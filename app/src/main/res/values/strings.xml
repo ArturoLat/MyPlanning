@@ -6,9 +6,18 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string-array name="config_layout_Spinner_priv">
+    </string-array>
+    <string-array name="config_layout_Spinner_comp">
+    </string-array>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="mensual_Layout_text">Mensual Planner</string>
     <string name="mensual_layout_calendar">TODO</string>
+    <string name="config_layout_TextView_config">Configuració</string>
+    <string name="config_layout_Spinner_priv_text">Privacitat</string>
+    <string name="config_layout_Spinner_comp_text">Compartir</string>
+    <string name="config_layout_Spinner_notif_text">Notificacions</string>
+    <string name="config_layout_spinner_perfil_text">Perfil</string>
 </resources>
