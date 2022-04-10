@@ -1,7 +1,281 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFD3D4">
+
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:background=""
+        android:onClick="prevDayAction"
+        android:text="<-"
+        android:textColor="@color/purple_200"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteY="26dp" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background=""
+        android:onClick="prevDayAction"
+        android:text="->"
+        android:textColor="@color/purple_200"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="192dp"
+        tools:layout_editor_absoluteY="26dp" />
+
+    <ImageButton
+        android:id="@+id/gener"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="106dp" />
+
+    <ImageButton
+        android:id="@+id/febrer"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="248dp" />
+
+    <ImageButton
+        android:id="@+id/març"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="273dp"
+        tools:layout_editor_absoluteY="106dp" />
+
+    <ImageButton
+        android:id="@+id/abril"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="391dp" />
+
+    <ImageButton
+        android:id="@+id/maig"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="536dp" />
+
+    <ImageButton
+        android:id="@+id/juny"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="391dp" />
+
+    <ImageButton
+        android:id="@+id/juliol"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="536dp" />
+
+    <ImageButton
+        android:id="@+id/agost"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="106dp" />
+
+    <ImageButton
+        android:id="@+id/septembre"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="536dp" />
+
+    <ImageButton
+        android:id="@+id/octubre"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="391dp" />
+
+    <ImageButton
+        android:id="@+id/novembre"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="248dp" />
+
+    <ImageButton
+        android:id="@+id/decembre"
+        android:layout_width="122dp"
+        android:layout_height="95dp"
+        android:background="@drawable/lt16400639_quantized"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="273dp"
+        tools:layout_editor_absoluteY="248dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="Gener"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="192dp"
+        android:text="Febrer"
+        app:layout_constraintBottom_toTopOf="@+id/agost"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.965" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:text="Març"
+        app:layout_constraintBottom_toTopOf="@+id/març"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.954" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="316dp"
+        android:text="Abril"
+        app:layout_constraintBottom_toTopOf="@+id/febrer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="188dp"
+        android:text="Maig"
+        app:layout_constraintBottom_toTopOf="@+id/novembre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:text="Juny"
+        app:layout_constraintBottom_toTopOf="@+id/decembre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="316dp"
+        android:layout_marginBottom="4dp"
+        android:text="Juliol"
+        app:layout_constraintBottom_toTopOf="@+id/abril"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="184dp"
+        android:layout_marginBottom="4dp"
+        android:text="Agost"
+        app:layout_constraintBottom_toTopOf="@+id/octubre"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="4dp"
+        android:text="Setembre"
+        app:layout_constraintBottom_toTopOf="@+id/juny"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="316dp"
+        android:layout_marginBottom="4dp"
+        android:text="Octubre"
+        app:layout_constraintBottom_toTopOf="@+id/septembre"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="172dp"
+        android:layout_marginBottom="4dp"
+        android:text="Novembre"
+        app:layout_constraintBottom_toTopOf="@+id/maig"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="4dp"
+        android:text="Decembre"
+        app:layout_constraintBottom_toTopOf="@+id/juliol"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="200dp"
+        android:text="2022"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
