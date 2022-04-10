@@ -6,11 +6,17 @@
         <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/config_layout.xml" value="0.264" />
         <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/log_in_layout.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/mensual_layout.xml" value="0.16799999999999998" />
-        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.17" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.17" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14402173913043478" />
-        <entry key="app/src/main/res/layout/log_in_layout.xml" value="0.14402173913043478" />
-        <entry key="app/src/main/res/layout/registre_layout.xml" value="0.125" />
+        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/anual_layout.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/config_layout.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/content_main.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/diari_layout.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/mensual_layout.xml" value="0.2" />
+        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/registre_layout.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/semanal_layout.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/leuis/StudioProjects/MyPlanning/app/src/main/res/layout/log_in_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/leuis/StudioProjects/MyPlanning/app/src/main/res/layout/registre_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/leuis/StudioProjects/MyPlanning/app/src/main/res/layout/semanal_layout.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
