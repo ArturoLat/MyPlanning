@@ -81,8 +81,8 @@
         android:background="@drawable/lt16400639_quantized"
         android:contentDescription="@string/btnfebrer"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="248dp" />
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="106dp" />
 
     <ImageButton
         android:id="@+id/btnMarç"
@@ -100,9 +100,9 @@
         android:layout_height="95dp"
         android:background="@drawable/lt16400639_quantized"
         android:contentDescription="@string/btnAbril"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,DuplicateSpeakableTextCheck"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="391dp" />
+        tools:layout_editor_absoluteY="248dp" />
 
     <ImageButton
         android:id="@+id/btnMaig"
@@ -110,9 +110,9 @@
         android:layout_height="95dp"
         android:background="@drawable/lt16400639_quantized"
         android:contentDescription="@string/btnMaig"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,DuplicateSpeakableTextCheck"
         tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="536dp" />
+        tools:layout_editor_absoluteY="248dp" />
 
     <ImageButton
         android:id="@+id/btnJuny"
@@ -121,8 +121,8 @@
         android:background="@drawable/lt16400639_quantized"
         android:contentDescription="@string/btnJuny"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="277dp"
-        tools:layout_editor_absoluteY="391dp" />
+        tools:layout_editor_absoluteX="273dp"
+        tools:layout_editor_absoluteY="248dp" />
 
     <ImageButton
         android:id="@+id/btnJuliol"
@@ -130,9 +130,9 @@
         android:layout_height="95dp"
         android:background="@drawable/lt16400639_quantized"
         android:contentDescription="@string/btnJuliol"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="277dp"
-        tools:layout_editor_absoluteY="536dp" />
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,DuplicateSpeakableTextCheck"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="391dp" />
 
     <ImageButton
         android:id="@+id/btnAgost"
@@ -142,7 +142,7 @@
         android:contentDescription="@string/btnAgost"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
         tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="106dp" />
+        tools:layout_editor_absoluteY="391dp" />
 
     <ImageButton
         android:id="@+id/btnSetembre"
@@ -151,8 +151,8 @@
         android:background="@drawable/lt16400639_quantized"
         android:contentDescription="@string/btnSetembre"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="536dp" />
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="391dp" />
 
     <ImageButton
         android:id="@+id/btnOctubre"
@@ -161,8 +161,8 @@
         android:background="@drawable/lt16400639_quantized"
         android:contentDescription="@string/btnOctubre"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="391dp" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="536dp" />
 
     <ImageButton
         android:id="@+id/btnNovembre"
@@ -170,9 +170,9 @@
         android:layout_height="95dp"
         android:background="@drawable/lt16400639_quantized"
         android:contentDescription="@string/btnNovembre"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,DuplicateSpeakableTextCheck"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
         tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="248dp" />
+        tools:layout_editor_absoluteY="536dp" />
 
     <ImageButton
         android:id="@+id/btnDecembre"
@@ -181,8 +181,8 @@
         android:background="@drawable/lt16400639_quantized"
         android:contentDescription="@string/btnDecembre"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="248dp" />
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="536dp" />
 
     <TextView
         android:id="@+id/textGener"
@@ -206,7 +206,7 @@
         android:layout_marginEnd="188dp"
         android:text="@string/febrer"
         android:textColor="#795548"
-        app:layout_constraintBottom_toTopOf="@+id/btnFebrer"
+        app:layout_constraintBottom_toTopOf="@+id/btnAbril"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textGener"
         app:layout_constraintTop_toTopOf="parent"
@@ -232,7 +232,7 @@
         android:layout_marginEnd="320dp"
         android:text="@string/abril"
         android:textColor="#795548"
-        app:layout_constraintBottom_toTopOf="@+id/btnAbril"
+        app:layout_constraintBottom_toTopOf="@+id/btnJuliol"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -246,7 +246,7 @@
         android:layout_marginEnd="192dp"
         android:text="@string/maig"
         android:textColor="#795548"
-        app:layout_constraintBottom_toTopOf="@+id/btnMaig"
+        app:layout_constraintBottom_toTopOf="@+id/btnNovembre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textAbril"
         app:layout_constraintTop_toTopOf="parent"
@@ -260,10 +260,10 @@
         android:layout_marginEnd="64dp"
         android:text="@string/textJuny"
         android:textColor="#795548"
-        app:layout_constraintBottom_toTopOf="@+id/btnJuny"
+        app:layout_constraintBottom_toTopOf="@+id/btnSetembre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/btnSetembre"
+        app:layout_constraintStart_toEndOf="@id/btnOctubre"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.612" />
 
@@ -277,10 +277,10 @@
         android:layout_marginBottom="4dp"
         android:text="@string/textJuliol"
         android:textColor="#795548"
-        app:layout_constraintBottom_toTopOf="@+id/btnAbril"
+        app:layout_constraintBottom_toTopOf="@+id/btnJuliol"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFebrer" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAbril" />
 
     <TextView
         android:id="@+id/textAgost"
@@ -290,7 +290,7 @@
         android:layout_marginBottom="4dp"
         android:text="@string/textAgost"
         android:textColor="#795548"
-        app:layout_constraintBottom_toTopOf="@+id/btnOctubre"
+        app:layout_constraintBottom_toTopOf="@+id/btnAgost"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -301,7 +301,7 @@
         android:layout_marginBottom="4dp"
         android:text="@string/textSetembre"
         android:textColor="#795548"
-        app:layout_constraintBottom_toTopOf="@+id/btnJuny"
+        app:layout_constraintBottom_toTopOf="@+id/btnSetembre"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -314,10 +314,10 @@
         android:layout_marginBottom="4dp"
         android:text="@string/textOctubre"
         android:textColor="#795548"
-        app:layout_constraintBottom_toTopOf="@+id/btnSetembre"
+        app:layout_constraintBottom_toTopOf="@+id/btnOctubre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAbril" />
+        app:layout_constraintTop_toBottomOf="@+id/btnJuliol" />
 
     <TextView
         android:id="@+id/textNovembre"
@@ -327,7 +327,7 @@
         android:layout_marginBottom="4dp"
         android:text="@string/textNovembre"
         android:textColor="#795548"
-        app:layout_constraintBottom_toTopOf="@+id/btnMaig"
+        app:layout_constraintBottom_toTopOf="@+id/btnNovembre"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -338,7 +338,7 @@
         android:layout_marginBottom="4dp"
         android:text="@string/textDecembre"
         android:textColor="#795548"
-        app:layout_constraintBottom_toTopOf="@+id/btnJuliol"
+        app:layout_constraintBottom_toTopOf="@+id/btnDecembre"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
