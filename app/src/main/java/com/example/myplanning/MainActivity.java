@@ -1,27 +1,24 @@
 package com.example.myplanning;
 
 import android.os.Bundle;
-
 import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
-
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import com.example.myplanning.databinding.LogInLayoutBinding;
-
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.myplanning.db.db_Sqlite;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private LogInLayoutBinding binding;
+    private db_Sqlite BASE_DE_DATOS = new db_Sqlite(this.getBaseContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
