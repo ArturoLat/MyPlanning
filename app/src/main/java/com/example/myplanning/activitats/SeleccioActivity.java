@@ -12,12 +12,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myplanning.R;
-import com.example.myplanning.databinding.LogInLayoutBinding;
+import com.example.myplanning.databinding.SeleccioLayoutBinding;
 
-public class LogInActivity extends Fragment {
+public class SeleccioActivity extends Fragment {
 
 
-    private LogInLayoutBinding binding;
+    private SeleccioLayoutBinding binding;
 
     @Override
     public View onCreateView(
@@ -25,7 +25,7 @@ public class LogInActivity extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = LogInLayoutBinding.inflate(inflater, container, false);
+        binding = SeleccioLayoutBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -35,17 +35,31 @@ public class LogInActivity extends Fragment {
 
         NavController navController = Navigation.findNavController(view);
 
-        binding.buttonRegistre.setOnClickListener(new View.OnClickListener() {
+        binding.btnDiari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_boton_registre_en_LogIN);
+                navController.navigate(R.id.action_seleccio_Diari);
             }
         });
 
-        binding.buttonSignin.setOnClickListener(new View.OnClickListener() {
+        binding.btnSemanal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_logIn);
+                //navController.navigate();
+            }
+        });
+
+        binding.btnMensual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //navController.navigate();
+            }
+        });
+
+        binding.btnAnual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //navController.navigate();
             }
         });
 
@@ -59,3 +73,4 @@ public class LogInActivity extends Fragment {
     }
 
 }
+

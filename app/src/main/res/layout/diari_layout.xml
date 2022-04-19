@@ -28,15 +28,12 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/diaTV"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/btnDia"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@string/textDia"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:layout_weight="1"
+            android:text="@string/textDia" />
 
         <Button
             android:id="@+id/btnFlechaSig"

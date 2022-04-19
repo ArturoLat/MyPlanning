@@ -3,25 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/LogInFragment">
+    app:startDestination="@id/LogInActivity">
 
     <fragment
-        android:id="@+id/LogInFragment"
+        android:id="@+id/LogInActivity"
         android:name="com.example.myplanning.activitats.LogInActivity"
         android:label="@string/login_fragment_label"
         tools:layout="@layout/log_in_layout">
 
         <action
             android:id="@+id/action_boton_registre_en_LogIN"
-            app:destination="@id/RegistreFragment" />
+            app:destination="@id/RegistreActivity" />
+        <action
+            android:id="@+id/action_logIn"
+            app:destination="@id/diariActivity" />
     </fragment>
     <fragment
-        android:id="@+id/RegistreFragment"
+        android:id="@+id/RegistreActivity"
         android:name="com.example.myplanning.activitats.RegistreActivity"
         android:label="@string/registre_fragment_label"
         tools:layout="@layout/registre_layout">
         <action
             android:id="@+id/action_boton_registre_en_Registre"
-            app:destination="@id/LogInFragment" />
+            app:destination="@id/LogInActivity" />
     </fragment>
+
+    <fragment
+        android:id="@+id/diariActivity"
+        android:name="com.example.myplanning.activitats.DiariActivity"
+        android:label="@string/diari_fragment_label"
+        tools:layout="@layout/diari_layout">
+        <action
+            android:id="@+id/action_Selecció"
+            app:destination="@id/seleccioActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/seleccioActivity"
+        android:name="com.example.myplanning.activitats.SeleccioActivity"
+        android:label="@string/seleccio_fragment_label"
+        tools:layout="@layout/seleccio_layout">
+        <action
+            android:id="@+id/action_seleccio_Diari"
+            app:destination="@id/diariActivity" />
+    </fragment>
+
 </navigation>

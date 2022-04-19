@@ -14,8 +14,10 @@
     <string name="text_weekly">Weekly Planner</string>
 
     <!-- Strings used for fragments for navigation -->
-    <string name="login_fragment_label">LogIn Fragment</string>
-    <string name="registre_fragment_label">Registre Fragment</string>
+    <string name="login_fragment_label">LogIn Activity</string>
+    <string name="registre_fragment_label">Registre Activity</string>
+    <string name="diari_fragment_label">Diari Activity</string>
+    <string name="seleccio_fragment_label">Seleccio Activity</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string-array name="config_layout_Spinner_priv"></string-array>
@@ -74,4 +76,8 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
+    <string name="btnDiari">Diari</string>
+    <string name="btnSemanal">Semanal</string>
+    <string name="btnMensual">Mensual</string>
+    <string name="btnAnual">Anual</string>
 </resources>
