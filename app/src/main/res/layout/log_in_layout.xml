@@ -96,4 +96,5 @@ android:background="#FFD3D4">
         app:layout_constraintBottom_toTopOf="@+id/offline"
         app:layout_constraintStart_toStartOf="parent" />
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>

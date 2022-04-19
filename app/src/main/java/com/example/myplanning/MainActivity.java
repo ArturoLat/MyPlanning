@@ -1,36 +1,30 @@
 package com.example.myplanning;
 
 import android.os.Bundle;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.example.myplanning.databinding.LogInLayoutBinding;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.example.myplanning.db.db_Sqlite;
+import com.example.myplanning.databinding.MainActivityLayoutBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private LogInLayoutBinding binding;
-    private db_Sqlite BASE_DE_DATOS = new db_Sqlite(this.getBaseContext());
+    private MainActivityLayoutBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = LogInLayoutBinding.inflate(getLayoutInflater());
+        binding = MainActivityLayoutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
 
     }
