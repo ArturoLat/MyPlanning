@@ -1,4 +1,4 @@
-package com.example.myplanning;
+package com.example.myplanning.activitats;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,15 +7,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.myplanning.databinding.DiariLayoutBinding;
+import com.example.myplanning.R;
 import com.example.myplanning.databinding.LogInLayoutBinding;
 import com.example.myplanning.databinding.RegistreLayoutBinding;
 
-public class DiariActivity extends Fragment {
+public class RegistreActivity extends Fragment {
 
-    private DiariLayoutBinding binding;
+    private RegistreLayoutBinding binding;
 
     @Override
     public View onCreateView(
@@ -23,7 +25,7 @@ public class DiariActivity extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = DiariLayoutBinding.inflate(inflater, container, false);
+        binding = RegistreLayoutBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -31,6 +33,15 @@ public class DiariActivity extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        NavController navController = Navigation.findNavController(view);
+
+        binding.buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Cridem al metode de registrar-se
+                navController.navigate(R.id.action_boton_registre_en_Registre);
+            }
+        });
 
 
     }

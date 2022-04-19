@@ -1,4 +1,4 @@
-package com.example.myplanning;
+package com.example.myplanning.activitats;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.myplanning.R;
 import com.example.myplanning.databinding.MainActivityLayoutBinding;
 import com.google.android.material.snackbar.Snackbar;
 

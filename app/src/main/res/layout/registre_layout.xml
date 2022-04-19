@@ -13,6 +13,7 @@
         android:layout_marginStart="101dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="101dp"
+        android:layout_marginBottom="1dp"
         android:autofillHints="@string/password_hint"
         android:background="@color/fondo_para_text"
         android:ems="10"
@@ -20,6 +21,7 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:text="@string/password_hint"
+        app:layout_constraintBottom_toTopOf="@+id/button_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_pass_register"
@@ -27,9 +29,10 @@
 
     <TextView
         android:id="@+id/text_signup"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="149dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="149dp"
         android:layout_marginBottom="621dp"
         android:fontFamily="@font/kaushan_script"
@@ -37,7 +40,10 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/register_mail"
@@ -46,6 +52,7 @@
         android:layout_marginStart="101dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="101dp"
+        android:layout_marginBottom="27dp"
         android:autofillHints="@string/mail_user_register"
         android:background="@color/fondo_para_text"
         android:ems="10"
@@ -54,6 +61,7 @@
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:text="@string/mail_user_register"
+        app:layout_constraintBottom_toTopOf="@+id/user_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_signup" />
@@ -65,6 +73,7 @@
         android:layout_marginStart="101dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="101dp"
+        android:layout_marginBottom="27dp"
         android:autofillHints="@string/username_login"
         android:background="@color/fondo_para_text"
         android:ems="10"
@@ -72,6 +81,7 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="@string/username_login"
+        app:layout_constraintBottom_toTopOf="@+id/user_pass_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_mail" />
@@ -83,12 +93,14 @@
         android:layout_marginStart="101dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="101dp"
+        android:layout_marginBottom="27dp"
         android:autofillHints="@string/password_hint"
         android:background="@color/fondo_para_text"
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:text="@string/password_hint"
+        app:layout_constraintBottom_toTopOf="@+id/user_pass_register2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_register" />
@@ -98,11 +110,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="158dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="159dp"
         android:layout_marginBottom="208dp"
         android:text="@string/user_register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_pass_register2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

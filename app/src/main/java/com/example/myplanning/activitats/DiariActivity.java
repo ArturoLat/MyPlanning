@@ -1,4 +1,4 @@
-package com.example.myplanning;
+package com.example.myplanning.activitats;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.myplanning.databinding.DiariLayoutBinding;
 import com.example.myplanning.databinding.LogInLayoutBinding;
 import com.example.myplanning.databinding.RegistreLayoutBinding;
 
-public class RegistreActivity extends Fragment {
+public class DiariActivity extends Fragment {
 
-    private RegistreLayoutBinding binding;
+    private DiariLayoutBinding binding;
 
     @Override
     public View onCreateView(
@@ -22,7 +23,7 @@ public class RegistreActivity extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = RegistreLayoutBinding.inflate(inflater, container, false);
+        binding = DiariLayoutBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
