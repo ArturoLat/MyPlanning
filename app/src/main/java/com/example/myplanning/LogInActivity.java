@@ -11,7 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myplanning.databinding.LogInLayoutBinding;
 
-public class LogInFragment extends Fragment {
+public class LogInActivity extends Fragment {
 
 
     private LogInLayoutBinding binding;
@@ -33,12 +33,22 @@ public class LogInFragment extends Fragment {
         binding.buttonRegistre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(LogInFragment.this)
+                NavHostFragment.findNavController(LogInActivity.this)
                         .navigate(R.id.action_boton_registre_en_LogIN);
             }
         });
 
-
+        binding.buttonSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO
+                /*
+                NavHostFragment.findNavController(LogInActivity.this)
+                        .navigate(R.id.);
+                        
+                 */
+            }
+        });
     }
 
     @Override

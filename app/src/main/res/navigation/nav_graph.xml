@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/LogInFragment"
-        android:name="com.example.myplanning.LogInFragment"
+        android:name="com.example.myplanning.LogInActivity"
         android:label="@string/login_fragment_label"
         tools:layout="@layout/log_in_layout">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/RegistreFragment"
-        android:name="com.example.myplanning.RegistreFragment"
+        android:name="com.example.myplanning.RegistreActivity"
         android:label="@string/registre_fragment_label"
         tools:layout="@layout/registre_layout"/>
 </navigation>

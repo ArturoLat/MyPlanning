@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Jan/Desktop/PIE/MyPlanning/app/src/main/res/drawable-v24/shape.xml" value="0.418" />
+        <entry key="..\:/Users/Jan/Desktop/PIE/MyPlanning/app/src/main/res/drawable/january.xml" value="0.418" />
         <entry key="..\:/Users/Jan/Desktop/PIE/MyPlanning/app/src/main/res/layout/anual_layout.xml" value="0.5546875" />
         <entry key="..\:/Users/Jan/Desktop/PIE/MyPlanning/app/src/main/res/layout/config_layout.xml" value="0.5546875" />
         <entry key="..\:/Users/Jan/Desktop/PIE/MyPlanning/app/src/main/res/layout/content_main.xml" value="0.5546875" />
@@ -15,9 +16,16 @@
         <entry key="..\:/Users/Jan/Desktop/PIE/MyPlanning/app/src/main/res/layout/registre_layout.xml" value="0.5546875" />
         <entry key="..\:/Users/Jan/Desktop/PIE/MyPlanning/app/src/main/res/layout/semanal_layout.xml" value="0.5546875" />
         <entry key="..\:/Users/Jan/Desktop/PIE/MyPlanning/app/src/main/res/menu/menu_main.xml" value="0.5546875" />
+        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/anual_layout.xml" value="0.264" />
         <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/config_layout.xml" value="0.264" />
-        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/log_in_layout.xml" value="0.11302083333333333" />
-        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/mensual_layout.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/content_main.xml" value="0.176" />
+        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/diari_layout.xml" value="0.264" />
+        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/fragment_first.xml" value="0.176" />
+        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/fragment_second.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/log_in_layout.xml" value="0.264" />
+        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/mensual_layout.xml" value="0.264" />
+        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/registre_layout.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/semanal_layout.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/anual_layout.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/config_layout.xml" value="0.12158054711246201" />
@@ -26,18 +34,6 @@
         <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/mensual_layout.xml" value="0.2" />
         <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/registre_layout.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/semanal_layout.xml" value="0.12158054711246201" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/layout/anual_layout.xml" value="0.2798913043478261" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/layout/config_layout.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/layout/diari_layout.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/layout/fragment_first.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/layout/fragment_second.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/layout/log_in_layout.xml" value="0.2545289855072464" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/layout/mensual_layout.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/layout/registre_layout.xml" value="0.2545289855072464" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/layout/semanal_layout.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/artur/StudioProjects/MyPlanning/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.332" />
         <entry key="..\:/Users/leuis/StudioProjects/MyPlanning/app/src/main/res/layout/log_in_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/leuis/StudioProjects/MyPlanning/app/src/main/res/layout/registre_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/leuis/StudioProjects/MyPlanning/app/src/main/res/layout/semanal_layout.xml" value="0.36666666666666664" />
