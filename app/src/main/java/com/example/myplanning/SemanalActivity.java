@@ -11,10 +11,11 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myplanning.databinding.LogInLayoutBinding;
 import com.example.myplanning.databinding.RegistreLayoutBinding;
+import com.example.myplanning.databinding.SemanalLayoutBinding;
 
-public class RegistreFragment extends Fragment {
+public class SemanalActivity extends Fragment {
 
-    private RegistreLayoutBinding binding;
+    private @NonNull SemanalLayoutBinding binding;
 
     @Override
     public View onCreateView(
@@ -22,7 +23,7 @@ public class RegistreFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = RegistreLayoutBinding.inflate(inflater, container, false);
+        binding = SemanalLayoutBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
