@@ -9,11 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myplanning.databinding.DiariLayoutBinding;
-import com.example.myplanning.databinding.LogInLayoutBinding;
-import com.example.myplanning.databinding.RegistreLayoutBinding;
 import com.example.myplanning.R;
 
 public class DiariActivity extends Fragment {
@@ -39,7 +36,7 @@ public class DiariActivity extends Fragment {
         binding.btnDia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Selecció);
+                navController.navigate(R.id.action_Seleccio);
             }
         });
 

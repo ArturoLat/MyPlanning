@@ -4,85 +4,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFD3D4">
+    android:background="@color/background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_thursday"
         android:layout_width="100dp"
         android:layout_height="200dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="15dp"
-        app:layout_constraintEnd_toStartOf="@+id/rv_friday"
-        app:layout_constraintTop_toBottomOf="@+id/rv_monday" />
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@id/rv_monday"
+        app:layout_constraintEnd_toStartOf="@id/rv_sunday"
+        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintStart_toStartOf="@id/rv_friday"
+        app:layout_constraintTop_toBottomOf="@id/rv_tuesday"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_saturday"
         android:layout_width="100dp"
         android:layout_height="200dp"
+        android:layout_marginStart="9dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_sunday"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rv_friday"
         app:layout_constraintTop_toBottomOf="@+id/rv_wednesday" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_friday"
         android:layout_width="100dp"
         android:layout_height="200dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="17dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_sunday"
         app:layout_constraintEnd_toStartOf="@+id/rv_saturday"
+        app:layout_constraintStart_toEndOf="@+id/rv_thursday"
         app:layout_constraintTop_toBottomOf="@+id/rv_tuesday" />
 
-    <TextView
-        android:id="@+id/weekly_text"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="650dp"
-        android:fontFamily="@font/kaushan_script"
-        android:text="@string/text_weekly"
-        android:textSize="34sp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sunday"
+        android:layout_width="364dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="57dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_saturday" />
+
+    <Button
+        android:id="@+id/btnWeeklyPlanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="122dp"
+        android:layout_marginBottom="27dp"
+        android:text="@string/btn_weekly_planner"
+        app:layout_constraintBottom_toTopOf="@+id/rv_monday"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_monday"
+        android:id="@+id/rv_wednesday"
         android:layout_width="100dp"
         android:layout_height="200dp"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="27dp"
-        android:layout_marginEnd="17dp"
-        app:layout_constraintEnd_toStartOf="@+id/rv_tuesday"
-        app:layout_constraintTop_toBottomOf="@+id/weekly_text" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_sunday"
-        android:layout_width="331dp"
-        android:layout_height="113dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="59dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_saturday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintStart_toEndOf="@+id/rv_tuesday"
+        app:layout_constraintTop_toBottomOf="@+id/btnWeeklyPlanner" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tuesday"
         android:layout_width="100dp"
         android:layout_height="200dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="17dp"
-        app:layout_constraintEnd_toStartOf="@+id/rv_wednesday"
-        app:layout_constraintTop_toBottomOf="@+id/weekly_text" />
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_friday"
+        app:layout_constraintStart_toEndOf="@+id/rv_monday"
+        app:layout_constraintTop_toBottomOf="@+id/btnWeeklyPlanner" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_wednesday"
+        android:id="@+id/rv_monday"
         android:layout_width="100dp"
         android:layout_height="200dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weekly_text" />
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toStartOf="@+id/rv_tuesday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnWeeklyPlanner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

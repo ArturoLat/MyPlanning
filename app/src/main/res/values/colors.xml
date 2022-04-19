@@ -11,4 +11,5 @@
     <color name="blue">#0000FF</color>
     <color name="lightGray">#EEE</color>
     <color name="gray">#8888</color>
+    <color name="background">#FFD3D4</color>
 </resources>

@@ -45,7 +45,7 @@ public class SeleccioActivity extends Fragment {
         binding.btnSemanal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //navController.navigate();
+                navController.navigate(R.id.action_seleccio_Semanal);
             }
         });
 
@@ -63,6 +63,12 @@ public class SeleccioActivity extends Fragment {
             }
         });
 
+        binding.btnConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_seleccio_Configuracio);
+            }
+        });
 
     }
 

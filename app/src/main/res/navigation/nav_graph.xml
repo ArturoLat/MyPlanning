@@ -34,7 +34,7 @@
         android:label="@string/diari_fragment_label"
         tools:layout="@layout/diari_layout">
         <action
-            android:id="@+id/action_Selecció"
+            android:id="@+id/action_Seleccio"
             app:destination="@id/seleccioActivity" />
     </fragment>
     <fragment
@@ -45,6 +45,30 @@
         <action
             android:id="@+id/action_seleccio_Diari"
             app:destination="@id/diariActivity" />
+        <action
+            android:id="@+id/action_seleccio_Configuracio"
+            app:destination="@id/configuracioActivity" />
+        <action
+            android:id="@+id/action_seleccio_Semanal"
+            app:destination="@id/semanalActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/configuracioActivity"
+        android:name="com.example.myplanning.activitats.ConfiguracioActivity"
+        android:label="ConfiguracioActivity"
+        tools:layout="@layout/config_layout" >
+        <action
+            android:id="@+id/action_Seleccio"
+            app:destination="@id/seleccioActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/semanalActivity"
+        android:name="com.example.myplanning.activitats.SemanalActivity"
+        android:label="SemanalActivity"
+        tools:layout="@layout/semanal_layout" >
+        <action
+            android:id="@+id/action_Seleccio3"
+            app:destination="@id/seleccioActivity" />
     </fragment>
 
 </navigation>

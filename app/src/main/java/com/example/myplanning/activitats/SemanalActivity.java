@@ -7,8 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.myplanning.R;
 import com.example.myplanning.databinding.LogInLayoutBinding;
 import com.example.myplanning.databinding.RegistreLayoutBinding;
 import com.example.myplanning.databinding.SemanalLayoutBinding;
@@ -30,7 +33,14 @@ public class SemanalActivity extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        NavController navController = Navigation.findNavController(view);
 
+        binding.btnWeeklyPlanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_Seleccio3);
+            }
+        });
 
 
     }

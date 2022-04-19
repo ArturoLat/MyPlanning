@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FFD3D4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
     android:visibility="visible"
     tools:contex=".CalendariDiari"
@@ -21,7 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@color/background"
             android:onClick="prevDayAction"
             android:text="@string/btnFlechaAnterior"
             android:textColor="#536DFE"
@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/background"
             android:text="@string/textDia" />
 
         <Button
@@ -40,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@color/background"
             android:onClick="nextDayAction"
             android:text="@string/btnFlechaSig"
             android:textColor="#536DFE"
@@ -51,11 +52,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="478dp"
+        android:background="@color/background"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="264dp"
             android:layout_height="match_parent"
+            android:background="@color/background"
             android:orientation="vertical">
 
             <TextView
@@ -63,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txtSchedule"
-                android:textColor="#795548" />
+                android:textColor="@color/white" />
 
             <ListView
                 android:id="@+id/horariListView"
@@ -88,13 +91,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/background"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtToDo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape"
+                android:background="@color/background"
                 android:text="@string/txtToDo" />
 
             <ListView
@@ -102,14 +106,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="@drawable/shape" />
+                android:background="@color/background" />
 
 
             <TextView
                 android:id="@+id/txtTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape"
+                android:background="@color/background"
                 android:text="@string/txtTask" />
 
             <ListView
@@ -117,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="@drawable/shape" />
+                android:background="@color/background" />
         </LinearLayout>
 
     </LinearLayout>
@@ -125,6 +129,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         android:orientation="horizontal">
 
         <TextView
@@ -132,7 +137,7 @@
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/shape"
+            android:background="@color/background"
             android:text="@string/txtDay" />
 
         <TextView
@@ -141,7 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/shape"
+            android:background="@color/background"
             android:text="@string/txtNotes" />
     </LinearLayout>
 
