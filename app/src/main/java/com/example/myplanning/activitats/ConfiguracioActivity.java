@@ -41,7 +41,7 @@ public class ConfiguracioActivity extends Fragment {
         binding.btnConfiguracio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Seleccio);
+                navController.navigate(R.id.action_configuracio_to_seleccioActivity);
             }
         });
 

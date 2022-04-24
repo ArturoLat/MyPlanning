@@ -83,4 +83,5 @@
     <string name="btnConfiguració">Configuració</string>
     <string name="btn_weekly_planner">Weekly Planner</string>
     <string name="swtch_NightMode">NightMode</string>
+    <string name="mensual_Layout_text">Mensual Planner</string>
 </resources>

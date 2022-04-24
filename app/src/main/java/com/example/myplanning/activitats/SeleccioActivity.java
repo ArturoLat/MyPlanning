@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myplanning.R;
 import com.example.myplanning.databinding.SeleccioLayoutBinding;
@@ -52,14 +51,14 @@ public class SeleccioActivity extends Fragment {
         binding.btnMensual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //navController.navigate();
+                navController.navigate(R.id.action_seleccio_mensual);
             }
         });
 
         binding.btnAnual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //navController.navigate();
+                navController.navigate(R.id.action_seleccio_anual);
             }
         });
 

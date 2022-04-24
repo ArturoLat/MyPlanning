@@ -49,7 +49,12 @@ public class LogInActivity extends Fragment {
             }
         });
 
-
+        binding.offline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // navController.navigate(R.id);
+            }
+        });
     }
 
     @Override

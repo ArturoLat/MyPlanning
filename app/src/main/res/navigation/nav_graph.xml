@@ -51,6 +51,12 @@
         <action
             android:id="@+id/action_seleccio_Semanal"
             app:destination="@id/semanalActivity" />
+        <action
+            android:id="@+id/action_seleccio_mensual"
+            app:destination="@id/mensualActivity" />
+        <action
+            android:id="@+id/action_seleccio_anual"
+            app:destination="@id/anualActivity" />
     </fragment>
     <fragment
         android:id="@+id/configuracioActivity"
@@ -58,7 +64,7 @@
         android:label="ConfiguracioActivity"
         tools:layout="@layout/config_layout" >
         <action
-            android:id="@+id/action_Seleccio"
+            android:id="@+id/action_configuracio_to_seleccioActivity"
             app:destination="@id/seleccioActivity" />
     </fragment>
     <fragment
@@ -67,7 +73,25 @@
         android:label="SemanalActivity"
         tools:layout="@layout/semanal_layout" >
         <action
-            android:id="@+id/action_Seleccio3"
+            android:id="@+id/action_semanal_to_seleccioActivity"
+            app:destination="@id/seleccioActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/mensualActivity"
+        android:name="com.example.myplanning.activitats.MensualActivity"
+        android:label="MensualActivity"
+        tools:layout="@layout/mensual_layout" >
+        <action
+            android:id="@+id/action_mensualActivity_to_seleccioActivity"
+            app:destination="@id/seleccioActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/anualActivity"
+        android:name="com.example.myplanning.activitats.AnualActivity"
+        android:label="AnualActivity"
+        tools:layout="@layout/anual_layout" >
+        <action
+            android:id="@+id/action_anualActivity_to_seleccioActivity"
             app:destination="@id/seleccioActivity" />
     </fragment>
 
