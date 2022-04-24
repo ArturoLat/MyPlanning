@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_Seleccio"
             app:destination="@id/seleccioActivity" />
+        <action
+            android:id="@+id/action_PujarTarea"
+            app:destination="@id/tareaActivity" />
     </fragment>
     <fragment
         android:id="@+id/seleccioActivity"
@@ -93,6 +96,18 @@
         <action
             android:id="@+id/action_anualActivity_to_seleccioActivity"
             app:destination="@id/seleccioActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/tareaActivity"
+        android:name="com.example.myplanning.activitats.TareaActivity"
+        android:label="TareaActivity"
+        tools:layout="@layout/tarea_layout" >
+        <action
+            android:id="@+id/action_PujarTasca"
+            app:destination="@id/diariActivity" />
+        <action
+            android:id="@+id/action_Cancelar"
+            app:destination="@id/diariActivity" />
     </fragment>
 
 </navigation>

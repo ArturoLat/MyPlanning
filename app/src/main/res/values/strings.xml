@@ -23,8 +23,6 @@
     <string-array name="config_layout_Spinner_priv"></string-array>
     <string-array name="config_layout_Spinner_comp"></string-array>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="mensual_Layout_text">Mensual Planner</string>
     <string name="mensual_layout_calendar">TODO</string>
     <string name="config_layout_TextView_config">Configuració</string>
@@ -83,5 +81,14 @@
     <string name="btnConfiguració">Configuració</string>
     <string name="btn_weekly_planner">Weekly Planner</string>
     <string name="swtch_NightMode">NightMode</string>
-    <string name="mensual_Layout_text">Mensual Planner</string>
+    <string name="txtTarea">Tarea</string>
+    <string name="txtNomTarea">Nom de la Tarea</string>
+    <string name="spinnerDay">Day</string>
+    <string name="txtmes">txtMes</string>
+    <string name="txtany">txtAny</string>
+    <string name="txtAlarma">Alarma</string>
+    <string name="selecciocolor">seleccioColor</string>
+    <string name="pujar_tasca">Pujar Tasca</string>
+    <string name="txtCancelar">Cancelar</string>
+    <string name="nom_de_la_tarea">Nom de la Tarea</string>
 </resources>

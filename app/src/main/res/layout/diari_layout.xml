@@ -21,10 +21,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/background"
+            android:backgroundTint="@color/background_boton"
             android:onClick="prevDayAction"
             android:text="@string/btnFlechaAnterior"
-            android:textColor="#536DFE"
+            android:textColor="@color/color_text"
+            android:textColorHint="@color/color_text"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -33,18 +34,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/background"
-            android:text="@string/textDia" />
+            android:backgroundTint="@color/background_boton"
+            android:text="@string/textDia"
+            android:textColor="@color/color_text"
+            android:textColorHint="@color/color_text" />
 
         <Button
             android:id="@+id/btnFlechaSig"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/background"
+            android:backgroundTint="@color/background_boton"
             android:onClick="nextDayAction"
             android:text="@string/btnFlechaSig"
-            android:textColor="#536DFE"
+            android:textColor="@color/color_text"
+            android:textColorHint="@color/color_text"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -66,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txtSchedule"
-                android:textColor="@color/white" />
+                android:textColor="@color/color_text" />
 
             <ListView
                 android:id="@+id/horariListView"
@@ -79,10 +83,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="#FFFFFF"
+                android:backgroundTint="@color/background_boton"
                 android:onClick="newEventAction"
                 android:text="@string/btnNouEvent"
-                android:textColor="#8D6E63"
+                android:textColor="@color/color_text"
+                android:textColorHint="@color/color_text"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -99,7 +104,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background"
-                android:text="@string/txtToDo" />
+                android:text="@string/txtToDo"
+                android:textColor="@color/color_text"
+                android:textColorHint="@color/color_text" />
 
             <ListView
                 android:id="@+id/todoListView"
@@ -114,7 +121,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background"
-                android:text="@string/txtTask" />
+                android:text="@string/txtTask"
+                android:textColor="@color/color_text"
+                android:textColorHint="@color/color_text" />
 
             <ListView
                 android:id="@+id/tasksListView"
@@ -138,7 +147,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/background"
-            android:text="@string/txtDay" />
+            android:text="@string/txtDay"
+            android:textColor="@color/color_text" />
 
         <TextView
             android:id="@+id/txtNota"
@@ -147,7 +157,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/background"
-            android:text="@string/txtNotes" />
+            android:text="@string/txtNotes"
+            android:textColor="@color/color_text" />
     </LinearLayout>
 
 

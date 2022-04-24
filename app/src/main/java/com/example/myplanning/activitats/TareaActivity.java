@@ -9,13 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.myplanning.databinding.DiariLayoutBinding;
 import com.example.myplanning.R;
+import com.example.myplanning.databinding.LogInLayoutBinding;
+import com.example.myplanning.databinding.TareaLayoutBinding;
 
-public class DiariActivity extends Fragment {
+public class TareaActivity extends Fragment {
 
-    private DiariLayoutBinding binding;
+
+    private TareaLayoutBinding binding;
 
     @Override
     public View onCreateView(
@@ -23,7 +26,7 @@ public class DiariActivity extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = DiariLayoutBinding.inflate(inflater, container, false);
+        binding = TareaLayoutBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -33,19 +36,21 @@ public class DiariActivity extends Fragment {
 
         NavController navController = Navigation.findNavController(view);
 
-        binding.btnDia.setOnClickListener(new View.OnClickListener() {
+        binding.btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_Seleccio);
+                navController.navigate(R.id.action_Cancelar);
             }
         });
 
-        binding.btnNouEvent.setOnClickListener(new View.OnClickListener() {
+        binding.btnPujarTasca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_PujarTarea);
+                navController.navigate(R.id.action_PujarTasca);
             }
         });
+
+
     }
 
     @Override
