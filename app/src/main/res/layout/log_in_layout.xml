@@ -33,7 +33,6 @@
         android:fallbackLineSpacing="true"
         android:hint="@string/username_login"
         android:inputType="textPersonName"
-        android:text="@string/username_login"
         android:textColor="@color/color_text"
         android:textColorHint="@color/color_text"
         app:layout_constraintBottom_toTopOf="@+id/edit_text_password"
