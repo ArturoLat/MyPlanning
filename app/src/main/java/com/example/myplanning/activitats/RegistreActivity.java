@@ -70,7 +70,7 @@ public class RegistreActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 //Cridem al metode de registrar-se
-                navController.navigate(R.id.action_boton_registre_en_Registre);
+
                 String mail = binding.registerMail.getText().toString();
                 String user = binding.userRegister.getText().toString();
                 String pass = binding.userPassRegister.getText().toString();
@@ -95,24 +95,28 @@ public class RegistreActivity extends Fragment {
 
                 }*/
 
-                if(pass.equals(pass1) && comprobarDades.emailIncorrecte(mail).equals(ErrorRegistre.FORMAT_EMAIL_C)){
-                    Map<String,Object> userData = new HashMap<>();
+                if(pass.equals(pass1)){
+                    String respuesta = comprobarDades.isSecure(pass, mail);
+                    if(respuesta.equals("Format de l'email incorrecte")){
 
-                    userData.put("mail",mail);
-                    userData.put("password",pass);
-                    db.collection("users").document(user).set(userData);
-                    viewModel.registreCorrecte();
-                }else if(comprobarDades.emailIncorrecte(mail).equals(ErrorRegistre.FORMAT_EMAIL)){
-                    viewModel.emailIncorrecte(mail);
-                }else{
-                    viewModel.contrasenyaIncorrecte();
+                        viewModel.emailIncorrecte();
+                    }else if(respuesta.equals("Format de la contrasenya incorrecte")){
+                        viewModel.contrasenyaIncorrecte();
+                    }else{
+                        Map<String,Object> userData = new HashMap<>();
+                        userData.put("mail",mail);
+                        userData.put("password",pass);
+                        db.collection("users").document(user).set(userData);
+                        viewModel.registreCorrecte();
+                        viewModel.getRespuesta().observe(getActivity(), observer);
+                        navController.navigate(R.id.action_boton_registre_en_Registre);
+                    }
                 }
-
+                viewModel.getRespuesta().observe(getActivity(), observer);
 
             }
         });
 
-        viewModel.getRespuesta().observe(getActivity(), observer);
     }
 
     @Override

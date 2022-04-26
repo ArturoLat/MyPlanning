@@ -24,8 +24,8 @@ public class RegistreViewModel extends ViewModel {
         respuesta.setValue(ErrorRegistre.REGISTRE_CORRECTE.toString());
     }
 
-    public void emailIncorrecte(String correu) { respuesta.setValue(ErrorRegistre.FORMAT_EMAIL.toString());}
+    public void emailIncorrecte() { respuesta.setValue(ErrorRegistre.FORMAT_EMAIL.toString());}
 
-    public void contrasenyaIncorrecte() { respuesta.setValue(ErrorRegistre.CONTRASENYA_INCORRECTE.toString());}
+    public void contrasenyaIncorrecte() { respuesta.setValue(ErrorRegistre.FORMAT_CONTRASENYA.toString());}
 }
 

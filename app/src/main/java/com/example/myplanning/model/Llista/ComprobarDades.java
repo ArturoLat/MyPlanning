@@ -5,11 +5,13 @@ import java.util.regex.Pattern;
 
 public class ComprobarDades {
 
-    public String emailIncorrecte(String correu){
-        if(!isMail(correu)){
+    public String isSecure(String password, String correu){
+        if(!isPasswordSegur(password)){
+            return ErrorRegistre.FORMAT_CONTRASENYA.toString();
+        }else if(!isMail(correu)){
             return ErrorRegistre.FORMAT_EMAIL.toString();
         }else{
-            return ErrorRegistre.FORMAT_EMAIL_C.toString();
+            return ErrorRegistre.REGISTRE_CORRECTE.toString();
         }
     }
 
