@@ -1,5 +1,7 @@
 package com.example.myplanning.db;
 
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 
 import com.example.myplanning.R;
@@ -11,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observer;
 
 public class fireBaseController {
 
@@ -38,7 +41,7 @@ public class fireBaseController {
                         String var = (String) document.getData().get(camp);
 
                     } else {
-                        //error no document asociat
+
                     }
                 } else {
                     //fall de descarrega
@@ -109,6 +112,8 @@ public class fireBaseController {
         db.collection(user).document("homework").collection(time).document(act).set(data);
 
     }
+
+
 
 
 

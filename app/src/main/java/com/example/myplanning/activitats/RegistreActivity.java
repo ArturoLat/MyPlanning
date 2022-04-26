@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -15,6 +17,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.myplanning.R;
 import com.example.myplanning.databinding.LogInLayoutBinding;
 import com.example.myplanning.databinding.RegistreLayoutBinding;
+import com.example.myplanning.model.Llista.ComprobarDades;
+import com.example.myplanning.model.Llista.ErrorRegistre;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -28,8 +32,9 @@ import java.util.Map;
 public class RegistreActivity extends Fragment {
 
     private RegistreLayoutBinding binding;
+    private ComprobarDades comprobarDades;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    private RegistreViewModel viewModel;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -38,6 +43,10 @@ public class RegistreActivity extends Fragment {
     ) {
 
         binding = RegistreLayoutBinding.inflate(inflater, container, false);
+
+
+
+
         return binding.getRoot();
 
     }
@@ -47,6 +56,16 @@ public class RegistreActivity extends Fragment {
 
         NavController navController = Navigation.findNavController(view);
 
+        viewModel = new ViewModelProvider(this).get(RegistreViewModel.class);
+        comprobarDades = new ComprobarDades();
+        final Observer<String> observer = new Observer<String>() {
+            @Override
+            public void onChanged(String string) {
+                Toast toastsuma =
+                        Toast.makeText(getContext(), string.toString(), Toast.LENGTH_SHORT);
+                toastsuma.show();
+            }
+        };
         binding.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,14 +94,25 @@ public class RegistreActivity extends Fragment {
                     db.collection("users").document(user).set(userData);
 
                 }*/
-                Map<String,Object> userData = new HashMap<>();
-                userData.put("mail",mail);
-                userData.put("password",pass);
-                db.collection("users").document(user).set(userData);
+
+                if(pass.equals(pass1) && comprobarDades.emailIncorrecte(mail).equals(ErrorRegistre.FORMAT_EMAIL_C)){
+                    Map<String,Object> userData = new HashMap<>();
+
+                    userData.put("mail",mail);
+                    userData.put("password",pass);
+                    db.collection("users").document(user).set(userData);
+                    viewModel.registreCorrecte();
+                }else if(comprobarDades.emailIncorrecte(mail).equals(ErrorRegistre.FORMAT_EMAIL)){
+                    viewModel.emailIncorrecte(mail);
+                }else{
+                    viewModel.contrasenyaIncorrecte();
+                }
+
 
             }
         });
 
+        viewModel.getRespuesta().observe(getActivity(), observer);
     }
 
     @Override

@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FFD3D4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo_para_text"
     android:orientation="vertical"
     android:visibility="visible"
     tools:contex=".CalendariDiari"
@@ -14,41 +14,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@color/fondo_para_text"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnFlechaAnterior"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="FFFFF"
+            android:background="@color/fondo_para_text"
             android:onClick="prevDayAction"
             android:text="@string/btnFlechaAnterior"
             android:textColor="@color/color_text"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/diaTV"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/btnDia"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
+            android:background="@color/fondo_para_text"
             android:text="@string/textDia"
-            android:textAlignment="center"
             android:textColor="@color/color_text"
-            android:textSize="20sp" />
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/btnFlechaSig"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFFF"
+            android:background="@color/fondo_para_text"
             android:onClick="nextDayAction"
             android:text="@string/btnFlechaSig"
             android:textColor="@color/color_text"
             android:textSize="20sp"
             android:textStyle="bold" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -65,13 +70,14 @@
                 android:id="@+id/txtSchedule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/fondo_para_text"
                 android:text="@string/txtSchedule"
-                android:textColor="#795548" />
+                android:textColor="@color/color_text" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                />
+                android:background="@color/fondo_para_text" />
 
 
         </LinearLayout>
@@ -85,23 +91,28 @@
                 android:id="@+id/txtToDo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape"
-                android:text="@string/txtToDo" />
+                android:background="@color/fondo_para_text"
+                android:text="@string/txtToDo"
+                android:textColor="@color/color_text" />
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="220dp" />
+                android:layout_height="220dp"
+                android:background="@color/fondo_para_text" />
 
             <TextView
                 android:id="@+id/txtTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape"
-                android:text="@string/txtTask" />
+                android:background="@color/fondo_para_text"
+                android:text="@string/txtTask"
+                android:textColor="@color/color_text" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@color/fondo_para_text" />
         </LinearLayout>
 
     </LinearLayout>
@@ -109,6 +120,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -122,20 +134,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape"
-                android:text="@string/txtDay" />
+                android:background="@color/fondo_para_text"
+                android:text="@string/txtDay"
+                android:textColor="@color/color_text" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="2"
+                android:background="@color/fondo_para_text" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtNota"
@@ -143,13 +157,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape"
-                android:text="@string/txtNotes" />
+                android:background="@color/fondo_para_text"
+                android:text="@string/txtNotes"
+                android:textColor="@color/color_text" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_weight="2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@color/fondo_para_text" />
         </LinearLayout>
     </LinearLayout>
 

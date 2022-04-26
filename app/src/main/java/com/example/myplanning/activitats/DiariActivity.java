@@ -40,12 +40,7 @@ public class DiariActivity extends Fragment {
             }
         });
 
-        binding.btnNouEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navController.navigate(R.id.action_PujarTarea);
-            }
-        });
+
     }
 
     @Override
