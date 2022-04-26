@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFD3D4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     android:orientation="vertical"
     android:visibility="visible"
     tools:contex=".CalendariDiari"
@@ -21,34 +21,32 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/background_boton"
+            android:background="FFFFF"
             android:onClick="prevDayAction"
             android:text="@string/btnFlechaAnterior"
-            android:textColor="@color/color_text"
-            android:textColorHint="@color/color_text"
+            android:textColor="@color/gray"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnDia"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/diaTV"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/background_boton"
+            android:layout_weight="2"
             android:text="@string/textDia"
+            android:textAlignment="center"
             android:textColor="@color/color_text"
-            android:textColorHint="@color/color_text" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btnFlechaSig"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/background_boton"
+            android:background="#FFFFF"
             android:onClick="nextDayAction"
             android:text="@string/btnFlechaSig"
-            android:textColor="@color/color_text"
-            android:textColorHint="@color/color_text"
+            android:textColor="@color/gray"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -56,13 +54,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="478dp"
-        android:background="@color/background"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="264dp"
             android:layout_height="match_parent"
-            android:background="@color/background"
             android:orientation="vertical">
 
             <TextView
@@ -70,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txtSchedule"
-                android:textColor="@color/color_text" />
+                android:textColor="#795548" />
 
             <ListView
                 android:id="@+id/horariListView"
@@ -83,11 +79,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="@color/background_boton"
+                android:background="#FFFFF"
                 android:onClick="newEventAction"
                 android:text="@string/btnNouEvent"
-                android:textColor="@color/color_text"
-                android:textColorHint="@color/color_text"
+                android:textColor="@color/gray"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -96,41 +91,55 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtToDo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/background"
-                android:text="@string/txtToDo"
-                android:textColor="@color/color_text"
-                android:textColorHint="@color/color_text" />
+                android:background="@drawable/shape"
+                android:text="@string/txtToDo" />
 
             <ListView
                 android:id="@+id/todoListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="@color/background" />
+                android:background="@drawable/shape">
 
+            </ListView>
+
+
+            <Button
+                android:id="@+id/btnNouTodo"
+                android:textColor="@color/gray"
+                android:background="#FFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nou To-do" />
 
             <TextView
                 android:id="@+id/txtTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/background"
-                android:text="@string/txtTask"
-                android:textColor="@color/color_text"
-                android:textColorHint="@color/color_text" />
+                android:background="@drawable/shape"
+                android:text="@string/txtTask" />
 
             <ListView
                 android:id="@+id/tasksListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="@color/background" />
+                android:background="@drawable/shape" />
+
+            <Button
+                android:textColor="@color/gray"
+                android:id="@+id/btnNewTask"
+                android:background="#FFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nova tasca" />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -138,7 +147,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
         android:orientation="horizontal">
 
         <TextView
@@ -146,9 +154,8 @@
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/background"
-            android:text="@string/txtDay"
-            android:textColor="@color/color_text" />
+            android:background="@drawable/shape"
+            android:text="@string/txtDay" />
 
         <TextView
             android:id="@+id/txtNota"
@@ -156,10 +163,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/background"
-            android:text="@string/txtNotes"
-            android:textColor="@color/color_text" />
+            android:background="@drawable/shape"
+            android:text="@string/txtNotes" />
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/diariRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 </LinearLayout>
