@@ -14,6 +14,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.myplanning.model.Llista.ErrorLogIn;
+import com.example.myplanning.model.Llista.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -63,6 +64,8 @@ public class LogInActivity extends Fragment {
                 toastsuma.show();
             }
         };
+
+
         binding.buttonRegistre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,34 +76,45 @@ public class LogInActivity extends Fragment {
         binding.buttonSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 String user = binding.editTextUsername.getText().toString();
                 String passUser = binding.editTextPassword.getText().toString();
 
-                DocumentReference docRef = db.collection("users").document(user);
-                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                String pass = (String) document.getData().get("password");
-                                if(pass.equals(passUser)){
-                                    viewModel.logInCorrecte();
-                                    navController.navigate(R.id.action_logIn);
+                if(user.equals("") || passUser.equals("")){
+                    viewModel.campBuit();
+                }else {
 
-                                }else{
-                                    //contrasenya diferent
-                                    viewModel.contrasenyaDiferent();
+
+                    DocumentReference docRef = db.collection("users").document(user);
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    String pass = (String) document.getData().get("password");
+                                    if (pass.equals(passUser)) {
+                                        //Login Correcte
+                                        viewModel.logInCorrecte();
+                                        navController.navigate(R.id.action_logIn);
+                                    } else {
+                                        //Contrasenya diferent
+                                        viewModel.contrasenyaDiferent();
+                                    }
+                                } else {
+                                    //error no document asociat
+                                    viewModel.usuariInexistent();
                                 }
                             } else {
-                                //error no document asociat
+                                //fall de descarrega
                                 viewModel.usuariInexistent();
                             }
-                        } else {
-                            //fall de descarrega
                         }
-                    }
-                });
+                    });
+                }
+
             }
         });
 

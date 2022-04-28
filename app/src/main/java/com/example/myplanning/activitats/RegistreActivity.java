@@ -12,20 +12,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myplanning.R;
-import com.example.myplanning.databinding.LogInLayoutBinding;
 import com.example.myplanning.databinding.RegistreLayoutBinding;
 import com.example.myplanning.model.Llista.ComprobarDades;
-import com.example.myplanning.model.Llista.ErrorRegistre;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.example.myplanning.model.Llista.Usuario;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +28,7 @@ public class RegistreActivity extends Fragment {
     private ComprobarDades comprobarDades;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private RegistreViewModel viewModel;
+    private Usuario usuarioOnline;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -43,19 +37,14 @@ public class RegistreActivity extends Fragment {
     ) {
 
         binding = RegistreLayoutBinding.inflate(inflater, container, false);
-
-
-
-
         return binding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         NavController navController = Navigation.findNavController(view);
-
+        usuarioOnline = null;
         viewModel = new ViewModelProvider(this).get(RegistreViewModel.class);
         comprobarDades = new ComprobarDades();
         final Observer<String> observer = new Observer<String>() {
@@ -98,18 +87,21 @@ public class RegistreActivity extends Fragment {
                 if(pass.equals(pass1)){
                     String respuesta = comprobarDades.isSecure(pass, mail);
                     if(respuesta.equals("Format de l'email incorrecte")){
-
                         viewModel.emailIncorrecte();
                     }else if(respuesta.equals("Format de la contrasenya incorrecte")){
                         viewModel.contrasenyaIncorrecte();
                     }else{
-                        Map<String,Object> userData = new HashMap<>();
-                        userData.put("mail",mail);
-                        userData.put("password",pass);
+                        usuarioOnline = new Usuario(mail);
+                        usuarioOnline.setUsuariCreat(true);
+                        Map<String, Object> userData = new HashMap<>();
+                        userData.put("mail", mail);
+                        userData.put("password", pass);
                         db.collection("users").document(user).set(userData);
                         viewModel.registreCorrecte();
                         viewModel.getRespuesta().observe(getActivity(), observer);
+
                         navController.navigate(R.id.action_boton_registre_en_Registre);
+
                     }
                 }
                 viewModel.getRespuesta().observe(getActivity(), observer);

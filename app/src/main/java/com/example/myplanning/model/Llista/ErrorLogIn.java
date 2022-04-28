@@ -3,6 +3,7 @@ package com.example.myplanning.model.Llista;
 public enum ErrorLogIn {
         USUARI_INEXISTENT("Usuari inexistent"),
         CONTRASSENYA_INCORRECTA("Contrassenya incorrecta"),
+        CAMP_INCORRECTE("Falta un camp o varis per omplir"),
         LOGIN_CORRECTE("Login correcte");
 
 
