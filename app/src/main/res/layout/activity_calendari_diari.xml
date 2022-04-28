@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:contex=".Diari.CalendariDiari"
+    tools:visibility="visible">
+
+    <LinearLayout
+        android:id="@+id/diaLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnFlechaAnterior"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:onClick="prevDayAction"
+            android:text="@string/btnFlechaAnterior"
+            android:textColor="@color/color_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/diaTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="textDia"
+            android:textAlignment="center"
+            android:textColor="@color/color_text"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnFlechaSig"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:onClick="nextDayAction"
+            android:text="@string/btnFlechaSig"
+            android:textColor="@color/color_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/scheduleLayout"
+        android:layout_width="245dp"
+        android:layout_height="450dp"
+        android:layout_below="@+id/diaLayout"
+        android:layout_marginLeft="1sp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/dotted_border"
+        android:orientation="vertical"
+        android:onClick="scheduleAction" >
+
+        <TextView
+            android:id="@+id/txtSchedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Schedule"
+            android:textColor="@color/color_text" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/scheduleRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/list_item"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/toDoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_below="@+id/diaLayout"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="1sp"
+        android:layout_toRightOf="@+id/scheduleLayout"
+        android:layout_weight="1"
+        android:background="@drawable/dotted_border"
+        android:orientation="vertical"
+        android:onClick="toDoAction">
+
+        <TextView
+            android:id="@+id/txtToDo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="To-Do" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/toDoRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/list_item"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tasksLayout"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_below="@+id/toDoLayout"
+        android:layout_marginRight="1sp"
+        android:layout_toEndOf="@+id/scheduleLayout"
+        android:layout_weight="2"
+        android:background="@drawable/dotted_border"
+        android:orientation="vertical"
+        android:onClick="taskAction">
+
+        <TextView
+            android:id="@+id/txtTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Tasks" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasksRecycleView"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/list_item"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/happyLayout"
+        android:layout_width="245dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/scheduleLayout"
+        android:layout_marginLeft="1sp"
+        android:layout_marginBottom="1sp"
+        android:layout_weight="2"
+        android:background="@drawable/dotted_border"
+        android:onClick="happiAction"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtDayHapiness"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Happiness" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/happinessRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/notaLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tasksLayout"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1sp"
+        android:layout_toEndOf="@id/happyLayout"
+        android:layout_weight="2"
+        android:background="@drawable/dotted_border"
+        android:onClick="notaAction"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtNota"
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Nota" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/notaRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+    </LinearLayout>
+
+
+</RelativeLayout>

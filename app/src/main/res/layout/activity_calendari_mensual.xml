@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.myplanning.activitats.Mensual.CalendariMensual">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text= "@string/btnFlechaAnterior"
+            android:textColor="@color/blue"
+            android:background="@null"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:onClick="prevMesAction"
+            />
+
+        <TextView
+            android:id="@+id/mesAnyTV"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="Abril 2022"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="@color/color_text"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btnFlechaSig"
+            android:textColor="@color/blue"
+            android:background="@null"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:onClick="nextMesAction"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/gray"
+            android:text="Di"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/gray"
+            android:text="Dm"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/gray"
+            android:text="Dx"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/gray"
+            android:text="Dj"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/gray"
+            android:text="Dv"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/gray"
+            android:text="Ds"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/gray"
+            android:text="Dm"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/calendariRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+
+</LinearLayout>

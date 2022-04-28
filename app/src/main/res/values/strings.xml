@@ -23,7 +23,7 @@
     <string name="previous">Previous</string>
     <string-array name="config_layout_Spinner_priv"></string-array>
     <string-array name="config_layout_Spinner_comp"></string-array>
-
+    <string name="dia">1</string>
     <string name="mensual_Layout_text">Mensual Planner</string>
     <string name="mensual_layout_calendar">TODO</string>
     <string name="config_layout_TextView_config">Configuració</string>
