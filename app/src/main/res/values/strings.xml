@@ -92,4 +92,16 @@
     <string name="pujar_tasca">Pujar Tasca</string>
     <string name="txtCancelar">Cancelar</string>
     <string name="nom_de_la_tarea">Nom de la Tarea</string>
+    <string name="textdia">textDia</string>
+    <string name="txtHapiness">Hapiness</string>
+    <string name="txtMensual">Abril 2022</string>
+    <string name="txtDimarts">Dm</string>
+    <string name="txtDimecres">Dx</string>
+    <string name="txtDijous">Dj</string>
+    <string name="txtDivendres">Dv</string>
+    <string name="txtDissabte">Ds</string>
+    <string name="txtDiumenge">Dm</string>
+    <string name="txtDilluns">Di</string>
+    <string name="textSeguent"><![CDATA[->]]></string>
+    <string name="txtdia">txtDia</string>
 </resources>

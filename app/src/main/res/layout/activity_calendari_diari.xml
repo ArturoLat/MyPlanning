@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
+    android:id="@+id/lyoutDiari"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
     android:visibility="visible"
     tools:contex=".Diari.CalendariDiari"
@@ -15,41 +16,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@color/background"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnFlechaAnterior"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@color/background"
             android:onClick="prevDayAction"
             android:text="@string/btnFlechaAnterior"
             android:textColor="@color/color_text"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/diaTV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="textDia"
-            android:textAlignment="center"
-            android:textColor="@color/color_text"
-            android:textSize="20sp" />
-
         <Button
-            android:id="@+id/btnFlechaSig"
+            android:id="@+id/btnDia"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@color/background_boton"
+            android:onClick="diaSeleccio"
+            android:text="@string/txtdia"
+            android:textColor="@color/color_text"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/btnFlechaSig"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/background_boton"
+            android:backgroundTint="@color/background"
             android:onClick="nextDayAction"
             android:text="@string/btnFlechaSig"
             android:textColor="@color/color_text"
             android:textSize="20sp"
             android:textStyle="bold" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -57,26 +65,28 @@
         android:layout_width="245dp"
         android:layout_height="450dp"
         android:layout_below="@+id/diaLayout"
-        android:layout_marginLeft="1sp"
+        android:layout_marginStart="1sp"
         android:layout_marginTop="10dp"
         android:background="@drawable/dotted_border"
-        android:orientation="vertical"
-        android:onClick="scheduleAction" >
+        android:onClick="scheduleAction"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtSchedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Schedule"
+            android:background="@color/background"
+            android:fontFamily="@font/kaushan_script"
+            android:text="@string/txtSchedule"
             android:textColor="@color/color_text" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/scheduleRecycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/list_item"
-            />
+            android:background="@color/background"
+            tools:listitem="@layout/list_item" />
 
     </LinearLayout>
 
@@ -86,25 +96,26 @@
         android:layout_height="225dp"
         android:layout_below="@+id/diaLayout"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="1sp"
-        android:layout_toRightOf="@+id/scheduleLayout"
-        android:layout_weight="1"
+        android:layout_marginEnd="1sp"
+        android:layout_toEndOf="@+id/scheduleLayout"
         android:background="@drawable/dotted_border"
-        android:orientation="vertical"
-        android:onClick="toDoAction">
+        android:onClick="toDoAction"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtToDo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="To-Do" />
+            android:fontFamily="@font/kaushan_script"
+            android:text="@string/txtToDo"
+            android:textColor="#795548" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/toDoRecycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/list_item"/>
+            tools:listitem="@layout/list_item" />
 
     </LinearLayout>
 
@@ -113,25 +124,28 @@
         android:layout_width="match_parent"
         android:layout_height="225dp"
         android:layout_below="@+id/toDoLayout"
-        android:layout_marginRight="1sp"
+        android:layout_marginEnd="1sp"
         android:layout_toEndOf="@+id/scheduleLayout"
-        android:layout_weight="2"
         android:background="@drawable/dotted_border"
-        android:orientation="vertical"
-        android:onClick="taskAction">
+        android:onClick="taskAction"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Tasks" />
+            android:background="@color/background"
+            android:fontFamily="@font/kaushan_script"
+            android:text="@string/txtTask"
+            android:textColor="#795548" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksRecycleView"
             android:layout_width="match_parent"
-            tools:listitem="@layout/list_item"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            tools:listitem="@layout/list_item" />
 
     </LinearLayout>
 
@@ -140,9 +154,8 @@
         android:layout_width="245dp"
         android:layout_height="match_parent"
         android:layout_below="@+id/scheduleLayout"
-        android:layout_marginLeft="1sp"
+        android:layout_marginStart="1sp"
         android:layout_marginBottom="1sp"
-        android:layout_weight="2"
         android:background="@drawable/dotted_border"
         android:onClick="happiAction"
         android:orientation="vertical">
@@ -152,13 +165,17 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:text="Happiness" />
+            android:background="@color/background"
+            android:fontFamily="@font/kaushan_script"
+            android:text="@string/txtHapiness"
+            android:textColor="#795548" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/happinessRecycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:background="@color/background" />
     </LinearLayout>
 
     <LinearLayout
@@ -166,10 +183,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tasksLayout"
-        android:layout_marginRight="1dp"
+        android:layout_marginEnd="1dp"
         android:layout_marginBottom="1sp"
         android:layout_toEndOf="@id/happyLayout"
-        android:layout_weight="2"
         android:background="@drawable/dotted_border"
         android:onClick="notaAction"
         android:orientation="vertical">
@@ -180,13 +196,17 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:text="Nota" />
+            android:background="@color/background"
+            android:fontFamily="@font/kaushan_script"
+            android:text="@string/txtNotes"
+            android:textColor="#795548" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notaRecycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:background="@color/background" />
     </LinearLayout>
 
 

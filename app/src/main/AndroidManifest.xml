@@ -20,6 +20,51 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.example.myplanning.activitats.Mensual.CalendariMensual"
+            android:exported="false"
+        />
+
+        <activity
+            android:name="com.example.myplanning.activitats.Diari.CalendariDiari"
+            android:exported="false"
+            />
+
+        <activity
+            android:name="com.example.myplanning.activitats.Anual.Anual"
+            android:exported="false"
+            />
+
+        <activity
+            android:name="com.example.myplanning.activitats.Configuracio.Configuracio"
+            android:exported="false"
+            />
+
+        <activity
+            android:name="com.example.myplanning.activitats.Semanal.Semanal"
+            android:exported="false"
+            />
+
+        <activity
+            android:name="com.example.myplanning.activitats.LogIn.LogIn"
+            android:exported="false"
+            />
+
+        <activity
+            android:name="com.example.myplanning.activitats.Registre.Registre"
+            android:exported="false"
+            />
+
+        <activity
+            android:name="com.example.myplanning.activitats.Seleccio.Seleccio"
+            android:exported="false"
+            />
+
+        <activity
+            android:name="com.example.myplanning.activitats.Diari.Tarea"
+            android:exported="false"
+            />
     </application>
 
 </manifest>

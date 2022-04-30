@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.time.LocalDate;
@@ -18,10 +19,11 @@ import com.example.myplanning.activitats.CalendariUtiles;
 
 import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.R;
+import com.example.myplanning.activitats.Seleccio.Seleccio;
 
 public class CalendariMensual extends AppCompatActivity implements MensualAdapter.onItemListener{
 
-    private TextView mesAnyText;
+    private Button mesAnyText;
     private RecyclerView calendariRecyclerView;
 
 
@@ -36,7 +38,7 @@ public class CalendariMensual extends AppCompatActivity implements MensualAdapte
 
     private void initWidgets() {
         calendariRecyclerView = findViewById(R.id.calendariRecyclerView);
-        mesAnyText = findViewById(R.id.mesAnyTV);
+        mesAnyText = findViewById(R.id.btnMes);
     }
 
     private void setMesView() {
@@ -49,6 +51,10 @@ public class CalendariMensual extends AppCompatActivity implements MensualAdapte
         calendariRecyclerView.setAdapter(mensualAdapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     public void onItemClick(int pos, LocalDate date)
@@ -68,5 +74,9 @@ public class CalendariMensual extends AppCompatActivity implements MensualAdapte
     public void nextMesAction(View view){
         CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.plusMonths(1);
         setMesView();
+    }
+
+    public void seleccioAction(View view){
+        startActivity(new Intent(this, Seleccio.class));
     }
 }

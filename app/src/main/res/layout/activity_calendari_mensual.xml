@@ -1,53 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
     tools:context="com.example.myplanning.activitats.Mensual.CalendariMensual">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp">
+        android:orientation="horizontal">
 
         <Button
-            android:layout_width="0dp"
+            android:id="@+id/btnAnterior"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text= "@string/btnFlechaAnterior"
-            android:textColor="@color/blue"
-            android:background="@null"
-            android:textStyle="bold"
-            android:textSize="20sp"
+            android:background="@color/background"
             android:onClick="prevMesAction"
-            />
-
-        <TextView
-            android:id="@+id/mesAnyTV"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:text="Abril 2022"
+            android:text="@string/btnFlechaAnterior"
+            android:textColor="@color/color_text"
             android:textSize="20sp"
-            android:textAlignment="center"
-            android:textColor="@color/color_text"/>
+            android:textStyle="bold" />
 
         <Button
-            android:layout_width="0dp"
+            android:id="@+id/btnMes"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/btnFlechaSig"
-            android:textColor="@color/blue"
-            android:background="@null"
-            android:textStyle="bold"
-            android:textSize="20sp"
+            android:onClick="seleccioAction"
+            android:text="@string/txtmes"
+            android:textColor="@color/color_text"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/btnSeguent"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="nextMesAction"
-            />
+            android:text="@string/textSeguent"
+            tools:ignore="TouchTargetSizeCheck" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -59,64 +60,71 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/gray"
-            android:text="Di"
+            android:background="@color/fondo_para_text"
+            android:text="@string/txtDilluns"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/color_text"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/gray"
-            android:text="Dm"
+            android:background="@color/fondo_para_text"
+            android:text="@string/txtDimarts"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/color_text"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/gray"
-            android:text="Dx"
+            android:background="@color/fondo_para_text"
+            android:text="@string/txtDimecres"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/color_text"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/gray"
-            android:text="Dj"
+            android:background="@color/fondo_para_text"
+            android:text="@string/txtDijous"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/color_text"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/gray"
-            android:text="Dv"
+            android:background="@color/fondo_para_text"
+            android:text="@string/txtDivendres"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/color_text"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/gray"
-            android:text="Ds"
+            android:background="@color/fondo_para_text"
+            android:text="@string/txtDissabte"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/color_text"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/gray"
-            android:text="Dm"
+            android:background="@color/fondo_para_text"
+            android:text="@string/txtDiumenge"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/color_text"
+            android:textSize="16sp" />
 
 
     </LinearLayout>
@@ -124,9 +132,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendariRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

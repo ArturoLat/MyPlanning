@@ -1,4 +1,4 @@
-package com.example.myplanning.activitats;
+package com.example.myplanning.activitats.Registre;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
