@@ -85,6 +85,10 @@
     <string name="txtTarea">Tarea</string>
     <string name="txtNomTarea">Nom de la Tarea</string>
     <string name="spinnerDay">Day</string>
+    <string name="spinnerMinutes">Minutes</string>
+    <string name="spinnerHour">Hour</string>
+    <string name="spinnerTarea">Tarea</string>
+
     <string name="txtmes">txtMes</string>
     <string name="txtany">txtAny</string>
     <string name="txtAlarma">Alarma</string>

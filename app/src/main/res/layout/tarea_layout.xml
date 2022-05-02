@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btnPujarTasca"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
     <TextView
         android:id="@+id/txtTarea"
-        android:layout_width="36dp"
-        android:layout_height="27dp"
+        android:layout_width="61dp"
+        android:layout_height="31dp"
         android:layout_marginStart="187dp"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="188dp"
@@ -18,6 +19,7 @@
         android:text="@string/txtTarea"
         android:textColor="@color/color_text"
         android:textColorHint="@color/color_text"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,10 +80,10 @@
         android:contentDescription="@string/txtmes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintHorizontal_bias="0.219"
         app:layout_constraintStart_toEndOf="@+id/spinnerDay"
         app:layout_constraintTop_toBottomOf="@+id/txtTareaName"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
         android:id="@+id/spinnerAny"
@@ -98,82 +100,121 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/spinnerMes"
         app:layout_constraintTop_toBottomOf="@+id/txtTareaName"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchAlarma"
-        android:layout_width="121dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="237dp"
-        android:layout_marginBottom="443dp"
-        android:backgroundTint="@color/background_boton"
-        android:fontFamily="@font/kaushan_script"
-        android:text="@string/txtAlarma"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerMes"
-        app:layout_constraintVertical_bias="0.428"
-        tools:ignore="TextContrastCheck" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
         android:id="@+id/spinnerSeleccioColor"
         android:layout_width="232dp"
         android:layout_height="48dp"
         android:layout_marginStart="51dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="127dp"
-        android:layout_marginBottom="377dp"
+        android:layout_marginBottom="288dp"
         android:backgroundTint="@color/background_boton"
         android:contentDescription="@string/selecciocolor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchAlarma"
+        app:layout_constraintTop_toBottomOf="@+id/switchAlarma" />
+
+    <Spinner
+        android:id="@+id/spinnerHour"
+        android:layout_width="112dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="17dp"
+        android:backgroundTint="@color/background_boton"
+        android:contentDescription="@string/spinnerHour"
+        app:layout_constraintBottom_toTopOf="@+id/switchAlarma"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerMins"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDay"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchAlarma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="273dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/fondo_para_text"
+        android:fontFamily="@font/kaushan_script"
+        android:minHeight="48dp"
+        android:text="@string/txtAlarma"
+        android:textColor="@color/color_text"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerSeleccioColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerHour"
+        tools:ignore="TextContrastCheck" />
+
+    <Spinner
+        android:id="@+id/spinnerMins"
+        android:layout_width="110dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="92dp"
+        android:backgroundTint="@color/background_boton"
+        android:contentDescription="@string/spinnerMinutes"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerSeleccioColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinnerHour" />
+
+    <Spinner
+        android:id="@+id/spinnerSeleccioTarea"
+        android:layout_width="246dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginBottom="202dp"
+        android:backgroundTint="@color/background_boton"
+        android:contentDescription="@string/spinnerTarea"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSeleccioColor"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btnPujarTasca"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="199dp"
-        android:layout_marginEnd="223dp"
-        android:layout_marginBottom="123dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="75dp"
         android:backgroundTint="@color/background_boton"
-        android:fontFamily="@font/kaushan_script"
-        android:onClick="pujarTascaAccio"
         android:text="@string/pujar_tasca"
         android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCancelar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSeleccioColor" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSeleccioTarea"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btnCancelar"
+        android:id="@+id/buttonCancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="199dp"
-        android:layout_marginEnd="66dp"
-        android:layout_marginBottom="123dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="75dp"
         android:backgroundTint="@color/background_boton"
-        android:fontFamily="@font/kaushan_script"
-        android:onClick="cancelarAccio"
         android:text="@string/txtCancelar"
         android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnPujarTasca"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSeleccioColor" />
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSeleccioTarea" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
