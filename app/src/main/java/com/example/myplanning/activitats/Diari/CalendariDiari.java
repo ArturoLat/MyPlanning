@@ -2,61 +2,108 @@ package com.example.myplanning.activitats.Diari;
 
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.time.format.TextStyle;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Map;
 
 import com.example.myplanning.activitats.CalendariUtiles;
-import com.example.myplanning.activitats.Mensual.MensualAdapter;
 import com.example.myplanning.R;
-import com.example.myplanning.activitats.Seleccio.Seleccio;
+import com.example.myplanning.db.fireBaseController;
+import com.example.myplanning.model.Llista.Schedule;
+import com.example.myplanning.model.Llista.HomeWork;
+import com.example.myplanning.model.Llista.ToDo;
+import com.example.myplanning.model.Llista.Usuario;
 
 public class CalendariDiari extends AppCompatActivity{
 
-
     private Button diaSetmanaTV;
-    private Button diaSeleccio;
-    RecyclerView scheduleRecycleView;
-    RecyclerView toDoRecycleView;
-    RecyclerView tasksRecycleView;
+    private RecyclerView scheduleRecycleView;
+    private RecyclerView toDoRecycleView;
+    private RecyclerView tasksRecycleView;
+
+    private Usuario user = Usuario.getInstance();
+
+    private long time;
+
+    private Map<String, Schedule> listDatosShedule;
+    private Map<String, ToDo> listDatostoDo;
+    private Map<String, HomeWork> listDatosHomeWork;
+
+    private fireBaseController db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendari_diari);
         initWidgets();
+        db.getInstance();
+
     }
 
     private void initWidgets() {
-        diaSetmanaTV = findViewById(R.id.btnDia);
+        this.diaSetmanaTV = findViewById(R.id.btnDia);
         this.scheduleRecycleView = findViewById(R.id.scheduleRecycleView);
         this.toDoRecycleView = findViewById(R.id.toDoRecycleView);
         this.tasksRecycleView = findViewById(R.id.tasksRecycleView);
+        //this.scheduleRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        //this.toDoRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        //this.tasksRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
+        /*listDatosShedule = db.getCollectUserScheduleDay(time, user.getNom());
+        listDatostoDo = db.getCollectUserTodoDay(time, user.getNom());
+        listDatosHomeWork = db.getCollectUserHomeWorkDay(time, user.getNom());*/
+
+        ArrayList<String> listaFinalShedule = new ArrayList<>();
+        ArrayList<String> listaFinaltoDo = new ArrayList<>();
+        ArrayList<String> listFinalHomeWork = new ArrayList<>();
+
+        /*Schedule tempShedule;
+        ToDo tempTodo;
+        HomeWork tempHomeWork;
+
+        for(String currentKey : listDatosShedule.keySet()){
+            tempShedule = listDatosShedule.get(currentKey);
+
+            listaFinalShedule.add(tempShedule.toString());
+
+        }
+        for(String currentKey : listDatostoDo.keySet()){
+            tempTodo = listDatostoDo.get(currentKey);
+
+            listaFinaltoDo.add(tempTodo.toString());
+
+        }
+        for(String currentKey : listDatosHomeWork.keySet()){
+            tempHomeWork = listDatosHomeWork.get(currentKey);
+
+            listFinalHomeWork.add(tempHomeWork.toString());
+
+        }
+
+        AdapterRecycler adapterSchedule = new AdapterRecycler(listaFinalShedule,this);
+        AdapterRecycler adaptertoDo = new AdapterRecycler(listaFinaltoDo,this);
+        AdapterRecycler adapterHomwWork = new AdapterRecycler(listFinalHomeWork,this);
+
+        scheduleRecycleView.setAdapter(adapterSchedule);
+        toDoRecycleView.setAdapter(adaptertoDo);
+        tasksRecycleView.setAdapter(adapterHomwWork);*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         setDiaView();
-    }
-
-    public void diaSeleccio(View view){
-        startActivity(new Intent(this, Seleccio.class));
     }
 
     private void setDiaView() {

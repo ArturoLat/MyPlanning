@@ -17,6 +17,7 @@ import com.example.myplanning.activitats.CalendariUtiles;
 import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.activitats.Mensual.CalendariMensual;
 import com.example.myplanning.activitats.Registre.Registre;
+import com.example.myplanning.db.fireBaseController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,7 +30,7 @@ public class LogIn extends AppCompatActivity {
     private Button btnLogin;
     private EditText txtUser;
     private EditText txtPassword;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private fireBaseController db = fireBaseController.getInstance();
     private LogInViewModel viewModel;
 
     @Override
@@ -69,32 +70,21 @@ public class LogIn extends AppCompatActivity {
         if(user.equals("") || passUser.equals("")){
             viewModel.campBuit();
         }else {
-            DocumentReference docRef = db.collection("users").document(user);
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            String pass = (String) document.getData().get("password");
-                            if (pass.equals(passUser)) {
-                                //Login Correcte
-                                viewModel.logInCorrecte();
-                                startActivity(new Intent(getApplicationContext(), CalendariMensual.class));
-                            } else {
-                                //Contrasenya diferent
-                                viewModel.contrasenyaDiferent();
-                            }
-                        } else {
-                            //error no document asociat
-                            viewModel.usuariInexistent();
-                        }
-                    } else {
-                        //fall de descarrega
-                        viewModel.usuariInexistent();
-                    }
-                }
-            });
+            Integer resultat = db.userExist(user,passUser);
+
+            if(resultat == 0){
+                viewModel.logInCorrecte();
+                startActivity(new Intent(getApplicationContext(), CalendariMensual.class));
+            }else if(resultat == 1){
+                //Contrasenya diferent
+                viewModel.contrasenyaDiferent();
+            }else if(resultat == 2) {
+                //error no document asociat
+                viewModel.usuariInexistent();
+            }else {
+                //fall de descarrega
+                viewModel.usuariInexistent();
+            }
         }
     }
 

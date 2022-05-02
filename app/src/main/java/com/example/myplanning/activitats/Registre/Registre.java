@@ -98,7 +98,6 @@ public class Registre extends AppCompatActivity {
                 viewModel.contrasenyaIncorrecte();
             }else{
                 usuarioOnline = new Usuario(mail);
-                usuarioOnline.setUsuariCreat(true);
                 Map<String, Object> userData = new HashMap<>();
                 userData.put("mail", mail);
                 userData.put("password", pass);

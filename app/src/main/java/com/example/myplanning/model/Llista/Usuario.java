@@ -1,12 +1,19 @@
 package com.example.myplanning.model.Llista;
 
 public class Usuario {
-    String nom;
-    Boolean usuariCreat;
+
+    private String nom;
+    public static Usuario instance;
 
     public Usuario(String nom){
         this.nom = nom;
-        usuariCreat = false;
+
+    }
+
+    public static Usuario getInstance(){
+
+        return instance;
+
     }
 
     public String getNom() {
@@ -17,11 +24,5 @@ public class Usuario {
         this.nom = nom;
     }
 
-    public Boolean getUsuariCreat() {
-        return usuariCreat;
-    }
 
-    public void setUsuariCreat(Boolean usuariCreat) {
-        this.usuariCreat = usuariCreat;
-    }
 }

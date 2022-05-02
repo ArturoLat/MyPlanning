@@ -1,37 +1,78 @@
 package com.example.myplanning.db;
 
+
+import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.myplanning.R;
+import com.example.myplanning.model.Llista.HomeWork;
+import com.example.myplanning.model.Llista.Schedule;
+import com.example.myplanning.model.Llista.ToDo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observer;
 
 public class fireBaseController {
 
-    private String user;
-    private FirebaseFirestore db;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Map<String, Object> result = new HashMap<>();
+    private static fireBaseController instance;
+    private int resultat = -1;
 
-    public fireBaseController(String user, FirebaseFirestore db){
 
-        this.user = user;
-        this.db = db;
+    public static fireBaseController getInstance(){
+        if(instance == null){
+            instance = new fireBaseController();
+
+        }
+        return instance;
 
     }
 
-    public String getCampCollectUser(String camp){
+    public Integer userExist(String user, String passUser){
+
+        DocumentReference docRef = db.collection("users").document(user);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String pass = (String) document.getData().get("password");
+                        if (pass.equals(passUser)) {
+                            //Login Correcte
+                            resultat = 0;
+
+                        } else {
+                            //Contrasenya diferent
+                            resultat = 1;
+                        }
+                    } else {
+                        //error no document asociat
+                        resultat = 2;
+                    }
+                }
+            }
+        });
+
+        return resultat;
+    }
+
+    public String getCampCollectUser(String camp, String user){
         String var = "";
 
-        DocumentReference docRef = db.collection("users").document(this.user);
+        DocumentReference docRef = db.collection("users").document(user);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -52,9 +93,126 @@ public class fireBaseController {
         return var;
     }
 
-    public Map<String, Object> getCollectUserTodo(String camp){
+    public void setCollectUserScheduleDay(long time){
 
-        DocumentReference docRef = db.collection(this.user).document("todo");
+        OffsetDateTime dateUTC = OffsetDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneOffset.UTC);
+
+        String date = String.valueOf(dateUTC.getDayOfMonth()+dateUTC.getMonthValue()+dateUTC.getYear());
+
+        Map<String,Object> data = new HashMap<>();
+        data.put("hora",String.valueOf(dateUTC.getHour()+dateUTC.getMinute()));
+        data.put("done",false);
+
+    }
+
+    public Map<String, HomeWork> getCollectUserHomeWorkDay(long time, String user){
+
+        Map<String, HomeWork> resultat = new HashMap<>();
+
+        OffsetDateTime dateUTC = OffsetDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneOffset.UTC);
+
+        String date = String.valueOf(dateUTC.getDayOfMonth()+dateUTC.getMonthValue()+dateUTC.getYear());
+
+        db.collection(user).document("task").collection(date)
+                .whereNotEqualTo("hora",0)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                resultat.put(document.getId(), new HomeWork(
+                                        document.getId(),
+                                        (Boolean) document.getData().get("done"),
+                                        (Integer) document.getData().get("hora"),
+                                        (Integer) document.getData().get("minutos"))
+                                );
+
+                            }
+                        } else {
+                            //error de descarga
+                        }
+                    }
+                });
+
+        return resultat;
+
+    }
+
+    public Map<String, ToDo> getCollectUserTodoDay(long time, String user){
+
+        Map<String, ToDo> resultat = new HashMap<>();
+
+        OffsetDateTime dateUTC = OffsetDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneOffset.UTC);
+
+        String date = String.valueOf(dateUTC.getDayOfMonth()+dateUTC.getMonthValue()+dateUTC.getYear());
+
+        db.collection(user).document("todo").collection(date)
+                .whereNotEqualTo("hora",0)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                resultat.put(document.getId(), new ToDo(
+                                        document.getId(),
+                                        (Boolean) document.getData().get("done"),
+                                        (Integer) document.getData().get("hora"),
+                                        (Integer) document.getData().get("minutos"))
+                                );
+
+                            }
+                        } else {
+                            //error de descarga
+                        }
+                    }
+                });
+
+        return resultat;
+
+    }
+
+    public Map<String, Schedule> getCollectUserScheduleDay(long time, String user){
+
+        Map<String, Schedule> resultat = new HashMap<>();
+
+        OffsetDateTime dateUTC = OffsetDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneOffset.UTC);
+
+        String date = String.valueOf(dateUTC.getDayOfMonth()+dateUTC.getMonthValue()+dateUTC.getYear());
+
+        db.collection(user).document("schedule").collection(date)
+                .whereNotEqualTo("hora",0)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                resultat.put(document.getId(), new Schedule(
+                                        document.getId(),
+                                        (Boolean) document.getData().get("done"),
+                                        (Integer) document.getData().get("hora"),
+                                        (Integer) document.getData().get("minutos"))
+                                );
+
+                            }
+                        } else {
+                            //error de descarga
+                        }
+                    }
+                });
+
+        return resultat;
+
+    }
+
+    public Map<String, Object> getCollectUserTodo(String camp, String user){
+
+        DocumentReference docRef = db.collection(user).document("todo");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -75,41 +233,19 @@ public class fireBaseController {
         return result;
     }
 
-    public Map<String, Object> getCollectUserHomeWork (String camp){
-
-        DocumentReference docRef = db.collection(this.user).document("homework");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        result =  document.getData();
-
-                    } else {
-                        //error no document asociat
-                    }
-                } else {
-                    //fall de descarrega
-                }
-            }
-        });
-
-        return result;
-    }
-
-    public void setCollectUserTodo (String time, String act, boolean check){
+    public void setCollectUserTodo (long time, String act, String user){
 
         Map<String,Object> data = new HashMap<>();
-        data.put("done",check);
-        db.collection(user).document("todo").collection(time).document(act).set(data);
+        data.put("hora",1155);
+        data.put("done",false);
+        db.collection(user).document("todo").collection(String.valueOf(time)).document(act).set(data);
 
     }
-    public void setCollectUserHomework (String time, String act, boolean check){
+    public void setCollectUserHomework (long time, String act, String user){
 
         Map<String,Object> data = new HashMap<>();
-        data.put("done",check);
-        db.collection(user).document("homework").collection(time).document(act).set(data);
+        data.put("done",false);
+        db.collection(user).document("homework").collection(String.valueOf(time)).document(act).set(data);
 
     }
 
