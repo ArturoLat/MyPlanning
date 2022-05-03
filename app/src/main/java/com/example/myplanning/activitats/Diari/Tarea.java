@@ -11,9 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myplanning.R;
 import com.example.myplanning.db.fireBaseController;
+import com.example.myplanning.model.Llista.Usuario;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.chrono.ChronoLocalDateTime;
 
 public class Tarea extends AppCompatActivity {
 
+    private Usuario user = Usuario.getInstance();
     private Button btnCancelar;
     private Button btnPujar;
     private fireBaseController db = fireBaseController.getInstance();
@@ -50,7 +56,19 @@ public class Tarea extends AppCompatActivity {
         Integer hora = (Integer) spinnerValueHora.getSelectedItem();
         Integer minutos = (Integer) spinnerValueMinutos.getSelectedItem();
 
-        if(activitatPenjar.equals(""))
+        LocalDateTime localDateTime =
+                LocalDateTime.parse(any+"-"+mes+"-"+dia+"T"+hora+":"+minutos+":00");
+
+        if(activitatPenjar.equals("Schedule")){
+            db.setCollectUserScheduleDay(localDateTime,user.getNom(),activitat);
+
+        }else if(activitatPenjar.equals("To-Do")){
+            db.setCollectUserTodo(localDateTime,user.getNom(),activitat);
+
+        }else{
+            db.setCollectUserHomework(localDateTime,user.getNom(),activitat);
+
+        }
 
         startActivity(new Intent(this, CalendariDiari.class));
     }

@@ -18,6 +18,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
@@ -93,18 +94,6 @@ public class fireBaseController {
         return var;
     }
 
-    public void setCollectUserScheduleDay(long time){
-
-        OffsetDateTime dateUTC = OffsetDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneOffset.UTC);
-
-        String date = String.valueOf(dateUTC.getDayOfMonth()+dateUTC.getMonthValue()+dateUTC.getYear());
-
-        Map<String,Object> data = new HashMap<>();
-        data.put("hora",String.valueOf(dateUTC.getHour()+dateUTC.getMinute()));
-        data.put("done",false);
-
-    }
-
     public Map<String, HomeWork> getCollectUserHomeWorkDay(long time, String user){
 
         Map<String, HomeWork> resultat = new HashMap<>();
@@ -121,13 +110,7 @@ public class fireBaseController {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                resultat.put(document.getId(), new HomeWork(
-                                        document.getId(),
-                                        (Boolean) document.getData().get("done"),
-                                        (Integer) document.getData().get("hora"),
-                                        (Integer) document.getData().get("minutos"))
-                                );
+                                //resultat.put()
 
                             }
                         } else {
@@ -156,13 +139,7 @@ public class fireBaseController {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                resultat.put(document.getId(), new ToDo(
-                                        document.getId(),
-                                        (Boolean) document.getData().get("done"),
-                                        (Integer) document.getData().get("hora"),
-                                        (Integer) document.getData().get("minutos"))
-                                );
+                                //resultat.put();
 
                             }
                         } else {
@@ -192,12 +169,7 @@ public class fireBaseController {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                resultat.put(document.getId(), new Schedule(
-                                        document.getId(),
-                                        (Boolean) document.getData().get("done"),
-                                        (Integer) document.getData().get("hora"),
-                                        (Integer) document.getData().get("minutos"))
-                                );
+                                //resultat.put(document.getId(),document.getData());
 
                             }
                         } else {
@@ -233,24 +205,38 @@ public class fireBaseController {
         return result;
     }
 
-    public void setCollectUserTodo (long time, String act, String user){
+    public void setCollectUserTodo (LocalDateTime time, String user, String act){
 
         Map<String,Object> data = new HashMap<>();
-        data.put("hora",1155);
-        data.put("done",false);
-        db.collection(user).document("todo").collection(String.valueOf(time)).document(act).set(data);
+        ToDo object = new ToDo(act,false, time);
+
+        data.put(object.getActivitat(),object);
+
+        db.collection(user).document("todo")
+                .collection(time.toString()).document(act).set(data);
 
     }
-    public void setCollectUserHomework (long time, String act, String user){
+    public void setCollectUserHomework (LocalDateTime time, String user, String act){
 
         Map<String,Object> data = new HashMap<>();
-        data.put("done",false);
-        db.collection(user).document("homework").collection(String.valueOf(time)).document(act).set(data);
+        HomeWork object = new HomeWork(act,false, time);
+
+        data.put(object.getActivitat(),object);
+        db.collection(user).document("homework")
+                .collection(time.toString()).document(act).set(data);
 
     }
 
+    public void setCollectUserScheduleDay(LocalDateTime time, String user, String act){
 
+        Map<String,Object> data = new HashMap<>();
+        Schedule object = new Schedule(act,false, time);
 
+        data.put(object.getActivitat(),object);
 
+        db.collection(user).document("schedule")
+                .collection(time.toString()).document(act).set(data);
+
+    }
 
 }

@@ -1,17 +1,17 @@
 package com.example.myplanning.model.Llista;
 
+import java.time.LocalDateTime;
+
 public class Dades {
 
     private String activitat;
     private Boolean done;
-    private int hora;
-    private int minutos;
+    private LocalDateTime date;
 
-    public Dades(String activitat, Boolean done, int hora, int minutos) {
+    public Dades(String activitat, Boolean done, LocalDateTime date) {
         this.activitat = activitat;
         this.done = done;
-        this.hora = hora;
-        this.minutos = minutos;
+        this.date = date;
 
     }
 
@@ -31,19 +31,10 @@ public class Dades {
         this.done = done;
     }
 
-    public int getHora() {
-        return hora;
-    }
-
-    public void setHora(int hora) {
-        this.hora = hora;
-    }
-
     @Override
     public String toString() {
-        return activitat + " " +
-                hora + ":" +
-                minutos;
+        return activitat + " ";
+
 
     }
 }
