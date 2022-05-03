@@ -19,6 +19,7 @@ import java.util.Map;
 
 import com.example.myplanning.activitats.CalendariUtiles;
 import com.example.myplanning.R;
+import com.example.myplanning.activitats.Seleccio.Seleccio;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Llista.Schedule;
 import com.example.myplanning.model.Llista.HomeWork;
@@ -106,6 +107,9 @@ public class CalendariDiari extends AppCompatActivity{
         setDiaView();
     }
 
+    public void diaSeleccioAccio(View view){
+        startActivity(new Intent(this, Seleccio.class));
+    }
     private void setDiaView() {
         String diaSetmana = CalendariUtiles.selectedDate.format(DateTimeFormatter
                 .ofLocalizedDate(FormatStyle.LONG));

@@ -39,6 +39,11 @@ public class CalendariUtiles {
         return date.format(formatter);
     }
 
+    public static String anyFromDate(LocalDate date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
+        return date.format(formatter);
+    }
+
     public static String diaMesDate(LocalDate date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d");
         return date.format(formatter);

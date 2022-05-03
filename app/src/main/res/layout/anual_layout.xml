@@ -6,353 +6,343 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <TextView
-        android:id="@+id/text2022"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="190dp"
-        android:layout_marginBottom="25dp"
-        android:text="@string/text2022"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/textFebrer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnFlechaAnterior"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnFlechaAnterior"
-        android:layout_width="65dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/background_boton"
-        android:onClick="prevDayAction"
-        android:text="@string/FlechaAnterior"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textFebrer"
-        app:layout_constraintEnd_toStartOf="@+id/btnFlechaSig"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/btnFlechaSig"
-        android:layout_width="65dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/background_boton"
-        android:onClick="prevDayAction"
-        android:text="@string/FlechaSig"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textFebrer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnFlechaAnterior"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/btnGener"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btngener"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,DuplicateSpeakableTextCheck"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="106dp" />
-
-    <ImageButton
-        android:id="@+id/btnFebrer"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnfebrer"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="106dp" />
-
-    <ImageButton
-        android:id="@+id/btnMarç"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnMarç"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,DuplicateSpeakableTextCheck"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="106dp" />
-
-    <ImageButton
-        android:id="@+id/btnAbril"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnAbril"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="248dp" />
-
-    <ImageButton
-        android:id="@+id/btnMaig"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnMaig"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,DuplicateSpeakableTextCheck"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="248dp" />
-
-    <ImageButton
-        android:id="@+id/btnJuny"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnJuny"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="248dp" />
-
-    <ImageButton
-        android:id="@+id/btnJuliol"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnJuliol"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,DuplicateSpeakableTextCheck"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="391dp" />
-
-    <ImageButton
-        android:id="@+id/btnAgost"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnAgost"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="391dp" />
-
-    <ImageButton
-        android:id="@+id/btnSetembre"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnSetembre"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="277dp"
-        tools:layout_editor_absoluteY="391dp" />
-
-    <ImageButton
-        android:id="@+id/btnOctubre"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnOctubre"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="536dp" />
-
-    <ImageButton
-        android:id="@+id/btnNovembre"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnNovembre"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="536dp" />
-
-    <ImageButton
-        android:id="@+id/btnDecembre"
-        android:layout_width="122dp"
-        android:layout_height="95dp"
-        android:background="@drawable/lt16400639_quantized"
-        android:contentDescription="@string/btnDecembre"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="277dp"
-        tools:layout_editor_absoluteY="536dp" />
-
-    <TextView
-        android:id="@+id/textGener"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:layout_marginBottom="3dp"
-        android:text="@string/textGener"
-        android:textColor="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@id/btnGener"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textFebrer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginEnd="188dp"
-        android:text="@string/febrer"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnAbril"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textGener"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
-
-    <TextView
-        android:id="@+id/textMarç"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:text="@string/Març"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnMarç"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.954" />
-
-    <TextView
-        android:id="@+id/textAbril"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginEnd="320dp"
-        android:text="@string/abril"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnJuliol"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.615" />
+        app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:id="@+id/textMaig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
-        android:layout_marginEnd="192dp"
-        android:text="@string/maig"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnNovembre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textAbril"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.442" />
+        <Button
+            android:id="@+id/btnAnteriorAnual"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/background_boton"
+            android:onClick="prevAnyAction"
+            android:text="@string/txtAnterior"
+            android:textColor="@color/color_text" />
 
-    <TextView
-        android:id="@+id/textJuny"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="98dp"
-        android:layout_marginEnd="64dp"
-        android:text="@string/textJuny"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnSetembre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/btnOctubre"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612" />
+        <Button
+            android:id="@+id/btnAny"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/background_boton"
+            android:onClick="txtAccio"
+            android:text="@string/txtany"
+            android:textColor="@color/color_text" />
 
-    <TextView
-        android:id="@+id/textJuliol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="316dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/textJuliol"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnJuliol"
+        <Button
+            android:id="@+id/btnSeguentAnual"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="nextAnyAction"
+            android:text="@string/txtSeguentAnual" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAbril" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-    <TextView
-        android:id="@+id/textAgost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="184dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/textAgost"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnAgost"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageButton
+            android:id="@+id/imgGener"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btngener"
+            app:srcCompat="@drawable/capturapantallagener__2_" />
 
-    <TextView
-        android:id="@+id/textSetembre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/textSetembre"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnSetembre"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageButton
+            android:id="@+id/imgFebrer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnfebrer"
+            app:srcCompat="@drawable/capturapantallafebrer__2_" />
 
-    <TextView
-        android:id="@+id/textOctubre"
-        android:layout_width="wrap_content"
+        <ImageButton
+            android:id="@+id/imgMarç"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnMarç"
+            app:srcCompat="@drawable/capturapantallamar___2_" />
+
+        <ImageButton
+            android:id="@+id/imgAbril"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnAbril"
+            app:srcCompat="@drawable/capturapantallaabril__2_" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="316dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/textOctubre"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnOctubre"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnJuliol" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:id="@+id/textNovembre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="172dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/textNovembre"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnNovembre"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/txtGener"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textGener"
+            android:textColor="@color/color_text" />
 
-    <TextView
-        android:id="@+id/textDecembre"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txtFebrer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/febrer"
+            android:textColor="@color/color_text" />
+
+        <TextView
+            android:id="@+id/txtMarç"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Març"
+            android:textColor="@color/color_text" />
+
+        <TextView
+            android:id="@+id/txtAbril"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/abril"
+            android:textColor="@color/color_text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <ImageButton
+            android:id="@+id/imgMaig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnMaig"
+            app:srcCompat="@drawable/capturapantallamaig__2_" />
+
+        <ImageButton
+            android:id="@+id/imgJuny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnJuny"
+            app:srcCompat="@drawable/capturapantallajuny__2_" />
+
+        <ImageButton
+            android:id="@+id/imgJuliol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnJuliol"
+            app:srcCompat="@drawable/capturapantallajuliol__2_" />
+
+        <ImageButton
+            android:id="@+id/imgAgost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnAgost"
+            app:srcCompat="@drawable/capturapantallaagost__2_" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/textDecembre"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnDecembre"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.32999998">
+
+        <TextView
+            android:id="@+id/txtMaig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/maig"
+            android:textColor="@color/color_text" />
+
+        <TextView
+            android:id="@+id/txtJuny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textJuny"
+            android:textColor="@color/color_text" />
+
+        <TextView
+            android:id="@+id/txtJuliol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textJuliol"
+            android:textColor="@color/color_text" />
+
+        <TextView
+            android:id="@+id/txtAgost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textAgost"
+            android:textColor="@color/color_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <TextView
+            android:id="@+id/txtSetembre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textSetembre"
+            android:textColor="@color/color_text" />
+
+        <TextView
+            android:id="@+id/txtOctubre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textOctubre"
+            android:textColor="@color/color_text" />
+
+        <TextView
+            android:id="@+id/txtNovembre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textNovembre"
+            android:textColor="@color/color_text" />
+
+        <TextView
+            android:id="@+id/txtDecembre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textDecembre"
+            android:textColor="@color/color_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <ImageButton
+            android:id="@+id/imgSetembre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnSetembre"
+            app:srcCompat="@drawable/capturapantallasetembre__2_" />
+
+        <ImageButton
+            android:id="@+id/imgOctubre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnOctubre"
+            app:srcCompat="@drawable/capturapantallaoctubre__2_" />
+
+        <ImageButton
+            android:id="@+id/imgNovembre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnNovembre"
+            app:srcCompat="@drawable/capturapantallanovembre__2_" />
+
+        <ImageButton
+            android:id="@+id/imgDecembre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dotted_border"
+            android:contentDescription="@string/btnDecembre"
+            app:srcCompat="@drawable/capturapantalladecembre__2_"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

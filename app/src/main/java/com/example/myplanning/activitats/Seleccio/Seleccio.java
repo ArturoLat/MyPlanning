@@ -6,16 +6,12 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Anual.Anual;
 import com.example.myplanning.activitats.Configuracio.Configuracio;
 import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.activitats.Mensual.CalendariMensual;
-import com.example.myplanning.activitats.Registre.RegistreViewModel;
-import com.example.myplanning.activitats.Semanal.Semanal;
-import com.example.myplanning.model.Llista.ComprobarDades;
 
 public class Seleccio extends AppCompatActivity {
     private Button btnDiari;
@@ -33,7 +29,6 @@ public class Seleccio extends AppCompatActivity {
 
     private void initWidgets(){
         btnDiari = findViewById(R.id.btnDiari);
-        btnSemanal = findViewById(R.id.btnSemanal);
         btnMensual = findViewById(R.id.btnMensual);
         btnAnual = findViewById(R.id.btnAnual);
         btnConfig = findViewById(R.id.btnConfig);
@@ -46,10 +41,6 @@ public class Seleccio extends AppCompatActivity {
 
     public void diariAccio(View view){
         startActivity(new Intent(this, CalendariDiari.class));
-    }
-
-    public void semanalAccio(View view){
-        startActivity(new Intent(this, Semanal.class));
     }
 
     public void mensualAccio(View view){

@@ -246,4 +246,7 @@
     <string name="txtDilluns">Di</string>
     <string name="textSeguent"><![CDATA[->]]></string>
     <string name="txtdia">txtDia</string>
+    <string name="txtAnterior"><![CDATA[<-]]></string>
+    <string name="txtSeguentAnual"><![CDATA[->]]></string>
+    <string name="txtSeleccio">Seleccio</string>
 </resources>

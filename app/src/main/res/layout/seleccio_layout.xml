@@ -6,96 +6,95 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <Button
-        android:id="@+id/btnConfig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="132dp"
-        android:layout_marginBottom="53dp"
-        android:backgroundTint="@color/background_boton"
-        android:onClick="configuracioAccio"
-        android:text="@string/btnConfiguració"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="409dp"
+        android:layout_height="550dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDiari" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btnAnual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="26dp"
+        <Button
+            android:id="@+id/btnDiari"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="161dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="162dp"
+            android:layout_marginBottom="26dp"
+            android:backgroundTint="@color/background_boton"
+            android:onClick="diariAccio"
+            android:text="@string/btnDiari"
+            android:textColor="@color/color_text"
+            android:textColorHint="@color/color_text" />
+
+        <Button
+            android:id="@+id/btnMensual"
+            android:layout_width="114dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="152dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="153dp"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="@color/background_boton"
+            android:onClick="mensualAccio"
+            android:text="@string/btnMensual"
+            android:textColor="@color/color_text"
+            android:textColorHint="@color/color_text" />
+
+        <Button
+            android:id="@+id/btnAnual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="161dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="162dp"
+            android:layout_marginBottom="26dp"
+            android:backgroundTint="@color/background_boton"
+            android:onClick="anualAccio"
+            android:text="@string/btnAnual"
+            android:textColor="@color/color_text"
+            android:textColorHint="@color/color_text" />
+
+        <Button
+            android:id="@+id/btnConfig"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="132dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="132dp"
+            android:layout_marginBottom="53dp"
+            android:backgroundTint="@color/background_boton"
+            android:onClick="configuracioAccio"
+            android:text="@string/btnConfiguració"
+            android:textColor="@color/color_text"
+            android:textColorHint="@color/color_text" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtSeleccio"
+        android:layout_width="87dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="162dp"
-        android:layout_marginBottom="26dp"
-        android:backgroundTint="@color/background_boton"
-        android:onClick="anualAccio"
-        android:text="@string/btnAnual"
+        android:layout_marginBottom="9dp"
+        android:fontFamily="@font/kaushan_script"
+        android:text="@string/txtSeleccio"
         android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnDiari"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMensual" />
-
-    <Button
-        android:id="@+id/btnSemanal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="153dp"
-        android:layout_marginBottom="26dp"
-        android:backgroundTint="@color/background_boton"
-        android:onClick="semanalAccio"
-        android:text="@string/btnSemanal"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnMensual"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnDiari"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="26dp"
-        android:backgroundTint="@color/background_boton"
-        android:onClick="diariAccio"
-        android:text="@string/btnDiari"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnConfig"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAnual" />
-
-    <Button
-        android:id="@+id/btnMensual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="153dp"
-        android:layout_marginBottom="28dp"
-        android:backgroundTint="@color/background_boton"
-        android:onClick="mensualAccio"
-        android:text="@string/btnMensual"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnAnual"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSemanal" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

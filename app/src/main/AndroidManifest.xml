@@ -42,11 +42,6 @@
             />
 
         <activity
-            android:name="com.example.myplanning.activitats.Semanal.Semanal"
-            android:exported="false"
-            />
-
-        <activity
             android:name="com.example.myplanning.activitats.LogIn.LogIn"
             android:exported="false"
             />

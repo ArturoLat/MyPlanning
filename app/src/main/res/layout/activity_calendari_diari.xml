@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/background_boton"
-            android:onClick="diaSeleccio"
+            android:onClick="diaSeleccioAccio"
             android:text="@string/txtdia"
             android:textColor="@color/color_text"
             tools:ignore="TouchTargetSizeCheck" />
@@ -85,7 +85,7 @@
             android:id="@+id/scheduleRecycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background"/>
+            android:background="@color/background" />
 
     </LinearLayout>
 
