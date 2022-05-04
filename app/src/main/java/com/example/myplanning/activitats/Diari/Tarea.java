@@ -13,9 +13,11 @@ import com.example.myplanning.R;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Llista.Usuario;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.chrono.ChronoLocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Tarea extends AppCompatActivity {
 
@@ -38,7 +40,7 @@ public class Tarea extends AppCompatActivity {
 
     public void pujarTascaAccio(View view){
 
-        EditText txtActivitat = findViewById(R.id.edit_text_username);
+        EditText txtActivitat = findViewById(R.id.txtTareaName);
         Spinner spinnerValueDia = findViewById(R.id.spinnerDay);
         Spinner spinnerValueMes = findViewById(R.id.spinnerMes);
         Spinner spinnerValueAny = findViewById(R.id.spinnerAny);
@@ -46,18 +48,17 @@ public class Tarea extends AppCompatActivity {
         Spinner spinnerValueMinutos = findViewById(R.id.spinnerMins);
 
         Spinner spinnerActivitat = findViewById(R.id.spinnerSeleccioTarea);
-        String activitatPenjar = (String) spinnerActivitat.getSelectedItem();
+        String activitatPenjar = spinnerActivitat.getSelectedItem().toString();
 
         String activitat = txtActivitat.getText().toString();
-        Integer dia = (Integer) spinnerValueDia.getSelectedItem();
-        Integer mes = (Integer) spinnerValueMes.getSelectedItem();
-        Integer any = (Integer) spinnerValueAny.getSelectedItem();
+        Integer dia = Integer.parseInt(spinnerValueDia.getSelectedItem().toString());
+        Integer mes = Integer.parseInt(spinnerValueMes.getSelectedItem().toString());
+        Integer any = Integer.parseInt(spinnerValueAny.getSelectedItem().toString());
 
-        Integer hora = (Integer) spinnerValueHora.getSelectedItem();
-        Integer minutos = (Integer) spinnerValueMinutos.getSelectedItem();
+        Integer hora = Integer.parseInt(spinnerValueHora.getSelectedItem().toString());;
+        Integer minutos = Integer.parseInt(spinnerValueMinutos.getSelectedItem().toString());;
 
-        LocalDateTime localDateTime =
-                LocalDateTime.parse(any+"-"+mes+"-"+dia+"T"+hora+":"+minutos+":00");
+        LocalDateTime localDateTime = LocalDateTime.of(any,mes,dia,hora,minutos,0);
 
         if(activitatPenjar.equals("Schedule")){
             db.setCollectUserScheduleDay(localDateTime,user.getNom(),activitat);

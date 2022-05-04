@@ -1,5 +1,7 @@
 package com.example.myplanning.model.Llista;
 
+import com.example.myplanning.db.fireBaseController;
+
 public class Usuario {
 
     private String nom;
@@ -10,6 +12,14 @@ public class Usuario {
 
     }
 
+    public static Usuario getInstance(String nom){
+        if(instance == null){
+            instance = new Usuario(nom);
+
+        }
+        return instance;
+
+    }
     public static Usuario getInstance(){
 
         return instance;

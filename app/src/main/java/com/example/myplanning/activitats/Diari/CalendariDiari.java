@@ -3,7 +3,6 @@ package com.example.myplanning.activitats.Diari;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -12,43 +11,38 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.example.myplanning.activitats.CalendariUtiles;
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Seleccio.Seleccio;
 import com.example.myplanning.db.fireBaseController;
-import com.example.myplanning.model.Llista.Schedule;
-import com.example.myplanning.model.Llista.HomeWork;
-import com.example.myplanning.model.Llista.ToDo;
 import com.example.myplanning.model.Llista.Usuario;
 
-public class CalendariDiari extends AppCompatActivity{
+public class CalendariDiari extends AppCompatActivity {
 
     private Button diaSetmanaTV;
     private RecyclerView scheduleRecycleView;
     private RecyclerView toDoRecycleView;
     private RecyclerView tasksRecycleView;
-
+    private LocalDateTime diaActual = LocalDateTime.now();
     private Usuario user = Usuario.getInstance();
 
-    private long time;
+    private Map<String, Object> listDatosShedule = new HashMap<>();
+    private Map<String, Object> listDatostoDo = new HashMap<>();
+    private Map<String, Object> listDatosHomeWork = new HashMap<>();
 
-    private Map<String, Schedule> listDatosShedule;
-    private Map<String, ToDo> listDatostoDo;
-    private Map<String, HomeWork> listDatosHomeWork;
-
-    private fireBaseController db;
+    private fireBaseController db = fireBaseController.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendari_diari);
         initWidgets();
-        db.getInstance();
 
     }
 
@@ -57,48 +51,56 @@ public class CalendariDiari extends AppCompatActivity{
         this.scheduleRecycleView = findViewById(R.id.scheduleRecycleView);
         this.toDoRecycleView = findViewById(R.id.toDoRecycleView);
         this.tasksRecycleView = findViewById(R.id.tasksRecycleView);
-        //this.scheduleRecycleView.setLayoutManager(new LinearLayoutManager(this));
-        //this.toDoRecycleView.setLayoutManager(new LinearLayoutManager(this));
-        //this.tasksRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        /*this.scheduleRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        this.toDoRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        this.tasksRecycleView.setLayoutManager(new LinearLayoutManager(this));*/
 
-        /*listDatosShedule = db.getCollectUserScheduleDay(time, user.getNom());
-        listDatostoDo = db.getCollectUserTodoDay(time, user.getNom());
-        listDatosHomeWork = db.getCollectUserHomeWorkDay(time, user.getNom());*/
+        db.getCollectUserSchedule(user.getNom(),diaActual);
+        db.getCollectUserTodo(user.getNom(),diaActual);
+        db.getCollectUserHomeWork(user.getNom(),diaActual);
 
-        ArrayList<String> listaFinalShedule = new ArrayList<>();
+        /*ArrayList<String> listaFinalShedule = new ArrayList<>();
         ArrayList<String> listaFinaltoDo = new ArrayList<>();
         ArrayList<String> listFinalHomeWork = new ArrayList<>();
 
-        /*Schedule tempShedule;
+        Schedule tempShedule;
         ToDo tempTodo;
-        HomeWork tempHomeWork;
+        HomeWork tempHomeWork;*/
 
-        for(String currentKey : listDatosShedule.keySet()){
-            tempShedule = listDatosShedule.get(currentKey);
+        /*for(String currentKey : listDatosShedule.keySet()){
+            tempShedule = (Schedule) listDatosShedule.get(currentKey);
 
             listaFinalShedule.add(tempShedule.toString());
 
         }
         for(String currentKey : listDatostoDo.keySet()){
-            tempTodo = listDatostoDo.get(currentKey);
+            tempTodo = (ToDo) listDatostoDo.get(currentKey);
 
             listaFinaltoDo.add(tempTodo.toString());
 
         }
         for(String currentKey : listDatosHomeWork.keySet()){
-            tempHomeWork = listDatosHomeWork.get(currentKey);
+            tempHomeWork = (HomeWork) listDatosHomeWork.get(currentKey);
 
             listFinalHomeWork.add(tempHomeWork.toString());
 
+        }*/
+        if(!listDatosShedule.isEmpty()){
+            AdapterRecycler adapterSchedule = new AdapterRecycler(listDatosShedule,this);
+            scheduleRecycleView.setAdapter(adapterSchedule);
+
+        }
+        if(!listDatostoDo.isEmpty()){
+            AdapterRecycler adaptertoDo = new AdapterRecycler(listDatostoDo,this);
+            toDoRecycleView.setAdapter(adaptertoDo);
+
+        }
+        if(!listDatosHomeWork.isEmpty()){
+            AdapterRecycler adapterHomwWork = new AdapterRecycler(listDatosHomeWork,this);
+            tasksRecycleView.setAdapter(adapterHomwWork);
+
         }
 
-        AdapterRecycler adapterSchedule = new AdapterRecycler(listaFinalShedule,this);
-        AdapterRecycler adaptertoDo = new AdapterRecycler(listaFinaltoDo,this);
-        AdapterRecycler adapterHomwWork = new AdapterRecycler(listFinalHomeWork,this);
-
-        scheduleRecycleView.setAdapter(adapterSchedule);
-        toDoRecycleView.setAdapter(adaptertoDo);
-        tasksRecycleView.setAdapter(adapterHomwWork);*/
     }
 
     @Override
@@ -150,5 +152,25 @@ public class CalendariDiari extends AppCompatActivity{
         Toast toast = Toast.makeText(this,"Schedule", Toast.LENGTH_SHORT);
         toast.show();
     }
+
+    public void changeAdapter(Map<String, Object> adapter){
+
+        if((adapter).getClass().isInstance("Schedule")){
+
+            AdapterRecycler adapterSchedule = new AdapterRecycler(adapter,this);
+            scheduleRecycleView.swapAdapter(adapterSchedule,true);
+
+        }else if((adapter).getClass().isInstance("ToDo")){
+
+            AdapterRecycler adaptertoDo = new AdapterRecycler(adapter,this);
+            toDoRecycleView.swapAdapter(adaptertoDo,true);
+
+        }else{
+            AdapterRecycler adapterHomwWork = new AdapterRecycler(adapter,this);
+            tasksRecycleView.swapAdapter(adapterHomwWork,true);
+
+        }
+    }
+
 
 }

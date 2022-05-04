@@ -18,6 +18,7 @@ import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.activitats.Mensual.CalendariMensual;
 import com.example.myplanning.activitats.Registre.Registre;
 import com.example.myplanning.db.fireBaseController;
+import com.example.myplanning.model.Llista.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,6 +30,7 @@ public class LogIn extends AppCompatActivity {
     private Button btnRegistre;
     private Button btnLogin;
     private EditText txtUser;
+    private Usuario usuario;
     private EditText txtPassword;
     private fireBaseController db = fireBaseController.getInstance();
     private LogInViewModel viewModel;
@@ -74,6 +76,7 @@ public class LogIn extends AppCompatActivity {
 
             if(resultat == 0){
                 viewModel.logInCorrecte();
+                this.usuario = Usuario.getInstance(user);
                 startActivity(new Intent(getApplicationContext(), CalendariMensual.class));
             }else if(resultat == 1){
                 //Contrasenya diferent

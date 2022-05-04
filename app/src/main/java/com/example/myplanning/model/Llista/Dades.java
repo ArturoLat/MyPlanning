@@ -33,7 +33,7 @@ public class Dades {
 
     @Override
     public String toString() {
-        return activitat + " ";
+        return activitat + "  " + date.getHour()+":"+date.getMinute();
 
 
     }
