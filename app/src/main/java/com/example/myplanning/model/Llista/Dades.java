@@ -1,6 +1,8 @@
 package com.example.myplanning.model.Llista;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Dades {
 
@@ -13,6 +15,15 @@ public class Dades {
         this.done = done;
         this.date = date;
 
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("activitat", this.activitat);
+        result.put("done", this.done);
+        result.put("Localdate", date.toString());
+
+        return result;
     }
 
     public String getActivitat() {
@@ -33,7 +44,7 @@ public class Dades {
 
     @Override
     public String toString() {
-        return activitat + "  " + date.getHour()+":"+date.getMinute();
+        return activitat + "  " + date;
 
 
     }

@@ -1,18 +1,15 @@
 package com.example.myplanning.db;
 
 
-import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
 import com.example.myplanning.activitats.Diari.CalendariDiari;
+import com.example.myplanning.activitats.observer.llistArrayObserver;
+import com.example.myplanning.model.Llista.Dades;
 import com.example.myplanning.model.Llista.HomeWork;
 import com.example.myplanning.model.Llista.Schedule;
 import com.example.myplanning.model.Llista.ToDo;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -20,16 +17,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.json.JSONArray;
-
-import java.time.Instant;
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class fireBaseController{
+public class fireBaseController  implements llistArrayObserver{
 
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static Map<String, Object> result = new HashMap<>();
@@ -85,11 +80,10 @@ public class fireBaseController{
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
                                 result.put(document.getId(),document.getData());
                             }
                         }
-                        //MOMENT DE TRANSFERIR DADES
+                        notificarHomeWork(result);
                     }
                 });
 
@@ -106,10 +100,11 @@ public class fireBaseController{
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                result.put(document.getId(), document.getData());
+                                result.put(document.getId(),document.getData());
                             }
                         }
-                        //MOMENT DE TRANSFERIR DADES
+                        notificarSchedule(result);
+
                     }
                 });
 
@@ -130,44 +125,148 @@ public class fireBaseController{
                                 result.put(document.getId(),document.getData());
                             }
                         }
-                        //MOMENT DE TRANSFERIR DADES
+                        notificarToDo(result);
+
                     }
                 });
 
     }
 
     public void setCollectUserTodo (LocalDateTime time, String user, String act){
-
-        Map<String,Object> data = new HashMap<>();
-        ToDo object = new ToDo(act,false, time);
-
-        data.put(act,object);
+        Dades dato = new Dades(act,false, time);
 
         db.collection(user).document("todo")
-                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(data);
+                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(dato.toMap());
 
     }
     public void setCollectUserHomework (LocalDateTime time, String user, String act){
+        Dades dato = new Dades(act,false, time);
 
-        Map<String,Object> data = new HashMap<>();
-        HomeWork object = new HomeWork(act,false, time);
-
-        data.put(act,object);
         db.collection(user).document("homework")
-                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(data);
+                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(dato.toMap());
 
     }
 
-    public void setCollectUserScheduleDay(LocalDateTime time, String user, String act){
+    public void setCollectUserSchedule(LocalDateTime time, String user, String act){
 
-        Map<String,Object> data = new HashMap<>();
-        Schedule object = new Schedule(act,false, time);
-
-        data.put(act,object);
+        Dades dato = new Dades(act,false, time);
 
         db.collection(user).document("schedule")
-                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(data);
+                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(dato.toMap());
 
     }
 
+    @Override
+    public void notificarSchedule(Map<String, Object> dada){
+        ArrayList<Object> camps = new ArrayList<>();
+        String act ="";
+        Boolean done = false;
+        String dateTime = "";
+
+        if(!dada.isEmpty()){
+            for (Object o: dada.values()){
+                camps.add(o);
+
+            }
+            for (int i = 0; i < camps.size(); i++) {
+                HashMap<String,Object> o = (HashMap<String, Object>) camps.get(i);
+                int cont = 0;
+                for(Object atri: o.values()){
+                    if(cont == 0){
+                        dateTime = (String) atri;
+
+                    }else if(cont == 1){
+                        done = (Boolean) atri;
+
+                    }else{
+                        act = (String) atri;
+
+                    }
+                    cont++;
+                }
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
+                CalendariDiari.listDatosShedule.add(new Dades(act,done,dataFinal));
+                cont = 0;
+            }
+            CalendariDiari.updateSchedule();
+
+        }
+    }
+
+    @Override
+    public void notificarToDo(Map<String, Object> dada) {
+        ArrayList<Object> camps = new ArrayList<>();
+        String act ="";
+        Boolean done = false;
+        String dateTime = "";
+
+        if(!dada.isEmpty()){
+            for (Object o: dada.values()){
+                camps.add(o);
+
+            }
+            for (int i = 0; i < camps.size(); i++) {
+                HashMap<String,Object> o = (HashMap<String, Object>) camps.get(i);
+                int cont = 0;
+                for(Object atri: o.values()){
+                    if(cont == 0){
+                        dateTime = (String) atri;
+
+                    }else if(cont == 1){
+                        done = (Boolean) atri;
+
+                    }else{
+                        act = (String) atri;
+
+                    }
+                    cont++;
+                }
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
+                CalendariDiari.listDatostoDo.add(new Dades(act,done,dataFinal));
+                cont = 0;
+            }
+            CalendariDiari.updateToDo();
+
+        }
+    }
+
+    @Override
+    public void notificarHomeWork(Map<String, Object> dada) {
+        ArrayList<Object> camps = new ArrayList<>();
+        String act ="";
+        Boolean done = false;
+        String dateTime = "";
+
+        if(!dada.isEmpty()){
+            for (Object o: dada.values()){
+                camps.add(o);
+
+            }
+            for (int i = 0; i < camps.size(); i++) {
+                HashMap<String,Object> o = (HashMap<String, Object>) camps.get(i);
+                int cont = 0;
+                for(Object atri: o.values()){
+                    if(cont == 0){
+                        dateTime = (String) atri;
+
+                    }else if(cont == 1){
+                        done = (Boolean) atri;
+
+                    }else{
+                        act = (String) atri;
+
+                    }
+                    cont++;
+                }
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
+                CalendariDiari.listDatosHomeWork.add(new Dades(act,done,dataFinal));
+                cont = 0;
+            }
+            CalendariDiari.updateHomeWork();
+
+        }
+    }
 }

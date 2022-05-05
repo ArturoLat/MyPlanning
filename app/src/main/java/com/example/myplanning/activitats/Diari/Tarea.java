@@ -61,7 +61,7 @@ public class Tarea extends AppCompatActivity {
         LocalDateTime localDateTime = LocalDateTime.of(any,mes,dia,hora,minutos,0);
 
         if(activitatPenjar.equals("Schedule")){
-            db.setCollectUserScheduleDay(localDateTime,user.getNom(),activitat);
+            db.setCollectUserSchedule(localDateTime,user.getNom(),activitat);
 
         }else if(activitatPenjar.equals("To-Do")){
             db.setCollectUserTodo(localDateTime,user.getNom(),activitat);
