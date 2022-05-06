@@ -1,4 +1,4 @@
-package com.example.myplanning.model.Llista;
+package com.example.myplanning.model.Usuari;
 
 public enum ErrorRegistre {
     FORMAT_EMAIL("Format de l'email incorrecte"),

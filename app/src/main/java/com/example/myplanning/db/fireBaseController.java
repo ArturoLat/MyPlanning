@@ -5,10 +5,7 @@ import androidx.annotation.NonNull;
 
 import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.activitats.observer.llistArrayObserver;
-import com.example.myplanning.model.Llista.Dades;
-import com.example.myplanning.model.Llista.HomeWork;
-import com.example.myplanning.model.Llista.Schedule;
-import com.example.myplanning.model.Llista.ToDo;
+import com.example.myplanning.model.Item.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;

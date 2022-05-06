@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myplanning.R;
 import com.example.myplanning.db.fireBaseController;
-import com.example.myplanning.model.Llista.Usuario;
+import com.example.myplanning.model.Usuari.Usuario;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

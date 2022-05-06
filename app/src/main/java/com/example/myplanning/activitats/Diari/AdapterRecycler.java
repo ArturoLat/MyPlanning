@@ -12,8 +12,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myplanning.R;
-import com.example.myplanning.model.Llista.Dades;
-import com.example.myplanning.model.Llista.Schedule;
+import com.example.myplanning.model.Item.Dades;
+import com.example.myplanning.model.Item.Schedule;
 
 import java.util.ArrayList;
 import java.util.HashMap;

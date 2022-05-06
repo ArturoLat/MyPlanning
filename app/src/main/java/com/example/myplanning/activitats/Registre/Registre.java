@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EdgeEffect;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,9 +13,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.LogIn.LogIn;
-import com.example.myplanning.activitats.LogIn.LogInViewModel;
-import com.example.myplanning.model.Llista.ComprobarDades;
-import com.example.myplanning.model.Llista.Usuario;
+import com.example.myplanning.model.Usuari.ComprobarDades;
+import com.example.myplanning.model.Usuari.Usuario;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -60,7 +58,7 @@ public class Registre extends AppCompatActivity {
         @Override
         public void onChanged(String string) {
             Toast toastsuma =
-                    Toast.makeText(getApplicationContext(), string.toString(), Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), string, Toast.LENGTH_SHORT);
             toastsuma.show();
         }
     };

@@ -1,4 +1,4 @@
-package com.example.myplanning.model.Llista;
+package com.example.myplanning.model.Item;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -9,12 +9,13 @@ public class Dades {
     private String activitat;
     private Boolean done;
     private LocalDateTime date;
+    private Integer id;
 
     public Dades(String activitat, Boolean done, LocalDateTime date) {
         this.activitat = activitat;
         this.done = done;
         this.date = date;
-
+        this.id = null;
     }
 
     public Map<String, Object> toMap() {
@@ -42,10 +43,15 @@ public class Dades {
         this.done = done;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     @Override
     public String toString() {
         return activitat + "  " + date;
-
-
     }
 }

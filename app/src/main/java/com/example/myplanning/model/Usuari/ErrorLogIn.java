@@ -1,4 +1,4 @@
-package com.example.myplanning.model.Llista;
+package com.example.myplanning.model.Usuari;
 
 public enum ErrorLogIn {
         USUARI_INEXISTENT("Usuari inexistent"),

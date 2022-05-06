@@ -1,4 +1,4 @@
-package com.example.myplanning.model.Llista;
+package com.example.myplanning.model.Usuari;
 
 import com.example.myplanning.db.fireBaseController;
 

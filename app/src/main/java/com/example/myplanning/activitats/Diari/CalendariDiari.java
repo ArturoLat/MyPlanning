@@ -16,13 +16,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.example.myplanning.activitats.CalendariUtiles;
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Seleccio.Seleccio;
 import com.example.myplanning.db.fireBaseController;
-import com.example.myplanning.model.Llista.Dades;
-import com.example.myplanning.model.Llista.Usuario;
+import com.example.myplanning.model.Item.*;
+import com.example.myplanning.model.Usuari.Usuario;
 
 public class CalendariDiari extends AppCompatActivity{
 

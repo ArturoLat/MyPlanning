@@ -18,7 +18,7 @@ import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.activitats.Mensual.CalendariMensual;
 import com.example.myplanning.activitats.Registre.Registre;
 import com.example.myplanning.db.fireBaseController;
-import com.example.myplanning.model.Llista.Usuario;
+import com.example.myplanning.model.Usuari.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;

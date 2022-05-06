@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.myplanning.model.Llista.ErrorLogIn;
-import com.example.myplanning.model.Llista.ErrorRegistre;
+import com.example.myplanning.model.Usuari.ErrorLogIn;
 
 public class LogInViewModel extends ViewModel {
 

@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.myplanning.model.Llista.ComprobarDades;
-import com.example.myplanning.model.Llista.ErrorRegistre;
+import com.example.myplanning.model.Usuari.ErrorRegistre;
 
 public class RegistreViewModel extends ViewModel {
 
