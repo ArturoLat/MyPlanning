@@ -186,9 +186,8 @@ public class fireBaseController  implements llistArrayObserver{
                 CalendariDiari.listDatosShedule.add(new Dades(act,done,dataFinal));
                 cont = 0;
             }
-            CalendariDiari.updateSchedule();
-
         }
+        CalendariDiari.updateSchedule();
     }
 
     @Override
@@ -224,9 +223,8 @@ public class fireBaseController  implements llistArrayObserver{
                 CalendariDiari.listDatostoDo.add(new Dades(act,done,dataFinal));
                 cont = 0;
             }
-            CalendariDiari.updateToDo();
-
         }
+        CalendariDiari.updateToDo();
     }
 
     @Override
@@ -262,8 +260,7 @@ public class fireBaseController  implements llistArrayObserver{
                 CalendariDiari.listDatosHomeWork.add(new Dades(act,done,dataFinal));
                 cont = 0;
             }
-            CalendariDiari.updateHomeWork();
-
         }
+        CalendariDiari.updateHomeWork();
     }
 }

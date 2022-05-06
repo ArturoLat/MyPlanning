@@ -31,7 +31,7 @@ public class CalendariDiari extends AppCompatActivity{
     private static RecyclerView scheduleRecycleView;
     private static RecyclerView toDoRecycleView;
     private static RecyclerView tasksRecycleView;
-    private LocalDateTime diaActual = LocalDateTime.now();
+    private LocalDateTime diaActual = CalendariUtiles.selectedDate.atStartOfDay();
     private Usuario user = Usuario.getInstance();
 
     public static ArrayList<Dades> listDatosShedule = new ArrayList<>();
@@ -57,6 +57,10 @@ public class CalendariDiari extends AppCompatActivity{
         toDoRecycleView.setLayoutManager(new LinearLayoutManager(this));
         tasksRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
+        listDatosShedule.clear();
+        listDatostoDo.clear();
+        listDatosHomeWork.clear();
+
         db.getCollectUserSchedule(user.getNom(),diaActual);
         db.getCollectUserTodo(user.getNom(),diaActual);
         db.getCollectUserHomeWork(user.getNom(),diaActual);
@@ -66,6 +70,11 @@ public class CalendariDiari extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
+
+        listDatosShedule.clear();
+        listDatostoDo.clear();
+        listDatosHomeWork.clear();
+
         setDiaView();
     }
 
@@ -76,6 +85,14 @@ public class CalendariDiari extends AppCompatActivity{
         String diaSetmana = CalendariUtiles.selectedDate.format(DateTimeFormatter
                 .ofLocalizedDate(FormatStyle.LONG));
         diaSetmanaTV.setText(diaSetmana);
+        diaActual = CalendariUtiles.selectedDate.atStartOfDay();
+        listDatosShedule.clear();
+        listDatostoDo.clear();
+        listDatosHomeWork.clear();
+        db.getCollectUserSchedule(user.getNom(),diaActual);
+        db.getCollectUserTodo(user.getNom(),diaActual);
+        db.getCollectUserHomeWork(user.getNom(),diaActual);
+
     }
 
     public void nextDayAction(View view){
@@ -87,6 +104,8 @@ public class CalendariDiari extends AppCompatActivity{
     public void prevDayAction(View view){
         CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.minusDays(1);
         setDiaView();
+
+
     }
 
     public void notaAction(View view){
