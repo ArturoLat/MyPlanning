@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myplanning" >
+    package="com.example.myplanning">
 
     <application
         android:allowBackup="true"
@@ -8,58 +8,43 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyPlanning" >
+        android:theme="@style/Theme.MyPlanning">
+        <activity
+            android:name=".activitats.Anual.CalendariAnual"
+            android:exported="false" />
         <activity
             android:name=".activitats.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.MyPlanning.NoActionBar" >
+            android:theme="@style/Theme.MyPlanning.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activitats.Mensual.CalendariMensual"
+            android:exported="false" />
+        <activity
+            android:name=".activitats.Diari.CalendariDiari"
+            android:exported="false" />
 
         <activity
-            android:name="com.example.myplanning.activitats.Mensual.CalendariMensual"
-            android:exported="false"
-        />
-
+            android:name=".activitats.Configuracio.Configuracio"
+            android:exported="false" />
         <activity
-            android:name="com.example.myplanning.activitats.Diari.CalendariDiari"
-            android:exported="false"
-            />
-
+            android:name=".activitats.LogIn.LogIn"
+            android:exported="false" />
         <activity
-            android:name="com.example.myplanning.activitats.Anual.Anual"
-            android:exported="false"
-            />
-
+            android:name=".activitats.Registre.Registre"
+            android:exported="false" />
         <activity
-            android:name="com.example.myplanning.activitats.Configuracio.Configuracio"
-            android:exported="false"
-            />
-
+            android:name=".activitats.Seleccio.Seleccio"
+            android:exported="false" />
         <activity
-            android:name="com.example.myplanning.activitats.LogIn.LogIn"
-            android:exported="false"
-            />
-
-        <activity
-            android:name="com.example.myplanning.activitats.Registre.Registre"
-            android:exported="false"
-            />
-
-        <activity
-            android:name="com.example.myplanning.activitats.Seleccio.Seleccio"
-            android:exported="false"
-            />
-
-        <activity
-            android:name="com.example.myplanning.activitats.Diari.Tarea"
-            android:exported="false"
-            />
+            android:name=".activitats.Diari.Tarea"
+            android:exported="false" />
     </application>
 
 </manifest>

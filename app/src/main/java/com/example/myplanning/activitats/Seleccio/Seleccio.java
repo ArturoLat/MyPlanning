@@ -8,7 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myplanning.R;
-import com.example.myplanning.activitats.Anual.Anual;
+import com.example.myplanning.activitats.Anual.CalendariAnual;
 import com.example.myplanning.activitats.Configuracio.Configuracio;
 import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.activitats.Mensual.CalendariMensual;
@@ -48,7 +48,7 @@ public class Seleccio extends AppCompatActivity {
     }
 
     public void anualAccio(View view){
-        startActivity(new Intent(this, Anual.class));
+        startActivity(new Intent(this, CalendariAnual.class));
     }
 
     public void configuracioAccio(View view){

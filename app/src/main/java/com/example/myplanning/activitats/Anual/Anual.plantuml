@@ -5,7 +5,7 @@ title __ANUAL's Class Diagram__\n
   namespace com.example.myplanning {
     namespace activitats {
       namespace Anual {
-        class com.example.myplanning.activitats.Anual.Anual {
+        class com.example.myplanning.activitats.Anual.CalendariAnual {
             - btnAnterior : Button
             - btnSeguent : Button
             - btnTxt : Button
@@ -23,7 +23,7 @@ title __ANUAL's Class Diagram__\n
   }
   
 
-  com.example.myplanning.activitats.Anual.Anual -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.myplanning.activitats.Anual.CalendariAnual -up-|> androidx.appcompat.app.AppCompatActivity
 
 
 right footer
