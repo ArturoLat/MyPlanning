@@ -1,6 +1,7 @@
 package com.example.myplanning.model.Item;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,20 +12,23 @@ public class Dades {
     private LocalDateTime date;
     private Integer id;
 
-    public Dades(String activitat, Boolean done, LocalDateTime date) {
+    public Dades(String activitat, Boolean done, String date) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime dataFinal = LocalDateTime.parse(date, formatter);
+
         this.activitat = activitat;
         this.done = done;
-        this.date = date;
+        this.date = dataFinal;
         this.id = null;
     }
 
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("activitat", this.activitat);
-        result.put("done", this.done);
-        result.put("Localdate", date.toString());
+    public LocalDateTime getDate() {
+        return date;
+    }
 
-        return result;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public String getActivitat() {

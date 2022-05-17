@@ -1,29 +1,23 @@
 package com.example.myplanning.activitats.Diari;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myplanning.R;
 import com.example.myplanning.model.Item.Dades;
-import com.example.myplanning.model.Item.Schedule;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHolderDiari> {
 
-    ArrayList<Dades> listdatos;
+    private ArrayList<Object> listdatos;
 
-    public AdapterRecycler(ArrayList<Dades> listdatos) {
+    public AdapterRecycler(ArrayList<Object> listdatos) {
         if(!listdatos.isEmpty()){
             this.listdatos = listdatos;
 
@@ -32,6 +26,12 @@ public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHo
 
         }
 
+    }
+
+    public interface changeAdapterInterface{
+        void changeAdapterSchedule();
+        void changeAdapterToDo();
+        void changeAdapterHomework();
     }
 
     @NonNull
@@ -67,4 +67,5 @@ public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHo
         }
 
     }
+
 }

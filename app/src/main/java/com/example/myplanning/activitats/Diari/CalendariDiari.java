@@ -3,9 +3,12 @@ package com.example.myplanning.activitats.Diari;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +19,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Map;
 
 import com.example.myplanning.activitats.CalendariUtiles;
 import com.example.myplanning.R;
@@ -31,6 +33,8 @@ public class CalendariDiari extends AppCompatActivity{
     private static RecyclerView scheduleRecycleView;
     private static RecyclerView toDoRecycleView;
     private static RecyclerView tasksRecycleView;
+    private Context parentContext;
+    private DiariViewModel viewModel;
     private LocalDateTime diaActual = CalendariUtiles.selectedDate.atStartOfDay();
     private Usuario user = Usuario.getInstance();
 
@@ -43,6 +47,7 @@ public class CalendariDiari extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        parentContext = this.getBaseContext();
         setContentView(R.layout.activity_calendari_diari);
         initWidgets();
 
@@ -146,6 +151,20 @@ public class CalendariDiari extends AppCompatActivity{
     public static void updateHomeWork() {
         /*AdapterRecycler adapterHomwWork = new AdapterRecycler(listDatosHomeWork);
         tasksRecycleView.swapAdapter(adapterHomwWork,true);*/
+
+    }
+    public void setLiveDataObservers() {
+        //Subscribe the activity to the observable
+        viewModel = new ViewModelProvider(this).get(DiariViewModel.class);
+
+        final Observer<ArrayList<Schedule>> observer = new Observer<ArrayList<Schedule>>() {
+            @Override
+            public void onChanged(ArrayList<Dades> ac) {
+                AdapterRecycler newAdapter = new AdapterRecycler(ac);
+                scheduleRecycleView.swapAdapter(newAdapter, false);
+                newAdapter.notifyDataSetChanged();
+            }
+        };
 
     }
 

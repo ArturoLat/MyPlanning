@@ -21,19 +21,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class fireBaseController  implements llistArrayObserver{
+public class fireBaseController{
 
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static Map<String, Object> result = new HashMap<>();
     private static fireBaseController instance;
+    public static llistArrayObserver listener;
     private int resultat = -1;
 
-    public static fireBaseController getInstance(){
-        if(instance == null){
-            instance = new fireBaseController();
-
-        }
-        return instance;
+    public fireBaseController(llistArrayObserver listener){
+        this.listener = listener;
 
     }
 
@@ -76,11 +73,13 @@ public class fireBaseController  implements llistArrayObserver{
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            ArrayList<HomeWork> llista_homework = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                result.put(document.getId(),document.getData());
+                                llista_homework.add(new HomeWork(document.getString("activitat"),Boolean.parseBoolean(document.getString("done")),document.getString("Localdate")));
                             }
+                            listener.notificarHomeWork(llista_homework);
                         }
-                        notificarHomeWork(result);
+
                     }
                 });
 
@@ -96,12 +95,12 @@ public class fireBaseController  implements llistArrayObserver{
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            ArrayList<Schedule> llista_schedule = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                result.put(document.getId(),document.getData());
+                                llista_schedule.add(new Schedule(document.getString("activitat"),Boolean.parseBoolean(document.getString("done")),document.getString("Localdate")));
                             }
+                            listener.notificarSchedule(llista_schedule);
                         }
-                        notificarSchedule(result);
-
                     }
                 });
 
@@ -118,43 +117,51 @@ public class fireBaseController  implements llistArrayObserver{
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            ArrayList<ToDo> llista_todo = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                result.put(document.getId(),document.getData());
+                                llista_todo.add(new ToDo(document.getString("activitat"),Boolean.parseBoolean(document.getString("done")),document.getString("Localdate")));
                             }
+                            listener.notificarToDo(llista_todo);
                         }
-                        notificarToDo(result);
-
                     }
                 });
 
     }
 
     public void setCollectUserTodo (LocalDateTime time, String user, String act){
-        Dades dato = new Dades(act,false, time);
+
+        Map<String, Object> object = new HashMap<>();
+        object.put("Localdate", time);
+        object.put("activitat", act);
+        object.put("done", false);
 
         db.collection(user).document("todo")
-                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(dato.toMap());
+                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(object);
 
     }
     public void setCollectUserHomework (LocalDateTime time, String user, String act){
-        Dades dato = new Dades(act,false, time);
+        Map<String, Object> object = new HashMap<>();
+        object.put("Localdate", time);
+        object.put("activitat", act);
+        object.put("done", false);
 
         db.collection(user).document("homework")
-                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(dato.toMap());
+                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(object);
 
     }
 
     public void setCollectUserSchedule(LocalDateTime time, String user, String act){
-
-        Dades dato = new Dades(act,false, time);
+        Map<String, Object> object = new HashMap<>();
+        object.put("Localdate", time);
+        object.put("activitat", act);
+        object.put("done", false);
 
         db.collection(user).document("schedule")
-                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(dato.toMap());
+                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(object);
 
     }
 
-    @Override
-    public void notificarSchedule(Map<String, Object> dada){
+    /*public void notificar(Map<String, Object> dada){
         ArrayList<Object> camps = new ArrayList<>();
         String act ="";
         Boolean done = false;
@@ -188,79 +195,6 @@ public class fireBaseController  implements llistArrayObserver{
             }
         }
         CalendariDiari.updateSchedule();
-    }
+    }*/
 
-    @Override
-    public void notificarToDo(Map<String, Object> dada) {
-        ArrayList<Object> camps = new ArrayList<>();
-        String act ="";
-        Boolean done = false;
-        String dateTime = "";
-
-        if(!dada.isEmpty()){
-            for (Object o: dada.values()){
-                camps.add(o);
-
-            }
-            for (int i = 0; i < camps.size(); i++) {
-                HashMap<String,Object> o = (HashMap<String, Object>) camps.get(i);
-                int cont = 0;
-                for(Object atri: o.values()){
-                    if(cont == 0){
-                        dateTime = (String) atri;
-
-                    }else if(cont == 1){
-                        done = (Boolean) atri;
-
-                    }else{
-                        act = (String) atri;
-
-                    }
-                    cont++;
-                }
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-                LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
-                CalendariDiari.listDatostoDo.add(new Dades(act,done,dataFinal));
-                cont = 0;
-            }
-        }
-        CalendariDiari.updateToDo();
-    }
-
-    @Override
-    public void notificarHomeWork(Map<String, Object> dada) {
-        ArrayList<Object> camps = new ArrayList<>();
-        String act ="";
-        Boolean done = false;
-        String dateTime = "";
-
-        if(!dada.isEmpty()){
-            for (Object o: dada.values()){
-                camps.add(o);
-
-            }
-            for (int i = 0; i < camps.size(); i++) {
-                HashMap<String,Object> o = (HashMap<String, Object>) camps.get(i);
-                int cont = 0;
-                for(Object atri: o.values()){
-                    if(cont == 0){
-                        dateTime = (String) atri;
-
-                    }else if(cont == 1){
-                        done = (Boolean) atri;
-
-                    }else{
-                        act = (String) atri;
-
-                    }
-                    cont++;
-                }
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-                LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
-                CalendariDiari.listDatosHomeWork.add(new Dades(act,done,dataFinal));
-                cont = 0;
-            }
-        }
-        CalendariDiari.updateHomeWork();
-    }
 }
