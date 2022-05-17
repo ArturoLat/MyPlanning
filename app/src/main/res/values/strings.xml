@@ -249,4 +249,10 @@
     <string name="txtAnterior"><![CDATA[<-]]></string>
     <string name="txtSeguentAnual"><![CDATA[->]]></string>
     <string name="txtSeleccio">Seleccio</string>
+    <string name="valoracio_del">"Valoracio del "</string>
+    <string name="txtdiaValoracio">txtDia</string>
+    <string name="pujar_valoraci">Pujar Valoració</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="valoraci_del">Valoració del dia:</string>
+    <string name="valorardia">valorarDia</string>
 </resources>

@@ -45,16 +45,12 @@ public class Configuracio extends AppCompatActivity {
                 }
 
                 if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-                    getApplicationContext().getTheme().applyStyle(AppCompatDelegate.MODE_NIGHT_YES, true);
+                    getTheme().applyStyle(AppCompatDelegate.MODE_NIGHT_YES, true);
                 }else{
-                    getApplicationContext().getTheme().applyStyle(AppCompatDelegate.MODE_NIGHT_NO, false);
+                    getTheme().applyStyle(AppCompatDelegate.MODE_NIGHT_NO, false);
                 }
             }
-
-
         });
-
-
     }
 
     @Override
