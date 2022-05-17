@@ -19,7 +19,7 @@ import com.example.myplanning.activitats.Seleccio.Seleccio;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Anual extends AppCompatActivity {
+public class CalendariAnual extends AppCompatActivity {
 
     private Button btnAnterior;
     private Button btnTxt;
