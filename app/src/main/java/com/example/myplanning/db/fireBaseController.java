@@ -37,6 +37,14 @@ public class fireBaseController{
         this.instance = this;
 
     }
+    public fireBaseController(){
+        this.instance = this;
+
+    }
+
+    public static void setListener(llistArrayObserver listener) {
+        fireBaseController.listener = listener;
+    }
 
     public static fireBaseController getInstance() {
         return instance;
@@ -167,41 +175,5 @@ public class fireBaseController{
                 .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(object);
 
     }
-
-    /*public void notificar(Map<String, Object> dada){
-        ArrayList<Object> camps = new ArrayList<>();
-        String act ="";
-        Boolean done = false;
-        String dateTime = "";
-
-        if(!dada.isEmpty()){
-            for (Object o: dada.values()){
-                camps.add(o);
-
-            }
-            for (int i = 0; i < camps.size(); i++) {
-                HashMap<String,Object> o = (HashMap<String, Object>) camps.get(i);
-                int cont = 0;
-                for(Object atri: o.values()){
-                    if(cont == 0){
-                        dateTime = (String) atri;
-
-                    }else if(cont == 1){
-                        done = (Boolean) atri;
-
-                    }else{
-                        act = (String) atri;
-
-                    }
-                    cont++;
-                }
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-                LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
-                CalendariDiari.listDatosShedule.add(new Dades(act,done,dataFinal));
-                cont = 0;
-            }
-        }
-        CalendariDiari.updateSchedule();
-    }*/
 
 }

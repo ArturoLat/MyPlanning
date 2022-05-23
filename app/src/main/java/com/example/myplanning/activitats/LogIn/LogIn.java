@@ -32,7 +32,7 @@ public class LogIn extends AppCompatActivity {
     private EditText txtUser;
     private Usuario usuario;
     private EditText txtPassword;
-    private fireBaseController db = fireBaseController.getInstance();
+    private fireBaseController db;
     private LogInViewModel viewModel;
 
     @Override
@@ -50,6 +50,8 @@ public class LogIn extends AppCompatActivity {
                 toastsuma.show();
             }
         };
+
+        this.db = new fireBaseController();
 
         viewModel.getRespuesta().observe(this, observer);
     }

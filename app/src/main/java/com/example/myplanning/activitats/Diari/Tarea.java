@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myplanning.R;
 import com.example.myplanning.db.fireBaseController;
@@ -24,13 +25,14 @@ public class Tarea extends AppCompatActivity {
     private Usuario user = Usuario.getInstance();
     private Button btnCancelar;
     private Button btnPujar;
-    private fireBaseController db; // TODO: 17/05/2022
+    private DiariViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tarea_layout);
         initWidgets();
+        viewModel = new ViewModelProvider(this).get(DiariViewModel.class);
     }
 
     private void initWidgets() {
@@ -61,13 +63,13 @@ public class Tarea extends AppCompatActivity {
         LocalDateTime localDateTime = LocalDateTime.of(any,mes,dia,hora,minutos,0);
 
         if(activitatPenjar.equals("Schedule")){
-            db.setCollectUserSchedule(localDateTime,user.getNom(),activitat);
+            this.viewModel.addSchedule(activitat, false, localDateTime.toString());
 
         }else if(activitatPenjar.equals("To-Do")){
-            db.setCollectUserTodo(localDateTime,user.getNom(),activitat);
+            this.viewModel.addTodo(activitat, false, localDateTime.toString());
 
         }else{
-            db.setCollectUserHomework(localDateTime,user.getNom(),activitat);
+            this.viewModel.addHomework(activitat, false, localDateTime.toString());
 
         }
 

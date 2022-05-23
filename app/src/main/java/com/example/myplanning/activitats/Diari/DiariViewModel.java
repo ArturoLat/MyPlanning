@@ -23,14 +23,14 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
     private final MutableLiveData<ArrayList<Dades>> listDatostoDo;
     private final MutableLiveData<ArrayList<Dades>> listDatosHomeWork;
     private Usuario user = com.example.myplanning.model.Usuari.Usuario.getInstance();
-    //private final MutableLiveData<String> mToast;
+    private fireBaseController db;
 
     public DiariViewModel(Application app) {
         super(app);
         this.listDatosShedule = new MutableLiveData<>();
         this.listDatostoDo = new MutableLiveData<>();
         this.listDatosHomeWork = new MutableLiveData<>();
-        fireBaseController db = new fireBaseController(this);
+        db = new fireBaseController(this);
 
     }
 
@@ -46,8 +46,36 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
         return listDatosHomeWork;
     }
 
-    public void addSchedule(){
+    public void addSchedule(String act, boolean donit, String data){
+        Schedule nou = new Schedule(act,donit,data);
+        if (nou != null){
+            this.listDatosShedule.getValue().add(nou);
+            this.listDatosShedule.setValue(listDatosShedule.getValue());
+            db.setCollectUserSchedule(nou.getDate(),user.getNom(),act);
 
+        }
+
+    }
+
+    public void addHomework(String act, boolean donit, String data){
+        HomeWork nou = new HomeWork(act,donit,data);
+        if (nou != null){
+            this.listDatosHomeWork.getValue().add(nou);
+            this.listDatosHomeWork.setValue(listDatosHomeWork.getValue());
+            db.setCollectUserSchedule(nou.getDate(),user.getNom(),act);
+
+        }
+
+    }
+
+    public void addTodo(String act, boolean donit, String data){
+        ToDo nou = new ToDo(act,donit,data);
+        if (nou != null){
+            this.listDatostoDo.getValue().add(nou);
+            this.listDatostoDo.setValue(listDatostoDo.getValue());
+            db.setCollectUserSchedule(nou.getDate(),user.getNom(),act);
+
+        }
 
     }
 

@@ -130,7 +130,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
 
-                Schedule schedule = new Schedule(task, done, dataFinal);
+                Schedule schedule = new Schedule(task, done, dateTime);
                 schedule.setId(id);
                 mapSchedule.put(task, schedule);
             } while (cursorSchedule.moveToNext());
@@ -156,7 +156,8 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 String dateTime = cursorToDo.getString(cursorToDo.getColumnIndex("time"));
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
-                ToDo todo = new ToDo(task, done, dataFinal);
+
+                ToDo todo = new ToDo(task, done, dateTime);
                 todo.setId(id);
                 mapToDo.put(task, todo);
             } while (cursorToDo.moveToNext());
@@ -183,7 +184,8 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 String dateTime = cursorHomework.getString(cursorHomework.getColumnIndex("time"));
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
-                HomeWork homework = new HomeWork(task, done, dataFinal);
+
+                HomeWork homework = new HomeWork(task, done, dateTime);
                 homework.setId(id);
                 mapHomework.put(task, homework);
             } while (cursorHomework.moveToNext());

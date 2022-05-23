@@ -1,17 +1,21 @@
 package com.example.myplanning.activitats.LogIn;
 
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.myplanning.model.Usuari.ErrorLogIn;
 
-public class LogInViewModel extends ViewModel {
+public class LogInViewModel extends AndroidViewModel {
 
     private MutableLiveData<String> respuesta;
 
-    public LogInViewModel(){
+    public LogInViewModel(Application application){
+        super(application);
         respuesta = new MutableLiveData<>();
     }
 
