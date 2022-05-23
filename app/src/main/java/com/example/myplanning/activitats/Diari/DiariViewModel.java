@@ -14,6 +14,7 @@ import com.example.myplanning.model.Item.Schedule;
 import com.example.myplanning.model.Item.ToDo;
 import com.example.myplanning.model.Usuari.Usuario;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -31,6 +32,9 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
         this.listDatostoDo = new MutableLiveData<>();
         this.listDatosHomeWork = new MutableLiveData<>();
         db = new fireBaseController(this);
+        db.getCollectUserHomeWork(this.user.getNom(),// TODO: 23/05/2022 );
+        db.getCollectUserTodo(this.user.getNom(),// TODO: 23/05/2022);
+        db.getCollectUserSchedule(this.user.getNom(),// TODO: 23/05/2022);
 
     }
 
