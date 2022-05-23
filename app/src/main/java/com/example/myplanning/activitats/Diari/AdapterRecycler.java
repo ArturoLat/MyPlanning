@@ -10,14 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myplanning.R;
 import com.example.myplanning.model.Item.Dades;
+import com.example.myplanning.model.Item.HomeWork;
+import com.example.myplanning.model.Item.Schedule;
+import com.example.myplanning.model.Item.ToDo;
 
 import java.util.ArrayList;
 
 public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHolderDiari> {
 
-    private ArrayList<Object> listdatos;
+    private ArrayList<Dades> listdatos;
 
-    public AdapterRecycler(ArrayList<Object> listdatos) {
+    public AdapterRecycler(ArrayList<Dades> listdatos) {
         if(!listdatos.isEmpty()){
             this.listdatos = listdatos;
 
@@ -26,12 +29,6 @@ public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHo
 
         }
 
-    }
-
-    public interface changeAdapterInterface{
-        void changeAdapterSchedule();
-        void changeAdapterToDo();
-        void changeAdapterHomework();
     }
 
     @NonNull

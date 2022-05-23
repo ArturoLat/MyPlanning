@@ -36,13 +36,6 @@ public class CalendariDiari extends AppCompatActivity{
     private Context parentContext;
     private DiariViewModel viewModel;
     private LocalDateTime diaActual = CalendariUtiles.selectedDate.atStartOfDay();
-    private Usuario user = Usuario.getInstance();
-
-    public static ArrayList<Dades> listDatosShedule = new ArrayList<>();
-    public static ArrayList<Dades> listDatostoDo = new ArrayList<>();
-    public static ArrayList<Dades> listDatosHomeWork = new ArrayList<>();
-
-    private fireBaseController db = fireBaseController.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,25 +55,13 @@ public class CalendariDiari extends AppCompatActivity{
         toDoRecycleView.setLayoutManager(new LinearLayoutManager(this));
         tasksRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
-        listDatosShedule.clear();
-        listDatostoDo.clear();
-        listDatosHomeWork.clear();
-
-        db.getCollectUserSchedule(user.getNom(),diaActual);
-        db.getCollectUserTodo(user.getNom(),diaActual);
-        db.getCollectUserHomeWork(user.getNom(),diaActual);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        listDatosShedule.clear();
-        listDatostoDo.clear();
-        listDatosHomeWork.clear();
-
         setDiaView();
+
     }
 
     public void diaSeleccioAccio(View view){
@@ -91,13 +72,43 @@ public class CalendariDiari extends AppCompatActivity{
                 .ofLocalizedDate(FormatStyle.LONG));
         diaSetmanaTV.setText(diaSetmana);
         diaActual = CalendariUtiles.selectedDate.atStartOfDay();
-        listDatosShedule.clear();
-        listDatostoDo.clear();
-        listDatosHomeWork.clear();
-        db.getCollectUserSchedule(user.getNom(),diaActual);
-        db.getCollectUserTodo(user.getNom(),diaActual);
-        db.getCollectUserHomeWork(user.getNom(),diaActual);
 
+    }
+
+    public void setLiveDataObservers() {
+        //Subscribe the activity to the observable
+        viewModel = new ViewModelProvider(this).get(DiariViewModel.class);
+
+        final Observer<ArrayList<Dades>> observer = new Observer<ArrayList<Dades>>() {
+            @Override
+            public void onChanged(ArrayList<Dades> ac) {
+                AdapterRecycler newAdapter = new AdapterRecycler(ac);
+                scheduleRecycleView.swapAdapter(newAdapter, false);
+                newAdapter.notifyDataSetChanged();
+            }
+        };
+
+        final Observer<ArrayList<Dades>> observer1 = new Observer<ArrayList<Dades>>() {
+            @Override
+            public void onChanged(ArrayList<Dades> ac) {
+                AdapterRecycler newAdapter = new AdapterRecycler(ac);
+                toDoRecycleView.swapAdapter(newAdapter, false);
+                newAdapter.notifyDataSetChanged();
+            }
+        };
+
+        final Observer<ArrayList<Dades>> observer2 = new Observer<ArrayList<Dades>>() {
+            @Override
+            public void onChanged(ArrayList<Dades> ac) {
+                AdapterRecycler newAdapter = new AdapterRecycler(ac);
+                tasksRecycleView.swapAdapter(newAdapter, false);
+                newAdapter.notifyDataSetChanged();
+            }
+        };
+
+        viewModel.getListDatosHomeWork().observe(this, observer2);
+        viewModel.getListDatosShedule().observe(this, observer);
+        viewModel.getListDatostoDo().observe(this,observer1);
     }
 
     public void nextDayAction(View view){
@@ -110,22 +121,24 @@ public class CalendariDiari extends AppCompatActivity{
         CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.minusDays(1);
         setDiaView();
 
-
     }
 
     public void notaAction(View view){
         Toast toast = Toast.makeText(this,"Nota", Toast.LENGTH_SHORT);
         toast.show();
+
     }
 
     public void toDoAction(View view){
         Toast toast = Toast.makeText(this,"To-Do", Toast.LENGTH_SHORT);
         toast.show();
+
     }
 
     public void happiAction(View view){
         Toast toast = Toast.makeText(this,"Happy", Toast.LENGTH_SHORT);
         toast.show();
+
     }
 
     public void taskAction(View view){
@@ -135,37 +148,6 @@ public class CalendariDiari extends AppCompatActivity{
     public void scheduleAction(View view){
         Toast toast = Toast.makeText(this,"Schedule", Toast.LENGTH_SHORT);
         toast.show();
-    }
-
-    public static void updateSchedule() {
-        AdapterRecycler adapterSchedule = new AdapterRecycler(listDatosShedule);
-        scheduleRecycleView.swapAdapter(adapterSchedule,true);
-
-    }
-
-    public static void updateToDo() {
-        /*AdapterRecycler adaptertoDo = new AdapterRecycler(listDatostoDo);
-        toDoRecycleView.swapAdapter(adaptertoDo,true);*/
-
-    }
-    public static void updateHomeWork() {
-        /*AdapterRecycler adapterHomwWork = new AdapterRecycler(listDatosHomeWork);
-        tasksRecycleView.swapAdapter(adapterHomwWork,true);*/
-
-    }
-    public void setLiveDataObservers() {
-        //Subscribe the activity to the observable
-        viewModel = new ViewModelProvider(this).get(DiariViewModel.class);
-
-        final Observer<ArrayList<Schedule>> observer = new Observer<ArrayList<Schedule>>() {
-            @Override
-            public void onChanged(ArrayList<Dades> ac) {
-                AdapterRecycler newAdapter = new AdapterRecycler(ac);
-                scheduleRecycleView.swapAdapter(newAdapter, false);
-                newAdapter.notifyDataSetChanged();
-            }
-        };
-
     }
 
 }

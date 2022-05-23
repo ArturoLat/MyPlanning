@@ -126,8 +126,10 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 }
                 String task = cursorSchedule.getString(cursorSchedule.getColumnIndex("task"));
                 String dateTime = cursorSchedule.getString(cursorSchedule.getColumnIndex("time"));
+
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
+
                 Schedule schedule = new Schedule(task, done, dataFinal);
                 schedule.setId(id);
                 mapSchedule.put(task, schedule);

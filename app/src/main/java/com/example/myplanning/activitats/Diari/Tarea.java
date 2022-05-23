@@ -24,7 +24,7 @@ public class Tarea extends AppCompatActivity {
     private Usuario user = Usuario.getInstance();
     private Button btnCancelar;
     private Button btnPujar;
-    private fireBaseController db = fireBaseController.getInstance();
+    private fireBaseController db; // TODO: 17/05/2022
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
