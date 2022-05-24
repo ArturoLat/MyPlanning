@@ -32,9 +32,13 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
         this.listDatostoDo = new MutableLiveData<>();
         this.listDatosHomeWork = new MutableLiveData<>();
         db = new fireBaseController(this);
-        db.getCollectUserHomeWork(this.user.getNom(),// TODO: 23/05/2022 );
-        db.getCollectUserTodo(this.user.getNom(),// TODO: 23/05/2022);
-        db.getCollectUserSchedule(this.user.getNom(),// TODO: 23/05/2022);
+
+    }
+
+    public void initDades(LocalDateTime date){
+        db.getCollectUserHomeWork(this.user.getNom(),date);
+        db.getCollectUserTodo(this.user.getNom(),date);
+        db.getCollectUserSchedule(this.user.getNom(),date);
 
     }
 
@@ -51,7 +55,7 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
     }
 
     public void addSchedule(String act, boolean donit, String data){
-        Schedule nou = new Schedule(act,donit,data);
+        Dades nou = new Dades(act,donit,data);
         if (nou != null){
             this.listDatosShedule.getValue().add(nou);
             this.listDatosShedule.setValue(listDatosShedule.getValue());

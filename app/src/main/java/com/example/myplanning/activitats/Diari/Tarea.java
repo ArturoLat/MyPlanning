@@ -25,14 +25,14 @@ public class Tarea extends AppCompatActivity {
     private Usuario user = Usuario.getInstance();
     private Button btnCancelar;
     private Button btnPujar;
-    private DiariViewModel viewModel;
+    private fireBaseController db = fireBaseController.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tarea_layout);
         initWidgets();
-        viewModel = new ViewModelProvider(this).get(DiariViewModel.class);
+
     }
 
     private void initWidgets() {
@@ -41,7 +41,6 @@ public class Tarea extends AppCompatActivity {
     }
 
     public void pujarTascaAccio(View view){
-
         EditText txtActivitat = findViewById(R.id.txtTareaName);
         Spinner spinnerValueDia = findViewById(R.id.spinnerDay);
         Spinner spinnerValueMes = findViewById(R.id.spinnerMes);
@@ -63,13 +62,13 @@ public class Tarea extends AppCompatActivity {
         LocalDateTime localDateTime = LocalDateTime.of(any,mes,dia,hora,minutos,0);
 
         if(activitatPenjar.equals("Schedule")){
-            this.viewModel.addSchedule(activitat, false, localDateTime.toString());
+            db.setCollectUserSchedule(localDateTime, user.getNom(), activitat);
 
         }else if(activitatPenjar.equals("To-Do")){
-            this.viewModel.addTodo(activitat, false, localDateTime.toString());
+            db.setCollectUserTodo(localDateTime, user.getNom(), activitat);
 
         }else{
-            this.viewModel.addHomework(activitat, false, localDateTime.toString());
+            db.setCollectUserHomework(localDateTime, user.getNom(), activitat);
 
         }
 

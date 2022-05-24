@@ -43,6 +43,7 @@ public class CalendariDiari extends AppCompatActivity{
         parentContext = this.getBaseContext();
         setContentView(R.layout.activity_calendari_diari);
         initWidgets();
+        setLiveDataObservers();
 
     }
 
@@ -78,6 +79,7 @@ public class CalendariDiari extends AppCompatActivity{
     public void setLiveDataObservers() {
         //Subscribe the activity to the observable
         viewModel = new ViewModelProvider(this).get(DiariViewModel.class);
+        viewModel.initDades(diaActual);
 
         final Observer<ArrayList<Dades>> observer = new Observer<ArrayList<Dades>>() {
             @Override

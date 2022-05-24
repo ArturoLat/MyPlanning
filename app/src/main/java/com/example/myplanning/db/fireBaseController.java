@@ -8,6 +8,7 @@ import com.example.myplanning.activitats.observer.llistArrayObserver;
 import com.example.myplanning.model.Item.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -18,8 +19,10 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,7 +94,7 @@ public class fireBaseController{
                         if (task.isSuccessful()) {
                             ArrayList<Dades> llista_homework = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                llista_homework.add(new Dades(document.getString("activitat"),Boolean.parseBoolean(document.getString("done")),document.getString("Localdate")));
+                                llista_homework.add(new Dades(document.getString("activitat"),Boolean.valueOf(document.getBoolean("done")), document.getString("Localdate")));
                             }
                             listener.notificarHomeWork(llista_homework);
                         }
@@ -113,7 +116,7 @@ public class fireBaseController{
                         if (task.isSuccessful()) {
                             ArrayList<Dades> llista_schedule = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                llista_schedule.add(new Dades(document.getString("activitat"),Boolean.parseBoolean(document.getString("done")),document.getString("Localdate")));
+                                llista_schedule.add(new Dades(document.getString("activitat"),Boolean.valueOf(document.getBoolean("done")),document.getString("Localdate")));
                             }
                             listener.notificarSchedule(llista_schedule);
                         }
@@ -134,7 +137,7 @@ public class fireBaseController{
                         if (task.isSuccessful()) {
                             ArrayList<Dades> llista_todo = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                llista_todo.add(new Dades(document.getString("activitat"),Boolean.parseBoolean(document.getString("done")),document.getString("Localdate")));
+                                llista_todo.add(new Dades(document.getString("activitat"),Boolean.valueOf(document.getBoolean("done")),document.getString("Localdate")));
                             }
                             listener.notificarToDo(llista_todo);
                         }
@@ -145,8 +148,10 @@ public class fireBaseController{
 
     public void setCollectUserTodo (LocalDateTime time, String user, String act){
 
+        String date = time.toString();
+
         Map<String, Object> object = new HashMap<>();
-        object.put("Localdate", time);
+        object.put("Localdate", date);
         object.put("activitat", act);
         object.put("done", false);
 
@@ -156,7 +161,10 @@ public class fireBaseController{
     }
     public void setCollectUserHomework (LocalDateTime time, String user, String act){
         Map<String, Object> object = new HashMap<>();
-        object.put("Localdate", time);
+
+        String date = time.toString();
+
+        object.put("Localdate", date);
         object.put("activitat", act);
         object.put("done", false);
 
@@ -167,7 +175,10 @@ public class fireBaseController{
 
     public void setCollectUserSchedule(LocalDateTime time, String user, String act){
         Map<String, Object> object = new HashMap<>();
-        object.put("Localdate", time);
+
+        String date = time.toString();
+
+        object.put("Localdate", date);
         object.put("activitat", act);
         object.put("done", false);
 

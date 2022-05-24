@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Jan/Desktop/MyPlanning/app/src/main/res/layout/activity_calendari_anual.xml" value="0.5546875" />
         <entry key="..\:/Users/Jan/Desktop/MyPlanning/app/src/main/res/layout/anual_layout.xml" value="0.5546875" />
         <entry key="..\:/Users/Jan/Desktop/MyPlanning/app/src/main/res/layout/diari_layout.xml" value="0.1" />
         <entry key="..\:/Users/Jan/Desktop/MyPlanning/app/src/main/res/layout/log_in_layout.xml" value="0.5546875" />
@@ -33,9 +32,6 @@
         <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/main_activity_layout.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/mensual_layout.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/Zijian/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/tarea_layout.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/anual_layout.xml" value="0.21829710144927536" />
-        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/rating_layout.xml" value="0.25" />
-        <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning/app/src/main/res/layout/tarea_layout.xml" value="0.21829710144927536" />
         <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/anual_layout.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/artur/AndroidStudioProjects/MyPlanning2/app/src/main/res/layout/config_layout.xml" value="0.12158054711246201" />
@@ -71,6 +67,8 @@
         <entry key="..\:/Users/leuis/StudioProjects/MyPlanning/app/src/main/res/layout/seleccio_layout.xml" value="0.19701086956521738" />
         <entry key="..\:/Users/leuis/StudioProjects/MyPlanning/app/src/main/res/layout/semanal_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/leuis/StudioProjects/MyPlanning/app/src/main/res/layout/tarea_layout.xml" value="0.19701086956521738" />
+        <entry key="app/src/main/res/layout/activity_calendari_diari.xml" value="0.13541666666666666" />
+        <entry key="app/src/main/res/layout/calendari_dia.xml" value="0.13541666666666666" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.2164855072463768" />
         <entry key="app/src/main/res/layout/diari_layout.xml" value="0.2258544921875" />
         <entry key="app/src/main/res/layout/log_in_layout.xml" value="0.2513586956521739" />
