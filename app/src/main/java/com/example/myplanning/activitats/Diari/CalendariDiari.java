@@ -8,24 +8,31 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import com.example.myplanning.activitats.CalendariUtiles;
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Seleccio.Seleccio;
-import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Item.*;
-import com.example.myplanning.model.Usuari.Usuario;
+import com.thebluealliance.spectrum.SpectrumPalette;
 
 public class CalendariDiari extends AppCompatActivity{
 
@@ -36,6 +43,7 @@ public class CalendariDiari extends AppCompatActivity{
     private Context parentContext;
     private DiariViewModel viewModel;
     private LocalDateTime diaActual = CalendariUtiles.selectedDate.atStartOfDay();
+    int color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +76,12 @@ public class CalendariDiari extends AppCompatActivity{
     public void diaSeleccioAccio(View view){
         startActivity(new Intent(this, Seleccio.class));
     }
+
     private void setDiaView() {
         String diaSetmana = CalendariUtiles.selectedDate.format(DateTimeFormatter
                 .ofLocalizedDate(FormatStyle.LONG));
         diaSetmanaTV.setText(diaSetmana);
         diaActual = CalendariUtiles.selectedDate.atStartOfDay();
-
     }
 
     public void setLiveDataObservers() {
@@ -84,7 +92,8 @@ public class CalendariDiari extends AppCompatActivity{
         final Observer<ArrayList<Dades>> observer = new Observer<ArrayList<Dades>>() {
             @Override
             public void onChanged(ArrayList<Dades> ac) {
-                AdapterRecycler newAdapter = new AdapterRecycler(ac);
+                ArrayList<Dades> ordenada = ordenarLlista(ac);
+                ScheduleAdapter newAdapter = new ScheduleAdapter(ordenada);
                 scheduleRecycleView.swapAdapter(newAdapter, false);
                 newAdapter.notifyDataSetChanged();
             }
@@ -93,7 +102,8 @@ public class CalendariDiari extends AppCompatActivity{
         final Observer<ArrayList<Dades>> observer1 = new Observer<ArrayList<Dades>>() {
             @Override
             public void onChanged(ArrayList<Dades> ac) {
-                AdapterRecycler newAdapter = new AdapterRecycler(ac);
+                ArrayList<Dades> ordenada = ordenarLlista(ac);
+                ScheduleAdapter newAdapter = new ScheduleAdapter(ordenada);
                 toDoRecycleView.swapAdapter(newAdapter, false);
                 newAdapter.notifyDataSetChanged();
             }
@@ -102,7 +112,8 @@ public class CalendariDiari extends AppCompatActivity{
         final Observer<ArrayList<Dades>> observer2 = new Observer<ArrayList<Dades>>() {
             @Override
             public void onChanged(ArrayList<Dades> ac) {
-                AdapterRecycler newAdapter = new AdapterRecycler(ac);
+                ArrayList<Dades> ordenada = ordenarLlista(ac);
+                ScheduleAdapter newAdapter = new ScheduleAdapter(ordenada);
                 tasksRecycleView.swapAdapter(newAdapter, false);
                 newAdapter.notifyDataSetChanged();
             }
@@ -148,8 +159,20 @@ public class CalendariDiari extends AppCompatActivity{
     }
 
     public void scheduleAction(View view){
-        Toast toast = Toast.makeText(this,"Schedule", Toast.LENGTH_SHORT);
-        toast.show();
+        startActivity(new Intent(this, Tarea.class));
+    }
+
+    public ArrayList<Dades> ordenarLlista(ArrayList<Dades> llistaEvents) {
+        Collections.sort(llistaEvents, Comparator.comparing(e -> e.getDate()));
+        return llistaEvents;
+    }
+
+
+
+    private void showDatePickerDialog() {
+        DatePickerFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+
     }
 
 }

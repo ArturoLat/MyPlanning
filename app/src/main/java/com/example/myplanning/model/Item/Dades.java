@@ -2,6 +2,8 @@ package com.example.myplanning.model.Item;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +13,7 @@ public class Dades {
     private Boolean done;
     private LocalDateTime date;
     private Integer id;
+    private int color;
 
     public Dades(String activitat, Boolean done, String date) {
 
@@ -21,6 +24,14 @@ public class Dades {
         this.done = done;
         this.date = dataFinal;
         this.id = null;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    public int getColor() {
+        return color;
     }
 
     public LocalDateTime getDate() {
@@ -56,6 +67,8 @@ public class Dades {
     }
     @Override
     public String toString() {
-        return activitat + "  " + date;
+        return date.getHour() + ":" +date.getMinute() + "  " + activitat;
     }
+
+
 }

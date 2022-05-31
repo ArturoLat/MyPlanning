@@ -9,12 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.myplanning.R;
 import com.example.myplanning.activitats.observer.llistArrayObserver;
 import com.example.myplanning.model.Item.Dades;
 import com.example.myplanning.model.Item.DayRating;
 import com.example.myplanning.model.Item.HomeWork;
 import com.example.myplanning.model.Item.Schedule;
 import com.example.myplanning.model.Item.ToDo;
+import com.thebluealliance.spectrum.SpectrumPalette;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -146,6 +148,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
+
 
                 Dades schedule = new Dades(task, done, dateTime);
                 schedule.setId(id);

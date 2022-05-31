@@ -255,4 +255,8 @@
     <string name="cancelar">Cancelar</string>
     <string name="valoraci_del">Valoració del dia:</string>
     <string name="valorardia">valorarDia</string>
+    <string name="selecciona_color">Selecciona color:</string>
+    <string name="afegir_event">Afegir Event</string>
+    <string name="textview">TextView</string>
+    <string name="todo">TODO</string>
 </resources>

@@ -5,7 +5,7 @@ title __DIARI's Class Diagram__\n
   namespace com.example.myplanning {
     namespace activitats {
       namespace Diari {
-        class com.example.myplanning.activitats.Diari.AdapterRecycler {
+        class com.example.myplanning.activitats.Diari.ScheduleAdapter {
             ~ listdatos : ArrayList<Dades>
             + AdapterRecycler()
             + getItemCount()
@@ -20,7 +20,7 @@ title __DIARI's Class Diagram__\n
   namespace com.example.myplanning {
     namespace activitats {
       namespace Diari {
-        class com.example.myplanning.activitats.Diari.AdapterRecycler.ViewHolderDiari {
+        class com.example.myplanning.activitats.Diari.ScheduleAdapter.ViewHolderDiari {
             + check : CheckBox
             + ViewHolderDiari()
         }
@@ -78,9 +78,9 @@ title __DIARI's Class Diagram__\n
   }
   
 
-  com.example.myplanning.activitats.Diari.AdapterRecycler -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
-  com.example.myplanning.activitats.Diari.AdapterRecycler +-down- com.example.myplanning.activitats.Diari.AdapterRecycler.ViewHolderDiari
-  com.example.myplanning.activitats.Diari.AdapterRecycler.ViewHolderDiari -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
+  com.example.myplanning.activitats.Diari.ScheduleAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.example.myplanning.activitats.Diari.ScheduleAdapter +-down- com.example.myplanning.activitats.Diari.ScheduleAdapter.ViewHolderDiari
+  com.example.myplanning.activitats.Diari.ScheduleAdapter.ViewHolderDiari -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
   com.example.myplanning.activitats.Diari.CalendariDiari -up-|> androidx.appcompat.app.AppCompatActivity
   com.example.myplanning.activitats.Diari.CalendariDiari o-- com.example.myplanning.db.fireBaseController : db
   com.example.myplanning.activitats.Diari.CalendariDiari o-- com.example.myplanning.model.Llista.Usuario : user

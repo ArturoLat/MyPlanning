@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/tasca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:autofillHints=""
+        android:hint="@string/afegir_event"
+        android:inputType="text"
+        android:textColorHint="@color/color_text"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <Spinner
+        android:id="@+id/spinnerActivitat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:entries="@array/actividades"
+        android:minHeight="48dp" />
+
+    <TimePicker
+        android:id="@+id/rellotge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:amPmTextColor="@color/color_text"
+        android:headerBackground="@color/background"
+        android:numbersTextColor="@color/color_text"
+        android:timePickerMode="clock" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/selecciona_color"
+            android:textColor="@color/color_text" />
+
+        <com.thebluealliance.spectrum.SpectrumPalette
+            android:id="@+id/spectrumPaletteTasca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            app:spectrum_colors="@array/colors_tarea">
+
+        </com.thebluealliance.spectrum.SpectrumPalette>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginStart="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+
+        <Button
+
+            android:id="@+id/btnAfegirEvent"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="activitatAccio"
+            android:text="@string/afegir_event"
+            android:textColor="@color/color_text" />
+
+        <Button
+            android:id="@+id/cancelarEvent"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:onClick="cancelarAccio"
+            android:text="@string/cancelar"
+            android:textColor="@color/color_text" />
+    </LinearLayout>
+
+
+</LinearLayout>

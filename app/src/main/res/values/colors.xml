@@ -4,5 +4,17 @@
     <color name="background">#FFD3D4</color>
     <color name="background_boton">#FB9D9F</color>
     <color name="color_text">#000000</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="red">#FF1100</color>
+    <color name="blue">#00BCD4</color>
+    <color name="green">#4CAF50</color>
+    <color name="purple">#9C27B0</color>
 
+    <array name="colors_tarea">
+        <item>@color/yellow</item>
+        <item>@color/blue</item>
+        <item>@color/green</item>
+        <item>@color/red</item>
+        <item>@color/purple</item>
+    </array>
 </resources>

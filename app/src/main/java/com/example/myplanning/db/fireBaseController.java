@@ -3,6 +3,7 @@ package com.example.myplanning.db;
 
 import androidx.annotation.NonNull;
 
+import com.example.myplanning.R;
 import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.activitats.observer.llistArrayObserver;
 import com.example.myplanning.model.Item.*;

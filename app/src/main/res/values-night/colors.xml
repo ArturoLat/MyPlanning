@@ -4,4 +4,10 @@
     <color name="background">#656565</color>
     <color name="background_boton">#A5A3A3</color>
     <color name="color_text">#FFFFFF</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="red">#FF1100</color>
+    <color name="blue">#00BCD4</color>
+    <color name="green">#4CAF50</color>
+    <color name="purple">#9C27B0</color>
+
 </resources>
