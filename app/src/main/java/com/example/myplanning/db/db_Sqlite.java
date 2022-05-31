@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.myplanning.activitats.observer.llistArrayObserver;
+import com.example.myplanning.model.Item.Dades;
 import com.example.myplanning.model.Item.DayRating;
 import com.example.myplanning.model.Item.HomeWork;
 import com.example.myplanning.model.Item.Schedule;
@@ -27,9 +29,27 @@ public class db_Sqlite extends SQLiteOpenHelper {
     private static final String TABLE_TODO = "t_todo";
     private static final String TABLE_HOMEWORK = "t_homework";
     private static final String TABLE_NOTA = "t_nota";
+    public static llistArrayObserver listener;
+    public static db_Sqlite instance;
+    public static SQLiteDatabase database;
+
 
     public db_Sqlite(@Nullable Context context) {
         super(context, DATABASE_MYPLANNING, null, DATABASE_VERSION);
+        this.database = this.getWritableDatabase();
+        this.instance = this;
+    }
+
+    public static SQLiteDatabase getDatabase() {
+        return database;
+    }
+
+    public static void setListener(llistArrayObserver listener) {
+        db_Sqlite.listener = listener;
+    }
+
+    public static db_Sqlite getInstance() {
+        return instance;
     }
 
     @Override
@@ -38,17 +58,17 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 "id_horari INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "done INTEGER NOT NULL," +
                 "task TEXT NOT NULL," +
-                "time INTEGER NOT NULL)");
+                "time TEXT NOT NULL)");
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_TODO + "(" +
                 "id_todo INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "done INTEGER NOT NULL," +
                 "todo TEXT NOT NULL," +
-                "time INTEGER NOT NULL)");
+                "time TEXT NOT NULL)");
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_HOMEWORK + "(" +
                 "id_homework INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "done INTEGER NOT NULL," +
                 "homework TEXT NOT NULL," +
-                "time INTEGER NOT NULL)");
+                "time TEXT NOT NULL)");
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NOTA + "(" +
                 "id_nota INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "link TEXT NOT NULL," +
@@ -75,27 +95,24 @@ public class db_Sqlite extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase, nou_code);
     }
 
-    public void insertSchedule(SQLiteDatabase sqLiteDatabase, Integer id_horari, String task, Integer time) {
+    public void insertSchedule(SQLiteDatabase sqLiteDatabase, String task, String time) {
         ContentValues values = new ContentValues();
-        values.put("id_horari", id_horari);
         values.put("done", 0);
         values.put("task", task);
         values.put("time", time);
         sqLiteDatabase.insert(TABLE_HORARI, null, values);
     }
 
-    public void insertToDo(SQLiteDatabase sqLiteDatabase, Integer id_todo, String todo, Integer time) {
+    public void insertToDo(SQLiteDatabase sqLiteDatabase, String todo, String time) {
         ContentValues values = new ContentValues();
-        values.put("id_todo", id_todo);
         values.put("done", 0);
         values.put("todo", todo);
         values.put("time", time);
         sqLiteDatabase.insert(TABLE_TODO, null, values);
     }
 
-    public void insertTask(SQLiteDatabase sqLiteDatabase, Integer id_homework, String homework, Integer time) {
+    public void insertTask(SQLiteDatabase sqLiteDatabase, String homework, String time) {
         ContentValues values = new ContentValues();
-        values.put("id_homework", id_homework);
         values.put("done", 0);
         values.put("homework", homework);
         values.put("time", time);
@@ -111,8 +128,8 @@ public class db_Sqlite extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public Map<String, Schedule> readSchedule() {
-        Map<String, Schedule> mapSchedule = new HashMap<>();
+    public Map<String, Dades> readSchedule() {
+        Map<String, Dades> mapSchedule = new HashMap<>();
         Cursor cursorSchedule;
         cursorSchedule = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_HORARI, null);
         boolean done = false;
@@ -130,18 +147,22 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
 
-                Schedule schedule = new Schedule(task, done, dateTime);
+                Dades schedule = new Dades(task, done, dateTime);
                 schedule.setId(id);
                 mapSchedule.put(task, schedule);
             } while (cursorSchedule.moveToNext());
         }
         cursorSchedule.close();
-        return mapSchedule;
+        if(!mapSchedule.isEmpty()){
+            return mapSchedule;
+
+        }
+        return null;
     }
 
     @SuppressLint("Range")
-    public Map<String, ToDo> readToDo() {
-        Map<String, ToDo> mapToDo = new HashMap<>();
+    public Map<String, Dades> readToDo() {
+        Map<String, Dades> mapToDo = new HashMap<>();
         Cursor cursorToDo;
         cursorToDo = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_TODO, null);
         boolean done = false;
@@ -153,22 +174,27 @@ public class db_Sqlite extends SQLiteOpenHelper {
                     done = true;
                 }
                 String task = cursorToDo.getString(cursorToDo.getColumnIndex("todo"));
+
                 String dateTime = cursorToDo.getString(cursorToDo.getColumnIndex("time"));
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
 
-                ToDo todo = new ToDo(task, done, dateTime);
+                Dades todo = new Dades(task, done, dateTime);
                 todo.setId(id);
                 mapToDo.put(task, todo);
             } while (cursorToDo.moveToNext());
         }
         cursorToDo.close();
-        return mapToDo;
+        if(!mapToDo.isEmpty()){
+            return mapToDo;
+
+        }
+        return null;
     }
 
     @SuppressLint("Range")
-    public Map<String, HomeWork> readTask() {
-        Map<String, HomeWork> mapHomework = new HashMap<>();
+    public Map<String, Dades> readTask() {
+        Map<String, Dades> mapHomework = new HashMap<>();
         Cursor cursorHomework;
         cursorHomework = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_HORARI, null);
         boolean done = false;
@@ -185,13 +211,17 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
 
-                HomeWork homework = new HomeWork(task, done, dateTime);
+                Dades homework = new Dades(task, done, dateTime);
                 homework.setId(id);
                 mapHomework.put(task, homework);
             } while (cursorHomework.moveToNext());
         }
         cursorHomework.close();
-        return mapHomework;
+        if(!mapHomework.isEmpty()){
+            return mapHomework;
+
+        }
+        return null;
     }
 
     @SuppressLint("Range")
@@ -211,6 +241,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
         cursorDayRating.close();
         return mapDayRating;
     }
+
     public Boolean deleteSchedule(SQLiteDatabase sqLiteDatabase, Integer id_horari) {
         Cursor cursorSchedule;
         cursorSchedule = getWritableDatabase().rawQuery("Select * from TABLE_HORARI where id_horari = ?",null);
@@ -221,6 +252,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
             return false;
         }
     }
+
     public Boolean deleteToDo(SQLiteDatabase sqLiteDatabase, Integer id_todo) {
         Cursor cursorTodo;
         cursorTodo = getWritableDatabase().rawQuery("Select * from TABLE_TODO where id_todo = ?",null);
@@ -231,6 +263,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
             return false;
         }
     }
+
     public Boolean deleteHomework(SQLiteDatabase sqLiteDatabase, Integer id_homework) {
         Cursor cursorHomeWork;
         cursorHomeWork = getWritableDatabase().rawQuery("Select * from TABLE_HOMEWORK where id_homework = ?",null);
@@ -241,6 +274,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
             return false;
         }
     }
+
     public Boolean deleteHappiness(SQLiteDatabase sqLiteDatabase, Integer id_nota) {
         Cursor cursorDayRating = null;
         cursorDayRating = getWritableDatabase().rawQuery("Select * from TABLE_NOTA where id_nota = ?",null);

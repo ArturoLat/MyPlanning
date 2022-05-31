@@ -1,12 +1,15 @@
 package com.example.myplanning.activitats.Diari;
 
 import android.app.Application;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myplanning.activitats.observer.llistArrayObserver;
+import com.example.myplanning.db.db_Sqlite;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Item.Dades;
 import com.example.myplanning.model.Item.HomeWork;
@@ -16,6 +19,7 @@ import com.example.myplanning.model.Usuari.Usuario;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class DiariViewModel extends AndroidViewModel implements llistArrayObserver {
@@ -25,21 +29,59 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
     private final MutableLiveData<ArrayList<Dades>> listDatosHomeWork;
     private Usuario user = com.example.myplanning.model.Usuari.Usuario.getInstance();
     private fireBaseController db;
+    private db_Sqlite dbSqlite;
 
     public DiariViewModel(Application app) {
         super(app);
         this.listDatosShedule = new MutableLiveData<>();
         this.listDatostoDo = new MutableLiveData<>();
         this.listDatosHomeWork = new MutableLiveData<>();
-        db = new fireBaseController(this);
+        if(user != null){
+            this.db = new fireBaseController(this);
+
+        }else{
+            dbSqlite = this.dbSqlite.getInstance();
+            dbSqlite.setListener(this);
+
+        }
 
     }
 
     public void initDades(LocalDateTime date){
-        db.getCollectUserHomeWork(this.user.getNom(),date);
-        db.getCollectUserTodo(this.user.getNom(),date);
-        db.getCollectUserSchedule(this.user.getNom(),date);
+        if (user != null){
+            db.getCollectUserHomeWork(this.user.getNom(),date);
+            db.getCollectUserTodo(this.user.getNom(),date);
+            db.getCollectUserSchedule(this.user.getNom(),date);
 
+        }else{
+            Map<String, Dades> resposta;
+            if(dbSqlite.readTask() != null){
+                resposta = dbSqlite.readTask();
+                mapToArray(resposta, "Task");
+            }
+            if(dbSqlite.readSchedule() != null){
+                resposta = dbSqlite.readSchedule();
+                mapToArray(resposta, "Schedule");
+            }
+            if(dbSqlite.readToDo() != null){
+                resposta = dbSqlite.readToDo();
+                mapToArray(resposta, "Todo");
+            }
+        }
+    }
+
+    private void mapToArray(Map<String, Dades> resposta, String opcio) {
+        ArrayList<Dades> dades = new ArrayList<>(resposta.values());
+        if(opcio == "Schedule"){
+            this.listDatosShedule.setValue(dades);
+
+        }else if(opcio == "Task"){
+            this.listDatosHomeWork.setValue(dades);
+
+        }else{
+            this.listDatostoDo.setValue(dades);
+
+        }
     }
 
     public LiveData<ArrayList<Dades>> getListDatosShedule() {
@@ -54,7 +96,7 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
         return listDatosHomeWork;
     }
 
-    public void addSchedule(String act, boolean donit, String data){
+    /*public void addSchedule(String act, boolean donit, String data){
         Dades nou = new Dades(act,donit,data);
         if (nou != null){
             this.listDatosShedule.getValue().add(nou);
@@ -62,7 +104,6 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
             db.setCollectUserSchedule(nou.getDate(),user.getNom(),act);
 
         }
-
     }
 
     public void addHomework(String act, boolean donit, String data){
@@ -73,7 +114,6 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
             db.setCollectUserSchedule(nou.getDate(),user.getNom(),act);
 
         }
-
     }
 
     public void addTodo(String act, boolean donit, String data){
@@ -84,8 +124,7 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
             db.setCollectUserSchedule(nou.getDate(),user.getNom(),act);
 
         }
-
-    }
+    }*/
 
     @Override
     public void notificarSchedule(ArrayList<Dades> dada) {

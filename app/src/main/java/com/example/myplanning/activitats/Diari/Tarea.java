@@ -1,6 +1,7 @@
 package com.example.myplanning.activitats.Diari;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myplanning.R;
+import com.example.myplanning.db.db_Sqlite;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Usuari.Usuario;
 
@@ -25,14 +27,21 @@ public class Tarea extends AppCompatActivity {
     private Usuario user = Usuario.getInstance();
     private Button btnCancelar;
     private Button btnPujar;
-    private fireBaseController db = fireBaseController.getInstance();
+    private fireBaseController db;
+    private db_Sqlite dbLite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tarea_layout);
         initWidgets();
+        if(user != null){
+            db = fireBaseController.getInstance();
 
+        }else {
+            dbLite = dbLite.getInstance();
+
+        }
     }
 
     private void initWidgets() {
@@ -61,17 +70,31 @@ public class Tarea extends AppCompatActivity {
 
         LocalDateTime localDateTime = LocalDateTime.of(any,mes,dia,hora,minutos,0);
 
-        if(activitatPenjar.equals("Schedule")){
-            db.setCollectUserSchedule(localDateTime, user.getNom(), activitat);
+        if(user != null){
+            if(activitatPenjar.equals("Schedule")){
+                db.setCollectUserSchedule(localDateTime, user.getNom(), activitat);
 
-        }else if(activitatPenjar.equals("To-Do")){
-            db.setCollectUserTodo(localDateTime, user.getNom(), activitat);
+            }else if(activitatPenjar.equals("To-Do")){
+                db.setCollectUserTodo(localDateTime, user.getNom(), activitat);
+
+            }else{
+                db.setCollectUserHomework(localDateTime, user.getNom(), activitat);
+
+            }
 
         }else{
-            db.setCollectUserHomework(localDateTime, user.getNom(), activitat);
+            if(activitatPenjar.equals("Schedule")){
+                dbLite.insertSchedule(dbLite.getDatabase(),activitat,localDateTime.toString());
+                //setCollectUserSchedule(localDateTime, user.getNom(), activitat);
 
+            }else if(activitatPenjar.equals("To-Do")){
+                dbLite.insertToDo(dbLite.getDatabase(),activitat,localDateTime.toString());
+
+            }else{
+                dbLite.insertTask(dbLite.getDatabase(),activitat,localDateTime.toString());
+
+            }
         }
-
         startActivity(new Intent(this, CalendariDiari.class));
     }
 

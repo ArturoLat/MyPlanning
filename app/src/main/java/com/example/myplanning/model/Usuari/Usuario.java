@@ -9,19 +9,9 @@ public class Usuario {
 
     public Usuario(String nom){
         this.nom = nom;
-
-    }
-
-    public static Usuario getInstance(String nom){
-        if(instance == null){
-            instance = new Usuario(nom);
-
-        }
-        return instance;
-
+        instance = this;
     }
     public static Usuario getInstance(){
-
         return instance;
 
     }

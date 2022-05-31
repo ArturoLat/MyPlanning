@@ -1,6 +1,7 @@
 package com.example.myplanning.activitats.LogIn;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import com.example.myplanning.activitats.CalendariUtiles;
 import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.activitats.Mensual.CalendariMensual;
 import com.example.myplanning.activitats.Registre.Registre;
+import com.example.myplanning.db.db_Sqlite;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Usuari.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -67,6 +69,12 @@ public class LogIn extends AppCompatActivity {
         startActivity(new Intent(this, Registre.class));
     }
 
+    public void loginOffAccio(View view){
+        db_Sqlite dbSqlite = new db_Sqlite(this);
+        startActivity(new Intent(getApplicationContext(), CalendariMensual.class));
+
+    }
+
     public void loginAccio(View view){
         String user = txtUser.getText().toString();
         String passUser = txtPassword.getText().toString();
@@ -78,7 +86,7 @@ public class LogIn extends AppCompatActivity {
 
             if(resultat == 0){
                 viewModel.logInCorrecte();
-                this.usuario = Usuario.getInstance(user);
+                this.usuario = new Usuario(user);
                 startActivity(new Intent(getApplicationContext(), CalendariMensual.class));
             }else if(resultat == 1){
                 //Contrasenya diferent

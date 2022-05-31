@@ -89,6 +89,7 @@
         android:layout_marginBottom="262dp"
         android:backgroundTint="@color/background_boton"
         android:text="@string/boton_offline"
+        android:onClick="loginOffAccio"
         android:textColor="@color/color_text"
         android:textColorHint="@color/color_text"
         app:layout_constraintBottom_toBottomOf="parent"
