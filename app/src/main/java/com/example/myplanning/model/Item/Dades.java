@@ -15,7 +15,7 @@ public class Dades {
     private Integer id;
     private int color;
 
-    public Dades(String activitat, Boolean done, String date) {
+    public Dades(String activitat, Boolean done, String date, int color) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime dataFinal = LocalDateTime.parse(date, formatter);
@@ -23,6 +23,7 @@ public class Dades {
         this.activitat = activitat;
         this.done = done;
         this.date = dataFinal;
+        this.color = color;
         this.id = null;
     }
 

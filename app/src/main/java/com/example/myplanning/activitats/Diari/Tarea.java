@@ -87,7 +87,7 @@ public class Tarea extends AppCompatActivity {
         tareaText.setTextColor(color);
         LocalDateTime eventTime = LocalDateTime.of(CalendariUtiles.selectedDate,
                 LocalTime.of(time.getHour(),time.getMinute()));
-        Dades dada = new Dades(tareaText.getText().toString(), false, eventTime.toString());
+        Dades dada = new Dades(tareaText.getText().toString(), false, eventTime.toString(),color);
         dada.setColor(color);
         String activitatPenjar = spinnerActivitat.getSelectedItem().toString();
         if(user != null){
@@ -104,14 +104,14 @@ public class Tarea extends AppCompatActivity {
 
         }else{
             if(activitatPenjar.equals("Schedule")){
-                dbLite.insertSchedule(dbLite.getDatabase(),tareaText.getText().toString(),eventTime.toString());
+                dbLite.insertSchedule(dbLite.getDatabase(),tareaText.getText().toString(),eventTime.toString(),color);
                 //setCollectUserSchedule(localDateTime, user.getNom(), activitat);
 
             }else if(activitatPenjar.equals("To-Do")){
-                dbLite.insertToDo(dbLite.getDatabase(),tareaText.getText().toString(),eventTime.toString());
+                dbLite.insertToDo(dbLite.getDatabase(),tareaText.getText().toString(),eventTime.toString(),color);
 
             }else{
-                dbLite.insertTask(dbLite.getDatabase(),tareaText.getText().toString(),eventTime.toString());
+                dbLite.insertTask(dbLite.getDatabase(),tareaText.getText().toString(),eventTime.toString(),color);
 
             }
         };

@@ -60,17 +60,20 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 "id_horari INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "done INTEGER NOT NULL," +
                 "task TEXT NOT NULL," +
-                "time TEXT NOT NULL)");
+                "time TEXT NOT NULL," +
+                "color INTEGER NOT NULL)");
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_TODO + "(" +
                 "id_todo INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "done INTEGER NOT NULL," +
                 "todo TEXT NOT NULL," +
-                "time TEXT NOT NULL)");
+                "time TEXT NOT NULL,"+
+                "color INTEGER NOT NULL)");
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_HOMEWORK + "(" +
                 "id_homework INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "done INTEGER NOT NULL," +
                 "homework TEXT NOT NULL," +
-                "time TEXT NOT NULL)");
+                "time TEXT NOT NULL," +
+                "color INTEGER NOT NULL)");
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NOTA + "(" +
                 "id_nota INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "link TEXT NOT NULL," +
@@ -97,27 +100,30 @@ public class db_Sqlite extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase, nou_code);
     }
 
-    public void insertSchedule(SQLiteDatabase sqLiteDatabase, String task, String time) {
+    public void insertSchedule(SQLiteDatabase sqLiteDatabase, String task, String time, int color) {
         ContentValues values = new ContentValues();
         values.put("done", 0);
         values.put("task", task);
         values.put("time", time);
+        values.put("color", color);
         sqLiteDatabase.insert(TABLE_HORARI, null, values);
     }
 
-    public void insertToDo(SQLiteDatabase sqLiteDatabase, String todo, String time) {
+    public void insertToDo(SQLiteDatabase sqLiteDatabase, String todo, String time, int color) {
         ContentValues values = new ContentValues();
         values.put("done", 0);
         values.put("todo", todo);
         values.put("time", time);
+        values.put("color", color);
         sqLiteDatabase.insert(TABLE_TODO, null, values);
     }
 
-    public void insertTask(SQLiteDatabase sqLiteDatabase, String homework, String time) {
+    public void insertTask(SQLiteDatabase sqLiteDatabase, String homework, String time, int color) {
         ContentValues values = new ContentValues();
         values.put("done", 0);
         values.put("homework", homework);
         values.put("time", time);
+        values.put("color", color);
         sqLiteDatabase.insert(TABLE_HOMEWORK, null, values);
     }
 
@@ -149,8 +155,9 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
 
+                int color = Integer.parseInt(cursorSchedule.getString(cursorSchedule.getColumnIndex("color")));
 
-                Dades schedule = new Dades(task, done, dateTime);
+                Dades schedule = new Dades(task, done, dateTime, color);
                 schedule.setId(id);
                 mapSchedule.put(task, schedule);
             } while (cursorSchedule.moveToNext());
@@ -191,7 +198,9 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
 
-                Dades todo = new Dades(task, done, dateTime);
+                int color = Integer.parseInt(cursorToDo.getString(cursorToDo.getColumnIndex("color")));
+
+                Dades todo = new Dades(task, done, dateTime,color);
                 todo.setId(id);
                 mapToDo.put(task, todo);
             } while (cursorToDo.moveToNext());
@@ -232,7 +241,9 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
 
-                Dades homework = new Dades(task, done, dateTime);
+                int color = Integer.parseInt(cursorHomework.getString(cursorHomework.getColumnIndex("color")));
+
+                Dades homework = new Dades(task, done, dateTime, color);
                 homework.setId(id);
                 mapHomework.put(task, homework);
             } while (cursorHomework.moveToNext());

@@ -95,7 +95,10 @@ public class fireBaseController{
                         if (task.isSuccessful()) {
                             ArrayList<Dades> llista_homework = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                llista_homework.add(new Dades(document.getString("activitat"),Boolean.valueOf(document.getBoolean("done")), document.getString("Localdate")));
+                                llista_homework.add(new Dades(document.getString("activitat"),
+                                        Boolean.valueOf(document.getBoolean("done")),
+                                        document.getString("Localdate"),
+                                        document.getLong("color").intValue()));
                             }
                             listener.notificarHomeWork(llista_homework);
                         }
@@ -117,7 +120,10 @@ public class fireBaseController{
                         if (task.isSuccessful()) {
                             ArrayList<Dades> llista_schedule = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                llista_schedule.add(new Dades(document.getString("activitat"),Boolean.valueOf(document.getBoolean("done")),document.getString("Localdate")));
+                                llista_schedule.add(new Dades(document.getString("activitat"),
+                                        Boolean.valueOf(document.getBoolean("done")),
+                                        document.getString("Localdate"),
+                                        document.getLong("color").intValue()));
                             }
                             listener.notificarSchedule(llista_schedule);
                         }
@@ -138,7 +144,10 @@ public class fireBaseController{
                         if (task.isSuccessful()) {
                             ArrayList<Dades> llista_todo = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                llista_todo.add(new Dades(document.getString("activitat"),Boolean.valueOf(document.getBoolean("done")),document.getString("Localdate")));
+                                llista_todo.add(new Dades(document.getString("activitat"),
+                                        Boolean.valueOf(document.getBoolean("done")),
+                                        document.getString("Localdate"),
+                                        document.getLong("color").intValue()));
                             }
                             listener.notificarToDo(llista_todo);
                         }

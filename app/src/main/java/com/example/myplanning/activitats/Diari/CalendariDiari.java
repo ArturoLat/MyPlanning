@@ -127,12 +127,14 @@ public class CalendariDiari extends AppCompatActivity{
     public void nextDayAction(View view){
         CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.plusDays(1);
         setDiaView();
+        viewModel.initDades(diaActual);
 
     }
 
     public void prevDayAction(View view){
         CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.minusDays(1);
         setDiaView();
+        viewModel.initDades(diaActual);
 
     }
 

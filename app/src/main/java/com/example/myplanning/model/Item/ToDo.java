@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class ToDo extends Dades {
 
-    public ToDo(String activitat, Boolean done, String date) {
-        super(activitat, done, date);
+    public ToDo(String activitat, Boolean done, String date, int color) {
+        super(activitat, done, date, color);
     }
 }
