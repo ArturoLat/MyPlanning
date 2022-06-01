@@ -55,16 +55,16 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
 
         }else{
             Map<String, Dades> resposta;
-            if(dbSqlite.readTask() != null){
-                resposta = dbSqlite.readTask();
+            if(dbSqlite.readTask(date) != null){
+                resposta = dbSqlite.readTask(date);
                 mapToArray(resposta, "Task");
             }
-            if(dbSqlite.readSchedule() != null){
-                resposta = dbSqlite.readSchedule();
+            if(dbSqlite.readSchedule(date) != null){
+                resposta = dbSqlite.readSchedule(date);
                 mapToArray(resposta, "Schedule");
             }
-            if(dbSqlite.readToDo() != null){
-                resposta = dbSqlite.readToDo();
+            if(dbSqlite.readToDo(date) != null){
+                resposta = dbSqlite.readToDo(date);
                 mapToArray(resposta, "Todo");
             }
         }

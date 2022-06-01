@@ -130,7 +130,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public Map<String, Dades> readSchedule() {
+    public Map<String, Dades> readSchedule(LocalDateTime dia) {
         Map<String, Dades> mapSchedule = new HashMap<>();
         Cursor cursorSchedule;
         cursorSchedule = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_HORARI, null);
@@ -157,14 +157,23 @@ public class db_Sqlite extends SQLiteOpenHelper {
         }
         cursorSchedule.close();
         if(!mapSchedule.isEmpty()){
-            return mapSchedule;
+            Map<String, Dades> resultat = new HashMap<>();
+            //busquem les dades segons el dia seleccionat
+            for(Dades dade : mapSchedule.values()){
+                if(dade.compareDate(dia)){
+                    resultat.put(dade.getActivitat(),dade);
+
+                }
+            }
+
+            return resultat;
 
         }
         return null;
     }
 
     @SuppressLint("Range")
-    public Map<String, Dades> readToDo() {
+    public Map<String, Dades> readToDo(LocalDateTime dia) {
         Map<String, Dades> mapToDo = new HashMap<>();
         Cursor cursorToDo;
         cursorToDo = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_TODO, null);
@@ -189,17 +198,25 @@ public class db_Sqlite extends SQLiteOpenHelper {
         }
         cursorToDo.close();
         if(!mapToDo.isEmpty()){
-            return mapToDo;
+            Map<String, Dades> resultat = new HashMap<>();
+            //busquem les dades segons el dia seleccionat
+            for(Dades dade : mapToDo.values()){
+                if(dade.compareDate(dia)){
+                    resultat.put(dade.getActivitat(),dade);
+
+                }
+            }
+            return resultat;
 
         }
         return null;
     }
 
     @SuppressLint("Range")
-    public Map<String, Dades> readTask() {
+    public Map<String, Dades> readTask(LocalDateTime dia) {
         Map<String, Dades> mapHomework = new HashMap<>();
         Cursor cursorHomework;
-        cursorHomework = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_HORARI, null);
+        cursorHomework = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_HOMEWORK, null);
         boolean done = false;
 
         if (cursorHomework.moveToFirst()) {
@@ -211,6 +228,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 }
                 String task = cursorHomework.getString(cursorHomework.getColumnIndex("homework"));
                 String dateTime = cursorHomework.getString(cursorHomework.getColumnIndex("time"));
+
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
 
@@ -221,7 +239,15 @@ public class db_Sqlite extends SQLiteOpenHelper {
         }
         cursorHomework.close();
         if(!mapHomework.isEmpty()){
-            return mapHomework;
+            Map<String, Dades> resultat = new HashMap<>();
+            //busquem les dades segons el dia seleccionat
+            for(Dades dade : mapHomework.values()){
+                if(dade.compareDate(dia)){
+                    resultat.put(dade.getActivitat(),dade);
+
+                }
+            }
+            return resultat;
 
         }
         return null;

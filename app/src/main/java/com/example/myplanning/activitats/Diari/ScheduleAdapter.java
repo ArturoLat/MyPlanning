@@ -40,6 +40,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     public void onBindViewHolder(ViewHolderDiari holder, int position) {
         Dades dada = (Dades) listdatos.get(position);
         holder.check.setText(dada.toString());
+        holder.check.setTextColor(dada.getColor());
 
     }
 

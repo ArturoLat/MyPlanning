@@ -38,6 +38,22 @@ public class Dades {
         return date;
     }
 
+    public boolean compareDate(LocalDateTime time){
+        int any = this.date.getYear();
+        int mes = this.date.getMonthValue();
+        int dia = this.date.getDayOfMonth();
+        if(
+            time.getYear() == any &&
+            time.getMonthValue() == mes &&
+            time.getDayOfMonth() == dia
+        ){
+            return true;
+
+        }
+
+        return false;
+    }
+
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
