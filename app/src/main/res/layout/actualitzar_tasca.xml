@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/tascaAc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:autofillHints=""
+        android:hint="@string/actualitzar_tasca"
+        android:inputType="text"
+        android:textColorHint="@color/color_text" />
+
+    <TimePicker
+        android:layout_weight="1"
+        android:id="@+id/rellotgeAc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="clock" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/seleccionaAc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/selecciona_color"
+            android:textColor="@color/color_text" />
+
+        <com.thebluealliance.spectrum.SpectrumPalette
+            android:id="@+id/spectrumPaletteAc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            app:spectrum_colors="@array/colors_tarea">
+
+        </com.thebluealliance.spectrum.SpectrumPalette>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutActualitzar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+
+        <Button
+
+            android:id="@+id/btnAc"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:onClick="afegirEventAction"
+            android:text="@string/actualitzar"
+            android:textColor="@color/color_text" />
+
+        <Button
+            android:id="@+id/cancelarAc"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:onClick="cancelarEventAction"
+            android:text="@string/cancelar"
+            android:textColor="@color/color_text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="170dp"
+        android:layout_weight="0"
+        android:background="@color/red"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnEliminar"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/red"
+            android:text="@string/eliminarTarea" />
+    </LinearLayout>
+
+
+</LinearLayout>

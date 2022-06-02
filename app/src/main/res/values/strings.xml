@@ -259,4 +259,7 @@
     <string name="afegir_event">Afegir Event</string>
     <string name="textview">TextView</string>
     <string name="todo">TODO</string>
+    <string name="actualitzar_tasca">Actualitzar tarea</string>
+    <string name="actualitzar">Actualitzar</string>
+    <string name="eliminarTarea">Eliminar</string>
 </resources>
