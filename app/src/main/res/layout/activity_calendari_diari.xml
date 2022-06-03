@@ -168,12 +168,7 @@
             android:text="@string/txtHapiness"
             android:textColor="#795548" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/happinessRecycleView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="@color/background" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -190,21 +185,20 @@
 
         <TextView
             android:id="@+id/txtNota"
-
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:background="@color/background"
-            android:fontFamily="@font/kaushan_script"
-            android:text="@string/txtNotes"
-            android:textColor="#795548" />
+            android:layout_height="wrap_content"
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notaRecycleView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="@color/background" />
+            android:text="@string/nota"
+            />
+
+        <RatingBar
+            android:id="@+id/notaDia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+
+            android:numStars="3"
+            android:stepSize="0.5" />
     </LinearLayout>
 
 </RelativeLayout>

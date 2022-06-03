@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ public class CalendariDiari extends AppCompatActivity{
     private static RecyclerView scheduleRecycleView;
     private static RecyclerView toDoRecycleView;
     private static RecyclerView tasksRecycleView;
+    private RatingBar nota;
     private Context parentContext;
     private DiariViewModel viewModel;
     private LocalDateTime diaActual = CalendariUtiles.selectedDate.atStartOfDay();
@@ -57,6 +59,21 @@ public class CalendariDiari extends AppCompatActivity{
 
     private void initWidgets() {
         this.diaSetmanaTV = findViewById(R.id.btnDia);
+        this.nota = findViewById(R.id.notaDia);
+        nota.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+
+                Valoracio val = CalendariUtiles.valoracioPerData(CalendariUtiles.selectedDate);
+                if(val==null){
+                    CalendariUtiles.llistaValoracions.add(new Valoracio(v,CalendariUtiles.selectedDate));
+                }
+                else {
+                    val.setValoracio(v);
+                }
+            }
+        });
+        setRatingBar();
         scheduleRecycleView = findViewById(R.id.scheduleRecycleView);
         toDoRecycleView = findViewById(R.id.toDoRecycleView);
         tasksRecycleView = findViewById(R.id.tasksRecycleView);
@@ -83,6 +100,17 @@ public class CalendariDiari extends AppCompatActivity{
         diaSetmanaTV.setText(diaSetmana);
         diaActual = CalendariUtiles.selectedDate.atStartOfDay();
     }
+
+    private void setRatingBar(){
+        Valoracio val = CalendariUtiles.valoracioPerData(CalendariUtiles.selectedDate);
+        if(val==null){
+            this.nota.setRating((float) 0);
+        }
+        else {
+            this.nota.setRating(val.getValoracio());
+        }
+    }
+
 
     public void setLiveDataObservers() {
         //Subscribe the activity to the observable

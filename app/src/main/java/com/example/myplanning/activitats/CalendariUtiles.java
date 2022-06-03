@@ -1,5 +1,7 @@
 package com.example.myplanning.activitats;
 
+import com.example.myplanning.activitats.Diari.Valoracio;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -49,4 +51,12 @@ public class CalendariUtiles {
         return date.format(formatter);
     }
 
+    public static ArrayList<Valoracio> llistaValoracions = new ArrayList<>();
+
+    public static Valoracio valoracioPerData(LocalDate data){
+        for (Valoracio valoracio:llistaValoracions){
+            if(valoracio.getDate().equals(data)){return valoracio;}
+        }
+        return null;
+    }
 }
