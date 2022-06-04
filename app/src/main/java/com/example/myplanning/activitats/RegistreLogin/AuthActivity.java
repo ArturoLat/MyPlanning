@@ -176,10 +176,26 @@ public class AuthActivity extends AppCompatActivity {
             try{
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 System.out.println(account.getEmail());
+
+
+
                 if(account != null){
                     AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                     FirebaseAuth.getInstance().signInWithCredential(credential);
                     showHome(account.getEmail(), ProviderType.GOOGLE);
+                    Integer resultat = db.userExist(account.getEmail(),account.getId());
+
+                    //Afegim a la base de dades en cas que no hi hagui un usuari existent sino loguem
+                    if(resultat == 0){
+                        this.usuarioOnline = new Usuario(account.getGivenName());
+                    }else{
+                        Map<String, Object> userData = new HashMap<>();
+                        userData.put("mail", account.getEmail());
+                        userData.put("password", account.getId());
+
+                        dbRegistre.collection("users").document(account.getGivenName()).set(userData);
+                        this.usuarioOnline = new Usuario(account.getGivenName());
+                    }
 
                     //Cridem al metode de les preferencies
                     afegirAPreferencies();
