@@ -10,11 +10,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -36,27 +35,50 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp" />
 
-        <TextView
-            android:id="@+id/txtCorreuAuth"
+        <EditText
+            android:id="@+id/emailAuth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:ems="10"
             android:fontFamily="@font/kaushan_script"
-            android:text="@string/correu_electronic"
-            android:textColor="@color/color_text"
-            android:textSize="24sp" />
+            android:hint="@string/correu_electronic"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:textColorHint="@color/color_text" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <EditText
+            android:id="@+id/userAuth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:ems="10"
+            android:fontFamily="@font/kaushan_script"
+            android:hint="@string/usuari"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColorHint="@color/color_text"
+            tools:ignore="TextContrastCheck,TextContrastCheck" />
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="8dp" />
 
-        <TextView
-            android:id="@+id/txtProveidorAuth"
+        <EditText
+            android:id="@+id/passAuth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:ems="10"
             android:fontFamily="@font/kaushan_script"
-            android:text="@string/proveidor"
-            android:textColor="@color/color_text"
-            android:textSize="24sp" />
+            android:hint="@string/contrasenya"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textColorHint="@color/color_text" />
 
         <Space
             android:layout_width="wrap_content"
@@ -68,47 +90,29 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnTancarSessio"
-                android:layout_width="0dp"
+                android:id="@+id/btnRegistreAuth"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/background_boton"
-                android:fontFamily="@font/kaushan_script"
-                android:onClick="tancarSessioAccio"
-                android:text="@string/tancar_sessi"
-                android:textColor="@color/color_text" />
+                android:background="@color/background_boton"
+                android:onClick="registrarseAccio"
+                android:text="@string/registrar_se" />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnLoginAuth"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/background_boton"
+                android:onClick="loguearseAccio"
+                android:text="@string/loguear_se" />
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnConfiguracio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/background_boton"
-            android:fontFamily="@font/kaushan_script"
-            android:onClick="configuracioAccio"
-            android:text="@string/btnConfiguració"
-            android:textColor="@color/color_text"
-            android:textColorHint="@color/color_text" />
-
     </LinearLayout>
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchNightMode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="468dp"
-        android:layout_marginEnd="162dp"
-        android:minHeight="48dp"
-        android:onClick="nightModeAccio"
-        android:text="@string/swtch_NightMode"
-        android:textColor="@color/color_text"
-        android:textColorHint="@color/color_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.771"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextContrastCheck" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

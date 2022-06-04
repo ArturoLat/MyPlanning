@@ -34,16 +34,16 @@
             android:name=".activitats.Configuracio.Configuracio"
             android:exported="false" />
         <activity
-            android:name=".activitats.LogIn.LogIn"
-            android:exported="false" />
-        <activity
-            android:name=".activitats.Registre.Registre"
-            android:exported="false" />
-        <activity
             android:name=".activitats.Seleccio.Seleccio"
             android:exported="false" />
         <activity
             android:name=".activitats.Diari.Tarea"
+            android:exported="false" />
+        <activity
+            android:name=".activitats.RegistreLogin.AuthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitats.RegistreLogin.HomeActivity"
             android:exported="false" />
     </application>
 

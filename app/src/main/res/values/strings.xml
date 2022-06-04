@@ -264,4 +264,13 @@
     <string name="eliminarTarea">Eliminar</string>
     <string name="nota">Nota</string>
     <string name="valoracioDia">valoracio dia</string>
+    <string name="nou_login">Nou login</string>
+    <string name="myplanning">MyPlanning</string>
+    <string name="correu_electronic">Correu Electronic</string>
+    <string name="proveidor">Proveidor</string>
+    <string name="usuari">Usuari</string>
+    <string name="contrasenya">Contrasenya</string>
+    <string name="registrar_se">Registrar-se</string>
+    <string name="loguear_se">Loguear-se</string>
+    <string name="tancar_sessi">Tancar Sessió</string>
 </resources>

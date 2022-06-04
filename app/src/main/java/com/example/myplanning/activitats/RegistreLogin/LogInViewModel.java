@@ -1,4 +1,4 @@
-package com.example.myplanning.activitats.LogIn;
+package com.example.myplanning.activitats.RegistreLogin;
 
 
 import android.app.Application;
