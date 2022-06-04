@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -15,6 +16,7 @@ import com.example.myplanning.model.Item.Dades;
 import com.example.myplanning.model.Item.HomeWork;
 import com.example.myplanning.model.Item.Schedule;
 import com.example.myplanning.model.Item.ToDo;
+import com.example.myplanning.model.Item.Valoracio;
 import com.example.myplanning.model.Usuari.Usuario;
 
 import java.time.LocalDateTime;
@@ -27,6 +29,8 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
     private final MutableLiveData<ArrayList<Dades>> listDatosShedule;
     private final MutableLiveData<ArrayList<Dades>> listDatostoDo;
     private final MutableLiveData<ArrayList<Dades>> listDatosHomeWork;
+    private float valoracio;
+
     private Usuario user = com.example.myplanning.model.Usuari.Usuario.getInstance();
     private fireBaseController db;
     private db_Sqlite dbSqlite;
@@ -36,6 +40,8 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
         this.listDatosShedule = new MutableLiveData<>();
         this.listDatostoDo = new MutableLiveData<>();
         this.listDatosHomeWork = new MutableLiveData<>();
+        this.valoracio = 0;
+
         if(user != null){
             this.db = new fireBaseController(this);
 
@@ -44,7 +50,6 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
             dbSqlite.setListener(this);
 
         }
-
     }
 
     public void initDades(LocalDateTime date){
@@ -141,6 +146,51 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
     @Override
     public void notificarHomeWork(ArrayList<Dades> dada) {
         this.listDatosHomeWork.setValue(dada);
+
+    }
+
+    public boolean emptyRegVal(LocalDateTime dia) {
+        if (user != null){
+            //val = db.getCollectUserValoracio(dia,val);
+
+        }else{
+            return dbSqlite.existValoracio(dia);
+
+        }
+        return false;
+    }
+
+    public Valoracio getValoracioDia(LocalDateTime dia) {
+        float val = 0;
+        if (user != null){
+            //val = db.getCollectUserValoracio(dia,val);
+
+        }else{
+            val = dbSqlite.readValoracio(dia);
+
+        }
+        return new Valoracio(val, dia);
+    }
+
+    public void updateValoracio (LocalDateTime dia, float nota) {
+        if (user != null){
+            //val = db.getCollectUserValoracio(dia,val);
+
+        }else{
+            dbSqlite.updateValoracio(dia, nota);
+
+        }
+
+    }
+
+    public void insertValoracio(LocalDateTime diaActual) {
+        if (user != null){
+            //val = db.getCollectUserValoracio(dia,val);
+
+        }else{
+            dbSqlite.insertValoracio(dbSqlite.getWritableDatabase(),diaActual.toString(),(float)0);
+
+        }
 
     }
 }

@@ -1,14 +1,17 @@
-package com.example.myplanning.activitats.Diari;
+package com.example.myplanning.model.Item;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Valoracio {
     private float valoracio;
-    private final LocalDate date;
+    private final LocalDateTime date;
 
-    public Valoracio(float valoracio, LocalDate date) {
+    public Valoracio(float valoracio, LocalDateTime datetext) {
+
         this.valoracio = valoracio;
-        this.date = date;
+        this.date = datetext;
     }
 
     public float getValoracio() {
@@ -19,7 +22,7 @@ public class Valoracio {
         this.valoracio = valoracio;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 }

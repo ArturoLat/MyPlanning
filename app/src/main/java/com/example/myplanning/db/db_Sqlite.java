@@ -16,6 +16,7 @@ import com.example.myplanning.model.Item.DayRating;
 import com.example.myplanning.model.Item.HomeWork;
 import com.example.myplanning.model.Item.Schedule;
 import com.example.myplanning.model.Item.ToDo;
+import com.example.myplanning.model.Item.Valoracio;
 import com.thebluealliance.spectrum.SpectrumPalette;
 
 import java.time.LocalDateTime;
@@ -30,7 +31,8 @@ public class db_Sqlite extends SQLiteOpenHelper {
     private static final String TABLE_HORARI = "t_horari";
     private static final String TABLE_TODO = "t_todo";
     private static final String TABLE_HOMEWORK = "t_homework";
-    private static final String TABLE_NOTA = "t_nota";
+    private static final String TABLE_VALORACIO = "t_valoracio";
+
     public static llistArrayObserver listener;
     public static db_Sqlite instance;
     public static SQLiteDatabase database;
@@ -74,10 +76,10 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 "homework TEXT NOT NULL," +
                 "time TEXT NOT NULL," +
                 "color INTEGER NOT NULL)");
-        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NOTA + "(" +
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_VALORACIO + "(" +
                 "id_nota INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "link TEXT NOT NULL," +
-                "nota INTEGER NOT NULL)");
+                "date TEXT NOT NULL," +
+                "nota REAL NOT NULL)");
 
     }
 
@@ -90,7 +92,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE " + TABLE_HORARI);
         sqLiteDatabase.execSQL("DROP TABLE " + TABLE_TODO);
         sqLiteDatabase.execSQL("DROP TABLE " + TABLE_HOMEWORK);
-        sqLiteDatabase.execSQL("DROP TABLE " + TABLE_NOTA);
+        sqLiteDatabase.execSQL("DROP TABLE " + TABLE_VALORACIO);
         onCreate(sqLiteDatabase);
 
     }
@@ -127,12 +129,11 @@ public class db_Sqlite extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_HOMEWORK, null, values);
     }
 
-    public void insertHappiness(SQLiteDatabase sqLiteDatabase, Integer id_nota, String link, Integer nota) {
+    public void insertValoracio(SQLiteDatabase sqLiteDatabase, String date, Float nota) {
         ContentValues values = new ContentValues();
-        values.put("id_nota", id_nota);
-        values.put("link", link);
+        values.put("date", date);
         values.put("nota", nota);
-        sqLiteDatabase.insert(TABLE_NOTA, null, values);
+        sqLiteDatabase.insert(TABLE_VALORACIO, null, values);
     }
 
     @SuppressLint("Range")
@@ -151,9 +152,6 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 }
                 String task = cursorSchedule.getString(cursorSchedule.getColumnIndex("task"));
                 String dateTime = cursorSchedule.getString(cursorSchedule.getColumnIndex("time"));
-
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-                LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
 
                 int color = Integer.parseInt(cursorSchedule.getString(cursorSchedule.getColumnIndex("color")));
 
@@ -195,8 +193,6 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 String task = cursorToDo.getString(cursorToDo.getColumnIndex("todo"));
 
                 String dateTime = cursorToDo.getString(cursorToDo.getColumnIndex("time"));
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-                LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
 
                 int color = Integer.parseInt(cursorToDo.getString(cursorToDo.getColumnIndex("color")));
 
@@ -238,9 +234,6 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 String task = cursorHomework.getString(cursorHomework.getColumnIndex("homework"));
                 String dateTime = cursorHomework.getString(cursorHomework.getColumnIndex("time"));
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-                LocalDateTime dataFinal = LocalDateTime.parse(dateTime, formatter);
-
                 int color = Integer.parseInt(cursorHomework.getString(cursorHomework.getColumnIndex("color")));
 
                 Dades homework = new Dades(task, done, dateTime, color);
@@ -265,21 +258,74 @@ public class db_Sqlite extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public Map<String, DayRating> readHappiness() {
-        Map<String, DayRating> mapDayRating = new HashMap<>();
+    public boolean existValoracio(LocalDateTime dia) {
         Cursor cursorDayRating;
-        cursorDayRating = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_NOTA , null);
+        String month = "";
+        String day = "";
+        if(dia.getMonthValue() < 10){
+            month = "0"+dia.getMonthValue();
+
+        }
+        if(dia.getDayOfMonth() < 10){
+            day = "0"+dia.getDayOfMonth();
+
+        }
+        String search = dia.getYear()+"-"+month+"-"+day+"%";
+        cursorDayRating = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_VALORACIO + " WHERE date LIKE " + "'" + search + "'", null);
 
         if (cursorDayRating.moveToFirst()) {
-            do {
-                Integer id = Integer.parseInt(cursorDayRating.getString(cursorDayRating.getColumnIndex("id_nota")));
-                String task = cursorDayRating.getString(cursorDayRating.getColumnIndex("link"));
-                Integer nota = Integer.parseInt(cursorDayRating.getString(cursorDayRating.getColumnIndex("nota")));
-                mapDayRating.put(task, new DayRating(task, nota));
-            } while (cursorDayRating.moveToNext());
+            return true;
         }
         cursorDayRating.close();
-        return mapDayRating;
+
+        return false;
+    }
+
+    @SuppressLint("Range")
+    public float readValoracio(LocalDateTime dia) {
+        float resultat = 0;
+        Cursor cursorDayRating;
+        String month = "";
+        String day = "";
+        if(dia.getMonthValue() < 10){
+            month = "0"+dia.getMonthValue();
+
+        }
+        if(dia.getDayOfMonth() < 10){
+            day = "0"+dia.getDayOfMonth();
+
+        }
+        String search = dia.getYear()+"-"+month+"-"+day+"%";
+        cursorDayRating = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_VALORACIO + " WHERE date LIKE " + "'" + search + "'", null);
+
+        if (cursorDayRating.moveToFirst()) {
+
+            Integer id = Integer.parseInt(cursorDayRating.getString(cursorDayRating.getColumnIndex("id_nota")));
+            String date = cursorDayRating.getString(cursorDayRating.getColumnIndex("date"));
+            resultat = Float.parseFloat(cursorDayRating.getString(cursorDayRating.getColumnIndex("nota")));
+        }
+        cursorDayRating.close();
+
+        return resultat;
+    }
+
+    @SuppressLint("Range")
+    public void updateValoracio(LocalDateTime dia, float nota) {
+        float resultat = 0;
+        Cursor cursorDayRating;
+        String month = "";
+        String day = "";
+        if(dia.getMonthValue() < 10){
+            month = "0"+dia.getMonthValue();
+
+        }
+        if(dia.getDayOfMonth() < 10){
+            day = "0"+dia.getDayOfMonth();
+
+        }
+        String search = dia.getYear()+"-"+month+"-"+day+"%";
+        this.database.execSQL("UPDATE "+ TABLE_VALORACIO +" SET nota" + " = " + nota + " WHERE date LIKE " + "'" + search + "'");
+
     }
 
     public Boolean deleteSchedule(SQLiteDatabase sqLiteDatabase, Integer id_horari) {
@@ -319,7 +365,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
         Cursor cursorDayRating = null;
         cursorDayRating = getWritableDatabase().rawQuery("Select * from TABLE_NOTA where id_nota = ?",null);
         if(cursorDayRating.getCount()>0) {
-            long result = sqLiteDatabase.delete(TABLE_NOTA,"id_nota=?",null);
+            long result = sqLiteDatabase.delete(TABLE_VALORACIO,"id_nota=?",null);
             return result != -1;
         }else{
             return false;

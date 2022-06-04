@@ -1,6 +1,6 @@
 package com.example.myplanning.activitats;
 
-import com.example.myplanning.activitats.Diari.Valoracio;
+import com.example.myplanning.model.Item.Valoracio;
 
 import java.time.LocalDate;
 import java.time.YearMonth;

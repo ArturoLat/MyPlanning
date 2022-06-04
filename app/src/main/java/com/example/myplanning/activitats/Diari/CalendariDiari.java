@@ -8,21 +8,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.Spinner;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
@@ -33,7 +27,6 @@ import com.example.myplanning.activitats.CalendariUtiles;
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Seleccio.Seleccio;
 import com.example.myplanning.model.Item.*;
-import com.thebluealliance.spectrum.SpectrumPalette;
 
 public class CalendariDiari extends AppCompatActivity{
 
@@ -50,36 +43,37 @@ public class CalendariDiari extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(DiariViewModel.class);
         parentContext = this.getBaseContext();
         setContentView(R.layout.activity_calendari_diari);
         initWidgets();
         setLiveDataObservers();
+        this.initRating();
 
     }
 
     private void initWidgets() {
         this.diaSetmanaTV = findViewById(R.id.btnDia);
         this.nota = findViewById(R.id.notaDia);
-        nota.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-
-                Valoracio val = CalendariUtiles.valoracioPerData(CalendariUtiles.selectedDate);
-                if(val==null){
-                    CalendariUtiles.llistaValoracions.add(new Valoracio(v,CalendariUtiles.selectedDate));
-                }
-                else {
-                    val.setValoracio(v);
-                }
-            }
-        });
-        setRatingBar();
         scheduleRecycleView = findViewById(R.id.scheduleRecycleView);
         toDoRecycleView = findViewById(R.id.toDoRecycleView);
         tasksRecycleView = findViewById(R.id.tasksRecycleView);
         scheduleRecycleView.setLayoutManager(new LinearLayoutManager(this));
         toDoRecycleView.setLayoutManager(new LinearLayoutManager(this));
         tasksRecycleView.setLayoutManager(new LinearLayoutManager(this));
+
+    }
+
+    public void initRating(){
+        if(!viewModel.emptyRegVal(diaActual)){
+            nota.setRating(0);
+            viewModel.insertValoracio(diaActual);
+
+        }else{
+            Valoracio val = viewModel.getValoracioDia(diaActual);
+            nota.setRating(val.getValoracio());
+
+        }
 
     }
 
@@ -101,21 +95,18 @@ public class CalendariDiari extends AppCompatActivity{
         diaActual = CalendariUtiles.selectedDate.atStartOfDay();
     }
 
-    private void setRatingBar(){
-        Valoracio val = CalendariUtiles.valoracioPerData(CalendariUtiles.selectedDate);
-        if(val==null){
-            this.nota.setRating((float) 0);
-        }
-        else {
-            this.nota.setRating(val.getValoracio());
-        }
-    }
-
-
     public void setLiveDataObservers() {
         //Subscribe the activity to the observable
-        viewModel = new ViewModelProvider(this).get(DiariViewModel.class);
         viewModel.initDades(diaActual);
+
+        nota.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                ratingBar.setRating(v);
+                viewModel.updateValoracio(diaActual,v);
+
+            }
+        });
 
         final Observer<ArrayList<Dades>> observer = new Observer<ArrayList<Dades>>() {
             @Override
@@ -156,6 +147,7 @@ public class CalendariDiari extends AppCompatActivity{
         CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.plusDays(1);
         setDiaView();
         viewModel.initDades(diaActual);
+        this.initRating();
 
     }
 
@@ -163,6 +155,7 @@ public class CalendariDiari extends AppCompatActivity{
         CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.minusDays(1);
         setDiaView();
         viewModel.initDades(diaActual);
+        this.initRating();
 
     }
 
