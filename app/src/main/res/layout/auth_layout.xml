@@ -7,6 +7,7 @@
     android:background="@color/background">
 
     <LinearLayout
+        android:id="@+id/authLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -114,5 +115,24 @@
                 android:text="@string/loguear_se" />
 
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/btnGoogle"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/background_google"
+            android:drawableLeft="@drawable/googleg_standard_color_18"
+            android:onClick="loginGoogle"
+            android:paddingStart="150dp"
+            android:text="@string/google"
+            android:textAlignment="textStart"
+            android:textColor="@color/color_text"
+            tools:ignore="TextContrastCheck,TextContrastCheck" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

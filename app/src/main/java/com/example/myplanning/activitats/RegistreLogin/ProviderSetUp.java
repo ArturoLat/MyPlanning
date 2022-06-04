@@ -1,5 +1,9 @@
 package com.example.myplanning.activitats.RegistreLogin;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.example.myplanning.R;
 import com.example.myplanning.activitats.Configuracio.ProviderType;
 
 public class ProviderSetUp {
@@ -11,6 +15,7 @@ public class ProviderSetUp {
         this.mail = mail;
         this.providerType = providerType;
         instance = this;
+
     }
     public void setMail(String mail) {
         this.mail = mail;

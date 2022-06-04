@@ -1,12 +1,16 @@
 package com.example.myplanning.activitats.RegistreLogin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,20 +21,36 @@ import com.example.myplanning.activitats.Mensual.CalendariMensual;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Usuari.ComprobarDades;
 import com.example.myplanning.model.Usuari.Usuario;
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.Api;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 public class AuthActivity extends AppCompatActivity {
 
+    private final static int GOOGLE_SIGN_IN = 100;
     private Button btnRegistre;
     private EditText txtEmail;
     private EditText txtUser;
     private EditText txtPassword;
     private Button btnLogin;
-
     private fireBaseController db;
     private FirebaseFirestore dbRegistre = FirebaseFirestore.getInstance();
     private Usuario usuarioOnline;
@@ -47,10 +67,11 @@ public class AuthActivity extends AppCompatActivity {
         registreViewModel = new ViewModelProvider(this).get(RegistreViewModel.class);
         logInViewModel = new ViewModelProvider(this).get(LogInViewModel.class);
         initWidgets();
-
-
+        session();
 
     }
+
+
 
     private void initWidgets(){
         btnRegistre = findViewById(R.id.btnRegistreAuth);
@@ -60,6 +81,17 @@ public class AuthActivity extends AppCompatActivity {
         txtPassword = findViewById(R.id.passAuth);
     }
 
+    private void session(){
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        String email = prefs.getString("email", null);
+        String proveidor = prefs.getString("proveidor", null);
+        //Si el email i el proveidor no son nulls, la sessio ja esta logueada
+        if(email != null && proveidor != null){
+            showHome(email, ProviderType.valueOf(proveidor));
+            startActivity(new Intent(this, CalendariMensual.class));
+        }
+
+    }
     public void registrarseAccio(View view){
         String pass = txtPassword.getText().toString();
         String mail = txtEmail.getText().toString();
@@ -81,9 +113,10 @@ public class AuthActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, pass);
             registreViewModel.registreCorrecte();
             registreViewModel.getRespuesta().observe(this, observer);
-            showHome(mail, ProviderType.BASIC);
+            showHome(mail, ProviderType.EMAIL);
+            //Afegim a les preferencies la conta registrada
+            afegirAPreferencies();
             startActivity(new Intent(this, CalendariMensual.class));
-
         }
         registreViewModel.getRespuesta().observe(this, observer);
     }
@@ -102,7 +135,9 @@ public class AuthActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(mail, pass);
                 logInViewModel.logInCorrecte();
                 this.usuarioOnline = new Usuario(user);
-                showHome(mail, ProviderType.BASIC);
+                showHome(mail, ProviderType.EMAIL);
+                //Afegim la conta a les preferencies
+                afegirAPreferencies();
                 startActivity(new Intent(this, CalendariMensual.class));
             }else if(resultat == 1){
                 //Contrasenya diferent
@@ -117,6 +152,62 @@ public class AuthActivity extends AppCompatActivity {
         }
     }
 
+
+
+    public void loginGoogle(View view){
+        GoogleSignInOptions googleConf = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id_string))
+                .requestEmail()
+        .build();
+
+        GoogleSignInClient googleClient = GoogleSignIn.getClient(this, googleConf);
+        googleClient.signOut();
+        startActivityForResult(googleClient.getSignInIntent(), GOOGLE_SIGN_IN);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if(requestCode == GOOGLE_SIGN_IN){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try{
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                System.out.println(account.getEmail());
+                if(account != null){
+                    AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                    FirebaseAuth.getInstance().signInWithCredential(credential);
+                    showHome(account.getEmail(), ProviderType.GOOGLE);
+
+                    //Cridem al metode de les preferencies
+                    afegirAPreferencies();
+                    //Comencem la activitat
+                    startActivity(new Intent(this, CalendariMensual.class));
+                }
+            }catch(ApiException e){
+                System.out.println("Error: " + e.toString());
+                System.out.println("error");
+            }
+
+
+        }
+    }
+
+
+
+    private void afegirAPreferencies(){
+        //Afegim a les preferencies la conta de google, per aixi mantenir la sessio en un futur
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        ProviderSetUp providerSetUp = ProviderSetUp.getInstance();
+        String email = providerSetUp.getMail();
+        String proveidor = providerSetUp.getString();
+        editor.putString("email", email);
+        editor.putString("proveidor", proveidor);
+        editor.apply();
+    }
     private final Observer<String> observer = new Observer<String>() {
         @Override
         public void onChanged(String string) {

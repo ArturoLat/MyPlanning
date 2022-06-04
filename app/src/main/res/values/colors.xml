@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="fondo_para_text">#FFDBDC</color>
+    <color name="background_google">#FFFFFF</color>
     <color name="background">#FFD3D4</color>
     <color name="background_boton">#FB9D9F</color>
     <color name="color_text">#000000</color>
