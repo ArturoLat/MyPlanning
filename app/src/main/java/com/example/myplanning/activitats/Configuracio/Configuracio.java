@@ -6,9 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -26,6 +24,7 @@ public class Configuracio extends AppCompatActivity {
     private SwitchCompat switchCompatNightMode;
     private TextView emailtxt;
     private ProviderSetUp providerSetUp;
+    private TextView usuaritxt;
     private TextView proveidortxt;
     private Button tancarSessioBtn;
 
@@ -38,15 +37,17 @@ public class Configuracio extends AppCompatActivity {
 
         String email = providerSetUp.getMail();
         String proveidor = providerSetUp.getString();
+        String usuari = providerSetUp.getUser();
         System.out.println(email);
         System.out.println(proveidor);
-        setup(email, proveidor);
+        setup(email, proveidor, usuari);
     }
 
     private void initWidgets(){
         emailtxt = findViewById(R.id.txtCorreuAuth);
         proveidortxt = findViewById(R.id.txtProveidorAuth);
         tancarSessioBtn = findViewById(R.id.btnTancarSessio);
+        usuaritxt = findViewById(R.id.txtUsuariAuth);
         btnConfig = findViewById(R.id.btnConfig);
         switchCompatNightMode = findViewById(R.id.switchNightMode);
     }
@@ -63,9 +64,10 @@ public class Configuracio extends AppCompatActivity {
         }
     }
 
-    private void setup(String email, String proveidor){
+    private void setup(String email, String proveidor, String usuari){
         emailtxt.setText(email);
         proveidortxt.setText(proveidor);
+        usuaritxt.setText(usuari);
     }
 
     public void tancarSessioAccio(View view){

@@ -8,12 +8,14 @@ import com.example.myplanning.activitats.Configuracio.ProviderType;
 
 public class ProviderSetUp {
     String mail;
+    String user;
     ProviderType providerType;
     public static ProviderSetUp instance;
 
-    public ProviderSetUp(String mail, ProviderType providerType){
+    public ProviderSetUp(String mail, ProviderType providerType, String user){
         this.mail = mail;
         this.providerType = providerType;
+        this.user = user;
         instance = this;
 
     }
@@ -36,4 +38,13 @@ public class ProviderSetUp {
     public String getMail() {
         return mail;
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
 }

@@ -62,12 +62,13 @@ public class AuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_layout);
+        session();
         comprobarDades = new ComprobarDades();
         this.db = new fireBaseController();
         registreViewModel = new ViewModelProvider(this).get(RegistreViewModel.class);
         logInViewModel = new ViewModelProvider(this).get(LogInViewModel.class);
         initWidgets();
-        session();
+
 
     }
 
@@ -85,9 +86,11 @@ public class AuthActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         String email = prefs.getString("email", null);
         String proveidor = prefs.getString("proveidor", null);
+        String user = prefs.getString("user", null);
         //Si el email i el proveidor no son nulls, la sessio ja esta logueada
         if(email != null && proveidor != null){
-            showHome(email, ProviderType.valueOf(proveidor));
+            this.usuarioOnline = new Usuario(email);
+            showHome(email, ProviderType.valueOf(proveidor), user);
             startActivity(new Intent(this, CalendariMensual.class));
         }
 
@@ -99,24 +102,28 @@ public class AuthActivity extends AppCompatActivity {
 
         String respuesta = comprobarDades.isSecure(pass, mail);
         if(respuesta.equals("Format de l'email incorrecte")){
-
             registreViewModel.emailIncorrecte();
         }else if(respuesta.equals("Format de la contrasenya incorrecte")){
             registreViewModel.contrasenyaIncorrecte();
         }else{
-            usuarioOnline = new Usuario(mail);
-            Map<String, Object> userData = new HashMap<>();
-            userData.put("mail", mail);
-            userData.put("password", pass);
-
-            dbRegistre.collection("users").document(user).set(userData);
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, pass);
-            registreViewModel.registreCorrecte();
-            registreViewModel.getRespuesta().observe(this, observer);
-            showHome(mail, ProviderType.EMAIL);
-            //Afegim a les preferencies la conta registrada
-            afegirAPreferencies();
-            startActivity(new Intent(this, CalendariMensual.class));
+            Integer resultat = db.userExist(mail,pass);
+            System.out.println(resultat);
+            if(resultat == 3){
+                registreViewModel.usuariJaCreat();
+            }else{
+                Map<String, Object> userData = new HashMap<>();
+                userData.put("mail", mail);
+                userData.put("password", pass);
+                dbRegistre.collection("users").document(mail).set(userData);
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, pass);
+                registreViewModel.registreCorrecte();
+                registreViewModel.getRespuesta().observe(this, observer);
+                this.usuarioOnline = new Usuario(mail);
+                showHome(mail, ProviderType.EMAIL, user);
+                //Afegim a les preferencies la conta registrada
+                afegirAPreferencies();
+                startActivity(new Intent(this, CalendariMensual.class));
+            }
         }
         registreViewModel.getRespuesta().observe(this, observer);
     }
@@ -129,13 +136,13 @@ public class AuthActivity extends AppCompatActivity {
         if(user.equals("") || pass.equals("")){
             logInViewModel.campBuit();
         }else {
-            Integer resultat = db.userExist(user,pass);
+            Integer resultat = db.userExist(mail,pass);
 
             if(resultat == 0){
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(mail, pass);
                 logInViewModel.logInCorrecte();
-                this.usuarioOnline = new Usuario(user);
-                showHome(mail, ProviderType.EMAIL);
+                this.usuarioOnline = new Usuario(mail);
+                showHome(mail, ProviderType.EMAIL, user);
                 //Afegim la conta a les preferencies
                 afegirAPreferencies();
                 startActivity(new Intent(this, CalendariMensual.class));
@@ -178,23 +185,22 @@ public class AuthActivity extends AppCompatActivity {
                 System.out.println(account.getEmail());
 
 
-
                 if(account != null){
                     AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                     FirebaseAuth.getInstance().signInWithCredential(credential);
-                    showHome(account.getEmail(), ProviderType.GOOGLE);
+                    showHome(account.getEmail(), ProviderType.GOOGLE, account.getGivenName());
                     Integer resultat = db.userExist(account.getEmail(),account.getId());
 
                     //Afegim a la base de dades en cas que no hi hagui un usuari existent sino loguem
                     if(resultat == 0){
-                        this.usuarioOnline = new Usuario(account.getGivenName());
+                        this.usuarioOnline = new Usuario(account.getEmail());
                     }else{
                         Map<String, Object> userData = new HashMap<>();
                         userData.put("mail", account.getEmail());
                         userData.put("password", account.getId());
 
-                        dbRegistre.collection("users").document(account.getGivenName()).set(userData);
-                        this.usuarioOnline = new Usuario(account.getGivenName());
+                        dbRegistre.collection("users").document(account.getEmail()).set(userData);
+                        this.usuarioOnline = new Usuario(account.getEmail());
                     }
 
                     //Cridem al metode de les preferencies
@@ -219,8 +225,10 @@ public class AuthActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         ProviderSetUp providerSetUp = ProviderSetUp.getInstance();
         String email = providerSetUp.getMail();
+        String user = providerSetUp.getUser();
         String proveidor = providerSetUp.getString();
         editor.putString("email", email);
+        editor.putString("user", user);
         editor.putString("proveidor", proveidor);
         editor.apply();
     }
@@ -233,8 +241,8 @@ public class AuthActivity extends AppCompatActivity {
         }
     };
 
-    private void showHome(String email, ProviderType provider){
-        ProviderSetUp providerSetUp = new ProviderSetUp(email, provider);
+    private void showHome(String email, ProviderType provider, String user){
+        ProviderSetUp providerSetUp = new ProviderSetUp(email, provider, user);
     }
 
 }
