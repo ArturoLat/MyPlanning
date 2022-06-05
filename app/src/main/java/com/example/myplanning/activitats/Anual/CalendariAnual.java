@@ -17,6 +17,7 @@ import com.example.myplanning.activitats.Mensual.MensualAdapter;
 import com.example.myplanning.activitats.Seleccio.Seleccio;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 public class CalendariAnual extends AppCompatActivity {
@@ -62,12 +63,68 @@ public class CalendariAnual extends AppCompatActivity {
         btnTxt.setText(CalendariUtiles.anyFromDate(CalendariUtiles.selectedDate));
     }
 
-    public void onItemClick(int pos, LocalDate date)
-    {
-        if(date != null)
-        {
-            CalendariUtiles.selectedDate = date;
-            startActivity(new Intent(this, CalendariMensual.class));
+    public void goMonthAction(View view){
+        switch(view.getId()){
+            case(R.id.imgGener):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.JANUARY.getValue());
+                break;
+            case (R.id.imgFebrer):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.FEBRUARY.getValue());
+                break;
+            case (R.id.imgMarç):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.MARCH.getValue());
+                break;
+
+            case (R.id.imgAbril):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.APRIL.getValue());
+
+            case (R.id.imgMaig):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.MAY.getValue());
+                break;
+
+            case (R.id.imgJuny):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.JUNE.getValue());
+                break;
+
+            case (R.id.imgJuliol):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.JULY.getValue());
+
+                break;
+
+            case (R.id.imgAgost):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.AUGUST.getValue());
+                break;
+
+            case (R.id.imgSetembre):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.SEPTEMBER.getValue());
+                break;
+
+            case (R.id.imgOctubre):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.OCTOBER.getValue());
+                break;
+
+            case(R.id.imgNovembre):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.NOVEMBER.getValue());
+                break;
+            case (R.id.imgDecembre):
+                CalendariUtiles.selectedDate = CalendariUtiles.selectedDate.
+                        withMonth(Month.DECEMBER.getValue());
+
+                break;
         }
+        startActivity(new Intent(this,CalendariMensual.class));
     }
+
+
 }
