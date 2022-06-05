@@ -32,7 +32,6 @@ public class CalendariMensual extends AppCompatActivity implements MensualAdapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendari_mensual);
         initWidgets();
-        CalendariUtiles.selectedDate = LocalDate.now();
         setMesView();
     }
 

@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPlanning.NoActionBar">
         <activity
-            android:name=".activitats.Anual.CalendariAnual"
-            android:exported="false" />
-        <activity
             android:name=".activitats.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
@@ -25,6 +22,9 @@
         </activity>
         <activity
             android:name=".activitats.Mensual.CalendariMensual"
+            android:exported="false" />
+        <activity
+            android:name=".activitats.Anual.CalendariAnual"
             android:exported="false" />
         <activity
             android:name=".activitats.Diari.CalendariDiari"
@@ -42,9 +42,7 @@
         <activity
             android:name=".activitats.RegistreLogin.AuthActivity"
             android:exported="false" />
-        <activity
-            android:name=".activitats.RegistreLogin.HomeActivity"
-            android:exported="false" />
+
     </application>
 
 </manifest>
