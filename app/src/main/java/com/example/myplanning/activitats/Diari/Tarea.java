@@ -88,17 +88,16 @@ public class Tarea extends AppCompatActivity {
         LocalDateTime eventTime = LocalDateTime.of(CalendariUtiles.selectedDate,
                 LocalTime.of(time.getHour(),time.getMinute()));
         Dades dada = new Dades(tareaText.getText().toString(), false, eventTime.toString(),color);
-        dada.setColor(color);
         String activitatPenjar = spinnerActivitat.getSelectedItem().toString();
         if(user != null){
             if(activitatPenjar.equals("Schedule")){
-                db.setCollectUserSchedule(eventTime, user.getNom(), tareaText.getText().toString());
+                db.setCollectUserSchedule(eventTime, user.getNom(), tareaText.getText().toString(),color);
 
             }else if(activitatPenjar.equals("To-Do")){
-                db.setCollectUserTodo(eventTime, user.getNom(), tareaText.getText().toString());
+                db.setCollectUserTodo(eventTime, user.getNom(), tareaText.getText().toString(),color);
 
             }else{
-                db.setCollectUserHomework(eventTime, user.getNom(), tareaText.getText().toString());
+                db.setCollectUserHomework(eventTime, user.getNom(), tareaText.getText().toString(),color);
 
             }
 

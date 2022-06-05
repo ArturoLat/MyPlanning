@@ -156,7 +156,7 @@ public class fireBaseController{
 
     }
 
-    public void setCollectUserTodo (LocalDateTime time, String user, String act){
+    public void setCollectUserTodo (LocalDateTime time, String user, String act, float color){
 
         String date = time.toString();
 
@@ -164,12 +164,13 @@ public class fireBaseController{
         object.put("Localdate", date);
         object.put("activitat", act);
         object.put("done", false);
+        object.put("color", color);
 
         db.collection(user).document("todo")
                 .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(object);
 
     }
-    public void setCollectUserHomework (LocalDateTime time, String user, String act){
+    public void setCollectUserHomework (LocalDateTime time, String user, String act, float color){
         Map<String, Object> object = new HashMap<>();
 
         String date = time.toString();
@@ -177,13 +178,14 @@ public class fireBaseController{
         object.put("Localdate", date);
         object.put("activitat", act);
         object.put("done", false);
+        object.put("color", color);
 
         db.collection(user).document("homework")
                 .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(object);
 
     }
 
-    public void setCollectUserSchedule(LocalDateTime time, String user, String act){
+    public void setCollectUserSchedule(LocalDateTime time, String user, String act, float color){
         Map<String, Object> object = new HashMap<>();
 
         String date = time.toString();
@@ -191,6 +193,7 @@ public class fireBaseController{
         object.put("Localdate", date);
         object.put("activitat", act);
         object.put("done", false);
+        object.put("color", color);
 
         db.collection(user).document("schedule")
                 .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document(act).set(object);
