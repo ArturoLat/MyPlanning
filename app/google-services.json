@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "67649195632",
+    "project_id": "myplanning-f6b25",
+    "storage_bucket": "myplanning-f6b25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67649195632:android:954caef4659b146b202eb5",
+        "android_client_info": {
+          "package_name": "com.example.myplanning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "67649195632-r45b3ctvt70f2p65s0gmjq1uvjvnfbi6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myplanning",
+            "certificate_hash": "36332440edaecb0bbbc28d07110fca07d61ac942"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDu2mIi_L191JEcsaeLH3R6LSQG2GV_lk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "67649195632-bmmapi528qfl9rpg2f3fnhgua5er1lj6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
