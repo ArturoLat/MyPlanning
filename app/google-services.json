@@ -1,41 +1,37 @@
 {
   "project_info": {
-    "project_number": "660725793324",
-    "project_id": "myplanning",
-    "storage_bucket": "myplanning.appspot.com"
+    "project_number": "67649195632",
+    "project_id": "myplanning-f6b25",
+    "storage_bucket": "myplanning-f6b25.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:660725793324:android:68a0d410d8d41d002cc789",
+        "mobilesdk_app_id": "1:67649195632:android:954caef4659b146b202eb5",
         "android_client_info": {
           "package_name": "com.example.myplanning"
         }
       },
       "oauth_client": [
         {
-          "client_id": "660725793324-13of9jrguko74kh18dc4giqqtcf26n79.apps.googleusercontent.com",
+          "client_id": "67649195632-r45b3ctvt70f2p65s0gmjq1uvjvnfbi6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.myplanning",
-            "certificate_hash": "fc96d51192745494380372f0f013b8122302d684"
+            "certificate_hash": "36332440edaecb0bbbc28d07110fca07d61ac942"
           }
-        },
-        {
-          "client_id": "660725793324-fhls4bhs0sb4bsvdqaau41jfesvrnluq.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyChnf4rjpBmmJV4Ov1FD0ZvMcbClDybmjU"
+          "current_key": "AIzaSyCDu2mIi_L191JEcsaeLH3R6LSQG2GV_lk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "660725793324-7oorh5uaqoht880am736jdcdar1smh23.apps.googleusercontent.com",
+              "client_id": "67649195632-bmmapi528qfl9rpg2f3fnhgua5er1lj6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
