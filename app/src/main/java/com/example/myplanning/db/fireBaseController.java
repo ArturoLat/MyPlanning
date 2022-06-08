@@ -7,6 +7,7 @@ import com.example.myplanning.R;
 import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.activitats.observer.llistArrayObserver;
 import com.example.myplanning.model.Item.*;
+import com.example.myplanning.model.Usuari.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -31,7 +32,6 @@ public class fireBaseController{
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
-    private static Map<String, Object> result = new HashMap<>();
     private static fireBaseController instance;
     public static llistArrayObserver listener;
     private int resultat = -1;
@@ -86,7 +86,6 @@ public class fireBaseController{
 
     public void getCollectUserHomeWork(String user, LocalDateTime time){
 
-        result.clear();
         String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
 
         db.collection(user).document("homework").collection(dataInfo).get()
@@ -110,8 +109,6 @@ public class fireBaseController{
     }
 
     public void getCollectUserSchedule(String user, LocalDateTime time){
-
-        result.clear();
         String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
 
         db.collection(user).document("schedule").collection(dataInfo).get()
@@ -134,10 +131,7 @@ public class fireBaseController{
     }
 
     public void getCollectUserTodo(String user, LocalDateTime time){
-
-        result.clear();
         String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
-
         db.collection(user).document("todo").collection(dataInfo).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -201,4 +195,35 @@ public class fireBaseController{
 
     }
 
+    public void insertValoracio(LocalDateTime time, float nota, String user) {
+
+        String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
+
+        Map<String, Object> object = new HashMap<>();
+        object.put("valoracio", nota);
+        db.collection(user).document("valoracio")
+                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document("valoracio").set(object);
+
+    }
+
+    public void getCollectUserValoracio(String user, LocalDateTime time) {
+        String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
+        db.collection(user).document("valoracio").collection(dataInfo).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<Valoracio> llista_val = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                llista_val.add(new Valoracio((float) document.getLong("valoracio").intValue(),time));
+                            }
+                            listener.notificarValoracio(llista_val);
+                        }else{
+                            insertValoracio(time, 0, user);
+                            ArrayList<Valoracio> llista_val = new ArrayList<>();
+                            llista_val.add(new Valoracio(0,time));
+                        }
+                    }
+                });
+    }
 }

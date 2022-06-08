@@ -65,12 +65,17 @@ public class CalendariDiari extends AppCompatActivity{
     }
 
     public void initRating(){
-        if(!viewModel.emptyRegVal(diaActual)){
-            nota.setRating(0);
-            viewModel.insertValoracio(diaActual);
 
-        }else{
-            Valoracio val = viewModel.getValoracioDia(diaActual);
+        if(!viewModel.existUser()){
+            if(!viewModel.emptyRegVal(diaActual)){
+                nota.setRating(0);
+                viewModel.insertValoracio(diaActual);
+
+            }
+
+        }
+        Valoracio val = viewModel.getValoracioDia(diaActual);
+        if(val != null){
             nota.setRating(val.getValoracio());
 
         }
@@ -108,6 +113,13 @@ public class CalendariDiari extends AppCompatActivity{
             }
         });
 
+        final Observer<ArrayList<Valoracio>> observer0 = new Observer<ArrayList<Valoracio>>() {
+            @Override
+            public void onChanged(ArrayList<Valoracio> ac) {
+                nota.setRating(ac.get(0).getValoracio());
+            }
+        };
+
         final Observer<ArrayList<Dades>> observer = new Observer<ArrayList<Dades>>() {
             @Override
             public void onChanged(ArrayList<Dades> ac) {
@@ -141,6 +153,7 @@ public class CalendariDiari extends AppCompatActivity{
         viewModel.getListDatosHomeWork().observe(this, observer2);
         viewModel.getListDatosShedule().observe(this, observer);
         viewModel.getListDatostoDo().observe(this,observer1);
+        viewModel.getListValoracio().observe(this,observer0);
     }
 
     public void nextDayAction(View view){

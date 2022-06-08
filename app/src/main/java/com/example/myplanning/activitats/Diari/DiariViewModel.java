@@ -1,10 +1,7 @@
 package com.example.myplanning.activitats.Diari;
 
 import android.app.Application;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -13,15 +10,11 @@ import com.example.myplanning.activitats.observer.llistArrayObserver;
 import com.example.myplanning.db.db_Sqlite;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Item.Dades;
-import com.example.myplanning.model.Item.HomeWork;
-import com.example.myplanning.model.Item.Schedule;
-import com.example.myplanning.model.Item.ToDo;
 import com.example.myplanning.model.Item.Valoracio;
 import com.example.myplanning.model.Usuari.Usuario;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class DiariViewModel extends AndroidViewModel implements llistArrayObserver {
@@ -29,7 +22,7 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
     private final MutableLiveData<ArrayList<Dades>> listDatosShedule;
     private final MutableLiveData<ArrayList<Dades>> listDatostoDo;
     private final MutableLiveData<ArrayList<Dades>> listDatosHomeWork;
-    private float valoracio;
+    private final MutableLiveData<ArrayList<Valoracio>> listDatosValoracio;
 
     private Usuario user = com.example.myplanning.model.Usuari.Usuario.getInstance();
     private fireBaseController db;
@@ -37,10 +30,10 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
 
     public DiariViewModel(Application app) {
         super(app);
+        this.listDatosValoracio = new MutableLiveData<>();
         this.listDatosShedule = new MutableLiveData<>();
         this.listDatostoDo = new MutableLiveData<>();
         this.listDatosHomeWork = new MutableLiveData<>();
-        this.valoracio = 0;
 
         if(user != null){
             this.db = new fireBaseController(this);
@@ -51,12 +44,19 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
 
         }
     }
+    public Boolean existUser(){
+        if(user != null){
+            return true;
+        }
+        return false;
+    }
 
     public void initDades(LocalDateTime date){
         if (user != null){
             db.getCollectUserHomeWork(this.user.getNom(),date);
             db.getCollectUserTodo(this.user.getNom(),date);
             db.getCollectUserSchedule(this.user.getNom(),date);
+            db.getCollectUserValoracio(this.user.getNom(),date);
 
         }else{
             Map<String, Dades> resposta;
@@ -95,6 +95,10 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
 
     public LiveData<ArrayList<Dades>> getListDatostoDo() {
         return listDatostoDo;
+    }
+
+    public LiveData<ArrayList<Valoracio>> getListValoracio() {
+        return listDatosValoracio;
     }
 
     public LiveData<ArrayList<Dades>> getListDatosHomeWork() {
@@ -149,22 +153,21 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
 
     }
 
+    @Override
+    public void notificarValoracio(ArrayList<Valoracio> dada) {
+        this.listDatosValoracio.setValue(dada);
+    }
+
     public boolean emptyRegVal(LocalDateTime dia) {
-        if (user != null){
-            //val = db.getCollectUserValoracio(dia,val);
+        return dbSqlite.existValoracio(dia);
 
-        }else{
-            return dbSqlite.existValoracio(dia);
-
-        }
-        return false;
     }
 
     public Valoracio getValoracioDia(LocalDateTime dia) {
         float val = 0;
         if (user != null){
-            //val = db.getCollectUserValoracio(dia,val);
-
+            db.getCollectUserValoracio(user.getNom(), dia);
+            return null;
         }else{
             val = dbSqlite.readValoracio(dia);
 
@@ -172,25 +175,24 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
         return new Valoracio(val, dia);
     }
 
-    public void updateValoracio (LocalDateTime dia, float nota) {
-        if (user != null){
-            //val = db.getCollectUserValoracio(dia,val);
+    public void updateValoracio(LocalDateTime dia, float nota) {
+        if(user != null){
+            db.insertValoracio(dia,nota, user.getNom());
 
         }else{
             dbSqlite.updateValoracio(dia, nota);
 
         }
+    }
+
+    public void dbinsertValoracio(LocalDateTime diaActual) {
+        db.insertValoracio(diaActual,(float)0, user.getNom());
 
     }
 
     public void insertValoracio(LocalDateTime diaActual) {
-        if (user != null){
-            //val = db.getCollectUserValoracio(dia,val);
+        dbSqlite.insertValoracio(dbSqlite.getWritableDatabase(),diaActual.toString(),(float)0);
 
-        }else{
-            dbSqlite.insertValoracio(dbSqlite.getWritableDatabase(),diaActual.toString(),(float)0);
-
-        }
 
     }
 }
