@@ -183,7 +183,6 @@ public class AuthActivity extends AppCompatActivity {
             try{
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 System.out.println(account.getEmail());
-
                 if(account != null){
                     AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                     FirebaseAuth.getInstance().signInWithCredential(credential);
