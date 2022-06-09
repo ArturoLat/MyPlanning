@@ -106,17 +106,24 @@
         android:layout_marginEnd="1sp"
         android:layout_toEndOf="@+id/scheduleLayout"
         android:background="@drawable/dotted_border"
-        android:onClick="toDoAction"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtToDo"
+        <LinearLayout
+            android:id="@+id/actiontoDO"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/kaushan_script"
-            android:text="@string/txtToDo"
-            android:textColor="#795548" />
+            android:orientation="vertical"
+            android:onClick="toDoAction">
+
+            <TextView
+                android:id="@+id/txtToDo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/kaushan_script"
+                android:text="@string/txtToDo"
+                android:textColor="#795548" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/toDoRecycleView"
@@ -133,18 +140,25 @@
         android:layout_marginEnd="1sp"
         android:layout_toEndOf="@+id/scheduleLayout"
         android:background="@drawable/dotted_border"
-        android:onClick="taskAction"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtTask"
+        <LinearLayout
+            android:id="@+id/actionTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@color/background"
-            android:fontFamily="@font/kaushan_script"
-            android:text="@string/txtTask"
-            android:textColor="#795548" />
+            android:orientation="vertical"
+            android:onClick="taskAction">
+
+            <TextView
+                android:id="@+id/txtTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@color/background"
+                android:fontFamily="@font/kaushan_script"
+                android:text="@string/txtTask"
+                android:textColor="#795548" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksRecycleView"

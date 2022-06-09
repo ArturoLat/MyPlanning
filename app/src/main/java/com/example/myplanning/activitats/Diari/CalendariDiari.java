@@ -182,8 +182,7 @@ public class CalendariDiari extends AppCompatActivity{
     }
 
     public void toDoAction(View view){
-        Toast toast = Toast.makeText(this,"To-Do", Toast.LENGTH_SHORT);
-        toast.show();
+        startActivity(new Intent(this, Tarea.class));
 
     }
 

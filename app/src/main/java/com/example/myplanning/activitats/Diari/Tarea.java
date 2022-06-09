@@ -129,7 +129,6 @@ public class Tarea extends AppCompatActivity {
 
     public void activitatAccio(View view){
 
-
         LocalDateTime eventTime = LocalDateTime.of(CalendariUtiles.selectedDate,
                 LocalTime.of(time.getHour(),time.getMinute()));
         Dades dada = new Dades(tareaText.getText().toString(), false, eventTime.toString(),color);
