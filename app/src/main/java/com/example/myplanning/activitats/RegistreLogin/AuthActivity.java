@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Configuracio.ProviderType;
 import com.example.myplanning.activitats.Mensual.CalendariMensual;
+import com.example.myplanning.db.db_Sqlite;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Usuari.ComprobarDades;
 import com.example.myplanning.model.Usuari.Usuario;
@@ -50,10 +51,12 @@ public class AuthActivity extends AppCompatActivity {
     private EditText txtEmail;
     private EditText txtUser;
     private EditText txtPassword;
+    private Button btnOffline;
     private Button btnLogin;
     private fireBaseController db;
     private FirebaseFirestore dbRegistre = FirebaseFirestore.getInstance();
     private Usuario usuarioOnline;
+    private db_Sqlite dbSqlite;
     private ComprobarDades comprobarDades;
     private RegistreViewModel registreViewModel;
     private LogInViewModel logInViewModel;
@@ -69,7 +72,6 @@ public class AuthActivity extends AppCompatActivity {
         logInViewModel = new ViewModelProvider(this).get(LogInViewModel.class);
         initWidgets();
 
-
     }
 
 
@@ -77,6 +79,7 @@ public class AuthActivity extends AppCompatActivity {
     private void initWidgets(){
         btnRegistre = findViewById(R.id.btnRegistreAuth);
         btnLogin = findViewById(R.id.btnLoginAuth);
+        btnOffline = findViewById(R.id.offlineButton);
         txtEmail = findViewById(R.id.emailAuth);
         txtUser = findViewById(R.id.userAuth);
         txtPassword = findViewById(R.id.passAuth);
@@ -95,6 +98,12 @@ public class AuthActivity extends AppCompatActivity {
         }
 
     }
+
+    public void loginOffline(View view){
+        dbSqlite = new db_Sqlite(view.getContext());
+        startActivity(new Intent(this, CalendariMensual.class));
+    }
+
     public void registrarseAccio(View view){
         String pass = txtPassword.getText().toString();
         String mail = txtEmail.getText().toString();
@@ -176,8 +185,6 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-
-
         if(requestCode == GOOGLE_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try{

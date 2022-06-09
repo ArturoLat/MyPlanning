@@ -265,10 +265,14 @@ public class db_Sqlite extends SQLiteOpenHelper {
         if(dia.getMonthValue() < 10){
             month = "0"+dia.getMonthValue();
 
+        }else{
+            month = String.valueOf(dia.getMonthValue());
         }
         if(dia.getDayOfMonth() < 10){
             day = "0"+dia.getDayOfMonth();
 
+        }else{
+            day = String.valueOf(dia.getDayOfMonth());
         }
         String search = dia.getYear()+"-"+month+"-"+day+"%";
         cursorDayRating = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_VALORACIO + " WHERE date LIKE " + "'" + search + "'", null);
@@ -290,10 +294,14 @@ public class db_Sqlite extends SQLiteOpenHelper {
         if(dia.getMonthValue() < 10){
             month = "0"+dia.getMonthValue();
 
+        }else{
+            month = String.valueOf(dia.getMonthValue());
         }
         if(dia.getDayOfMonth() < 10){
             day = "0"+dia.getDayOfMonth();
 
+        }else{
+            day = String.valueOf(dia.getDayOfMonth());
         }
         String search = dia.getYear()+"-"+month+"-"+day+"%";
         cursorDayRating = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_VALORACIO + " WHERE date LIKE " + "'" + search + "'", null);
@@ -318,10 +326,14 @@ public class db_Sqlite extends SQLiteOpenHelper {
         if(dia.getMonthValue() < 10){
             month = "0"+dia.getMonthValue();
 
+        }else{
+            month = String.valueOf(dia.getMonthValue());
         }
         if(dia.getDayOfMonth() < 10){
             day = "0"+dia.getDayOfMonth();
 
+        }else{
+            day = String.valueOf(dia.getDayOfMonth());
         }
         String search = dia.getYear()+"-"+month+"-"+day+"%";
         this.database.execSQL("UPDATE "+ TABLE_VALORACIO +" SET nota" + " = " + nota + " WHERE date LIKE " + "'" + search + "'");

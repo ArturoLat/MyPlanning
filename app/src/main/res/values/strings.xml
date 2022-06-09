@@ -277,4 +277,5 @@
     <string name="prefs_file">com.example.myplanning.PREFERENCE_FILE_KEY</string>
     <string name="default_web_client_id_string">67649195632-bmmapi528qfl9rpg2f3fnhgua5er1lj6.apps.googleusercontent.com</string>
     <string name="usuarii">Usuari</string>
+
 </resources>

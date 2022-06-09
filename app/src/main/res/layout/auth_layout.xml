@@ -134,5 +134,12 @@
             android:textColor="@color/color_text"
             tools:ignore="TextContrastCheck,TextContrastCheck" />
 
+        <Button
+            android:id="@+id/offlineButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/boton_offline"
+            android:onClick="loginOffline"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

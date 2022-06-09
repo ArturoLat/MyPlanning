@@ -66,13 +66,17 @@ public class CalendariDiari extends AppCompatActivity{
 
     public void initRating(){
         if(!viewModel.existUser()){
+            //verifica si hi ha registre de valoracio
             if(!viewModel.emptyRegVal(diaActual)){
+                //si no existeix s'inicialitza el valor de val a 0
                 nota.setRating(0);
+                //s'insereix registre a la base de dades (valor inicial a 0)
                 viewModel.insertValoracio(diaActual);
 
             }
 
         }
+        //get valoracio
         Valoracio val = viewModel.getValoracioDia(diaActual);
         if(val != null){
             nota.setRating(val.getValoracio());

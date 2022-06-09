@@ -61,6 +61,7 @@
     </LinearLayout>
 
     <LinearLayout
+
         android:id="@+id/scheduleLayout"
         android:layout_width="245dp"
         android:layout_height="450dp"
@@ -68,18 +69,24 @@
         android:layout_marginStart="1sp"
         android:layout_marginTop="10dp"
         android:background="@drawable/dotted_border"
-        android:onClick="scheduleAction"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txtSchedule"
+        <LinearLayout
+            android:id="@+id/actionschedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@color/background"
-            android:fontFamily="@font/kaushan_script"
-            android:text="@string/txtSchedule"
-            android:textColor="@color/color_text" />
+            android:orientation="vertical"
+            android:onClick="scheduleAction">
+
+            <TextView
+                android:id="@+id/txtSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@color/background"
+                android:fontFamily="@font/kaushan_script"
+                android:text="@string/txtSchedule"
+                android:textColor="@color/color_text" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/scheduleRecycleView"

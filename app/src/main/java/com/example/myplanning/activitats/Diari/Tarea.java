@@ -57,9 +57,11 @@ public class Tarea extends AppCompatActivity {
 
         }
 
+        //agafa dades de la tasca (ScheduleAdapter)
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        if(!extras.isEmpty()){
+
+        if(extras != null){
             String act = intent.getStringExtra("act");
             String type = intent.getStringExtra("type");
             String time = intent.getStringExtra("time");
@@ -68,11 +70,12 @@ public class Tarea extends AppCompatActivity {
             tareaText.setText(act);
             tareaText.setTextColor(color);
 
-            palette.setSelectedColor(getResources().getColor(R.color.black));
+            palette.setSelectedColor(color);
             spinnerActivitat.setSelection(getIndex(spinnerActivitat, type));
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+
             this.time.setHour(dateTime.getHour());
             this.time.setMinute(dateTime.getMinute());
 

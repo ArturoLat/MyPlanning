@@ -185,11 +185,6 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
         }
     }
 
-    public void dbinsertValoracio(LocalDateTime diaActual) {
-        db.insertValoracio(diaActual,(float)0, user.getNom());
-
-    }
-
     public void insertValoracio(LocalDateTime diaActual) {
         dbSqlite.insertValoracio(dbSqlite.getWritableDatabase(),diaActual.toString(),(float)0);
 
