@@ -65,7 +65,6 @@ public class CalendariDiari extends AppCompatActivity{
     }
 
     public void initRating(){
-
         if(!viewModel.existUser()){
             if(!viewModel.emptyRegVal(diaActual)){
                 nota.setRating(0);
@@ -124,7 +123,7 @@ public class CalendariDiari extends AppCompatActivity{
             @Override
             public void onChanged(ArrayList<Dades> ac) {
                 ArrayList<Dades> ordenada = ordenarLlista(ac);
-                ScheduleAdapter newAdapter = new ScheduleAdapter(ordenada);
+                ScheduleAdapter newAdapter = new ScheduleAdapter(ordenada, "Schedule");
                 scheduleRecycleView.swapAdapter(newAdapter, false);
                 newAdapter.notifyDataSetChanged();
             }
@@ -134,7 +133,7 @@ public class CalendariDiari extends AppCompatActivity{
             @Override
             public void onChanged(ArrayList<Dades> ac) {
                 ArrayList<Dades> ordenada = ordenarLlista(ac);
-                ScheduleAdapter newAdapter = new ScheduleAdapter(ordenada);
+                ScheduleAdapter newAdapter = new ScheduleAdapter(ordenada,"To-Do");
                 toDoRecycleView.swapAdapter(newAdapter, false);
                 newAdapter.notifyDataSetChanged();
             }
@@ -144,7 +143,7 @@ public class CalendariDiari extends AppCompatActivity{
             @Override
             public void onChanged(ArrayList<Dades> ac) {
                 ArrayList<Dades> ordenada = ordenarLlista(ac);
-                ScheduleAdapter newAdapter = new ScheduleAdapter(ordenada);
+                ScheduleAdapter newAdapter = new ScheduleAdapter(ordenada, "Tasks");
                 tasksRecycleView.swapAdapter(newAdapter, false);
                 newAdapter.notifyDataSetChanged();
             }

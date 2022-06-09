@@ -1,5 +1,6 @@
 package com.example.myplanning.activitats.Diari;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,13 @@ import com.example.myplanning.model.Item.Dades;
 
 import java.util.ArrayList;
 
-public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolderDiari> {
+public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolderDiari>{
 
     private ArrayList<Dades> listdatos;
+    private String type;
 
-    public ScheduleAdapter(ArrayList<Dades> listdatos) {
+    public ScheduleAdapter(ArrayList<Dades> listdatos, String typedada) {
+        this.type = typedada;
         if(!listdatos.isEmpty()){
             this.listdatos = listdatos;
 
@@ -41,6 +44,18 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         Dades dada = (Dades) listdatos.get(position);
         holder.check.setText(dada.toString());
         holder.check.setTextColor(dada.getColor());
+        holder.check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), Tarea.class);
+                intent.putExtra("act", dada.getActivitat());
+                intent.putExtra("type", type);
+                intent.putExtra("time", dada.getDate().toString());
+                intent.putExtra("color", dada.getColor());
+                System.out.println(dada.getColor());
+                view.getContext().startActivity(intent);
+            }
+        });
 
     }
 
@@ -48,6 +63,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     public int getItemCount() {
         return listdatos.size();
     }
+
 
     public class ViewHolderDiari extends RecyclerView.ViewHolder {
 

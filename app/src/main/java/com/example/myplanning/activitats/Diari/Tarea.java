@@ -3,6 +3,7 @@ package com.example.myplanning.activitats.Diari;
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -20,6 +21,7 @@ import com.example.myplanning.db.db_Sqlite;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Item.Dades;
 import com.example.myplanning.model.Usuari.Usuario;
+import com.thebluealliance.spectrum.SpectrumDialog;
 import com.thebluealliance.spectrum.SpectrumPalette;
 
 import java.time.LocalDate;
@@ -55,23 +57,41 @@ public class Tarea extends AppCompatActivity {
 
         }
 
-        int hora = time.getHour();
-        int min = time.getMinute();
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if(!extras.isEmpty()){
+            String act = intent.getStringExtra("act");
+            String type = intent.getStringExtra("type");
+            String time = intent.getStringExtra("time");
+            int color = intent.getIntExtra("color",-16777216);
 
-        palette.setOnColorSelectedListener(
-                clr -> color = clr
-        );
+            tareaText.setText(act);
+            tareaText.setTextColor(color);
 
-        palette.setSelectedColor(getResources().getColor(R.color.yellow));
-        color = getResources().getColor(R.color.yellow);
+            palette.setSelectedColor(getResources().getColor(R.color.black));
+            spinnerActivitat.setSelection(getIndex(spinnerActivitat, type));
 
-        time.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker timePicker, int hora, int min) {
-                timePicker.setHour(hora);
-                timePicker.setMinute(min);
-            }
-        });
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+            this.time.setHour(dateTime.getHour());
+            this.time.setMinute(dateTime.getMinute());
+
+        }else{
+            int hora = time.getHour();
+            int min = time.getMinute();
+
+            palette.setSelectedColor(getResources().getColor(R.color.yellow));
+            color = getResources().getColor(R.color.yellow);
+
+
+            time.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+                @Override
+                public void onTimeChanged(TimePicker timePicker, int hora, int min) {
+                    timePicker.setHour(hora);
+                    timePicker.setMinute(min);
+                }
+            });
+        }
     }
 
     private void initWidgets(){
@@ -81,14 +101,37 @@ public class Tarea extends AppCompatActivity {
         tareaText = findViewById(R.id.tasca);
         palette = findViewById(R.id.spectrumPaletteTasca);
         spinnerActivitat = findViewById(R.id.spinnerActivitat);
+        palette.setOnColorSelectedListener(new SpectrumPalette.OnColorSelectedListener(){
+            @Override
+            public void onColorSelected(int color) {
+                setColor(color);
+
+            }
+
+        });
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+
+        return 0;
+    }
+    public void setColor(int color){
+        this.color = color;
     }
 
     public void activitatAccio(View view){
-        tareaText.setTextColor(color);
+
+
         LocalDateTime eventTime = LocalDateTime.of(CalendariUtiles.selectedDate,
                 LocalTime.of(time.getHour(),time.getMinute()));
         Dades dada = new Dades(tareaText.getText().toString(), false, eventTime.toString(),color);
         String activitatPenjar = spinnerActivitat.getSelectedItem().toString();
+        System.out.println(color);
         if(user != null){
             if(activitatPenjar.equals("Schedule")){
                 db.setCollectUserSchedule(eventTime, user.getNom(), tareaText.getText().toString(),color);
