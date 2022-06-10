@@ -18,6 +18,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Configuracio.ProviderType;
 import com.example.myplanning.activitats.Mensual.CalendariMensual;
+import com.example.myplanning.activitats.observer.LoginObserver;
+import com.example.myplanning.activitats.observer.llistArrayObserver;
+import com.example.myplanning.db.db_Sqlite;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Usuari.ComprobarDades;
 import com.example.myplanning.model.Usuari.Usuario;
@@ -44,20 +47,23 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-public class AuthActivity extends AppCompatActivity {
+public class AuthActivity extends AppCompatActivity implements LoginObserver {
 
     private final static int GOOGLE_SIGN_IN = 100;
     private Button btnRegistre;
     private EditText txtEmail;
     private EditText txtUser;
     private EditText txtPassword;
+    private Button btnOffline;
     private Button btnLogin;
     private fireBaseController db;
     private FirebaseFirestore dbRegistre = FirebaseFirestore.getInstance();
     private Usuario usuarioOnline;
+    private db_Sqlite dbSqlite;
     private ComprobarDades comprobarDades;
     private RegistreViewModel registreViewModel;
     private LogInViewModel logInViewModel;
+    private Integer resultat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,7 @@ public class AuthActivity extends AppCompatActivity {
         session();
         comprobarDades = new ComprobarDades();
         this.db = new fireBaseController();
+        db.setListenerLogin(this);
         registreViewModel = new ViewModelProvider(this).get(RegistreViewModel.class);
         logInViewModel = new ViewModelProvider(this).get(LogInViewModel.class);
         initWidgets();
@@ -78,6 +85,7 @@ public class AuthActivity extends AppCompatActivity {
     private void initWidgets(){
         btnRegistre = findViewById(R.id.btnRegistreAuth);
         btnLogin = findViewById(R.id.btnLoginAuth);
+        btnOffline = findViewById(R.id.offlineButton);
         txtEmail = findViewById(R.id.emailAuth);
         txtUser = findViewById(R.id.userAuth);
         txtPassword = findViewById(R.id.passAuth);
@@ -96,6 +104,12 @@ public class AuthActivity extends AppCompatActivity {
         }
 
     }
+
+    public void loginOffline(View view){
+        dbSqlite = new db_Sqlite(view.getContext());
+        startActivity(new Intent(this, CalendariMensual.class));
+    }
+
     public void registrarseAccio(View view){
         String pass = txtPassword.getText().toString();
         String mail = txtEmail.getText().toString();
@@ -108,7 +122,7 @@ public class AuthActivity extends AppCompatActivity {
         }else if(respuesta.equals("Format de la contrasenya incorrecte")){
             registreViewModel.contrasenyaIncorrecte();
         }else{
-            Integer resultat = db.userExist(mail,pass);
+            db.userExist(mail,pass);
             System.out.println(resultat);
             if(resultat == 3){
                 registreViewModel.usuariJaCreat();
@@ -158,27 +172,21 @@ public class AuthActivity extends AppCompatActivity {
         if(user.equals("") || pass.equals("")){
             logInViewModel.campBuit();
         }else {
-            Integer resultat = db.userExist(mail,pass);
-
-            if(resultat == 0){
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(mail, pass);
-                logInViewModel.logInCorrecte();
-                this.usuarioOnline = new Usuario(mail);
-                showHome(mail, ProviderType.EMAIL, user);
-                //Afegim la conta a les preferencies
-                afegirAPreferencies();
-                startActivity(new Intent(this, CalendariMensual.class));
-            }else if(resultat == 1){
-                //Contrasenya diferent
-                logInViewModel.contrasenyaDiferent();
-            }else if(resultat == 2) {
-                //error no document asociat
-                logInViewModel.usuariInexistent();
-            }else {
-                //fall de descarrega
-                logInViewModel.usuariInexistent();
-            }
+            db.userExist(mail, pass);
         }
+    }
+
+    private void iniciSucces(){
+        String mail = txtEmail.getText().toString();
+        String user = txtUser.getText().toString();
+
+        logInViewModel.logInCorrecte();
+        this.usuarioOnline = new Usuario(mail);
+        showHome(mail, ProviderType.EMAIL, user);
+        //Afegim la conta a les preferencies
+        afegirAPreferencies();
+        startActivity(new Intent(this, CalendariMensual.class));
+
     }
 
 
@@ -271,4 +279,34 @@ public class AuthActivity extends AppCompatActivity {
         ProviderSetUp providerSetUp = new ProviderSetUp(email, provider, user);
     }
 
+    @Override
+    public void notificarLogin(Integer resultat) {
+        String pass = txtPassword.getText().toString();
+        String mail = txtEmail.getText().toString();
+        String user = txtUser.getText().toString();
+
+        this.resultat = resultat;
+        if(resultat == 0){
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(mail, pass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                iniciSucces();
+
+                            }
+                        }
+                    });
+
+        }else if(resultat == 1){
+            //Contrasenya diferent
+            logInViewModel.contrasenyaDiferent();
+        }else if(resultat == 2) {
+            //error no document asociat
+            logInViewModel.usuariInexistent();
+        }else {
+            //fall de descarrega
+            logInViewModel.usuariInexistent();
+        }
+    }
 }

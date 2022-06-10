@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Diari.CalendariDiari;
+import com.example.myplanning.activitats.observer.LoginObserver;
 import com.example.myplanning.activitats.observer.llistArrayObserver;
 import com.example.myplanning.model.Item.*;
 import com.example.myplanning.model.Usuari.Usuario;
@@ -34,6 +35,7 @@ public class fireBaseController{
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private static fireBaseController instance;
     public static llistArrayObserver listener;
+    public static LoginObserver listenerLogin;
     private int resultat = -1;
 
     public fireBaseController(llistArrayObserver listener){
@@ -49,12 +51,15 @@ public class fireBaseController{
     public static void setListener(llistArrayObserver listener) {
         fireBaseController.listener = listener;
     }
+    public static void setListenerLogin(LoginObserver listener) {
+        fireBaseController.listenerLogin = listener;
+    }
 
     public static fireBaseController getInstance() {
         return instance;
     }
 
-    public Integer userExist(String user, String passUser){
+    public void userExist(String user, String passUser){
         DocumentReference docRef = db.collection("users").document(user);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -66,21 +71,19 @@ public class fireBaseController{
                         String pass = (String) document.getData().get("password");
                         if (pass.equals(passUser)) {
                             //Login Correcte
-                            resultat = 0;
+                            listenerLogin.notificarLogin(0);
 
                         } else {
                             //Contrasenya diferent
-                            resultat = 1;
+                            listenerLogin.notificarLogin(1);
                         }
                     } else {
                         //error no document asociat
-                        resultat = 2;
+                        listenerLogin.notificarLogin(2);
                     }
                 }
             }
         });
-
-        return resultat;
     }
 
     public void getCollectUserHomeWork(String user, LocalDateTime time){
