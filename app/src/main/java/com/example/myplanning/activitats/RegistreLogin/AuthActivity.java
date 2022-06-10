@@ -18,7 +18,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Configuracio.ProviderType;
 import com.example.myplanning.activitats.Mensual.CalendariMensual;
-import com.example.myplanning.db.db_Sqlite;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Usuari.ComprobarDades;
 import com.example.myplanning.model.Usuari.Usuario;
@@ -37,6 +36,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -51,12 +51,10 @@ public class AuthActivity extends AppCompatActivity {
     private EditText txtEmail;
     private EditText txtUser;
     private EditText txtPassword;
-    private Button btnOffline;
     private Button btnLogin;
     private fireBaseController db;
     private FirebaseFirestore dbRegistre = FirebaseFirestore.getInstance();
     private Usuario usuarioOnline;
-    private db_Sqlite dbSqlite;
     private ComprobarDades comprobarDades;
     private RegistreViewModel registreViewModel;
     private LogInViewModel logInViewModel;
@@ -72,6 +70,7 @@ public class AuthActivity extends AppCompatActivity {
         logInViewModel = new ViewModelProvider(this).get(LogInViewModel.class);
         initWidgets();
 
+
     }
 
 
@@ -79,7 +78,6 @@ public class AuthActivity extends AppCompatActivity {
     private void initWidgets(){
         btnRegistre = findViewById(R.id.btnRegistreAuth);
         btnLogin = findViewById(R.id.btnLoginAuth);
-        btnOffline = findViewById(R.id.offlineButton);
         txtEmail = findViewById(R.id.emailAuth);
         txtUser = findViewById(R.id.userAuth);
         txtPassword = findViewById(R.id.passAuth);
@@ -98,18 +96,13 @@ public class AuthActivity extends AppCompatActivity {
         }
 
     }
-
-    public void loginOffline(View view){
-        dbSqlite = new db_Sqlite(view.getContext());
-        startActivity(new Intent(this, CalendariMensual.class));
-    }
-
     public void registrarseAccio(View view){
         String pass = txtPassword.getText().toString();
         String mail = txtEmail.getText().toString();
         String user = txtUser.getText().toString();
 
         String respuesta = comprobarDades.isSecure(pass, mail);
+
         if(respuesta.equals("Format de l'email incorrecte")){
             registreViewModel.emailIncorrecte();
         }else if(respuesta.equals("Format de la contrasenya incorrecte")){
@@ -120,21 +113,41 @@ public class AuthActivity extends AppCompatActivity {
             if(resultat == 3){
                 registreViewModel.usuariJaCreat();
             }else{
-                Map<String, Object> userData = new HashMap<>();
-                userData.put("mail", mail);
-                userData.put("password", pass);
-                dbRegistre.collection("users").document(mail).set(userData);
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, pass);
-                registreViewModel.registreCorrecte();
-                registreViewModel.getRespuesta().observe(this, observer);
-                this.usuarioOnline = new Usuario(mail);
-                showHome(mail, ProviderType.EMAIL, user);
-                //Afegim a les preferencies la conta registrada
-                afegirAPreferencies();
-                startActivity(new Intent(this, CalendariMensual.class));
+                FirebaseAuth.getInstance().fetchSignInMethodsForEmail(mail).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                        boolean isNewUser = task.getResult().getSignInMethods().isEmpty();{
+                            if(isNewUser){
+                                registre(mail, pass, user);
+                            }else{
+                                registreViewModel.registreAnterior();
+                            }
+                        }
+                    }
+                });
+
+
+
             }
         }
         registreViewModel.getRespuesta().observe(this, observer);
+    }
+
+
+    private void registre(String mail, String pass, String user){
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("mail", mail);
+        userData.put("password", pass);
+        dbRegistre.collection("users").document(mail).set(userData);
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, pass);
+        registreViewModel.registreCorrecte();
+        registreViewModel.getRespuesta().observe(this, observer);
+        this.usuarioOnline = new Usuario(mail);
+        showHome(mail, ProviderType.EMAIL, user);
+        //Afegim a les preferencies la conta registrada
+        afegirAPreferencies();
+        startActivity(new Intent(this, CalendariMensual.class));
     }
 
     public void loguearseAccio(View view){
@@ -194,20 +207,18 @@ public class AuthActivity extends AppCompatActivity {
                     AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                     FirebaseAuth.getInstance().signInWithCredential(credential);
                     showHome(account.getEmail(), ProviderType.GOOGLE, account.getGivenName());
-                    Integer resultat = db.userExist(account.getEmail(),account.getId());
-
-                    //Afegim a la base de dades en cas que no hi hagui un usuari existent sino loguem
-                    if(resultat == 0){
-                        this.usuarioOnline = new Usuario(account.getEmail());
-                    }else{
-                        Map<String, Object> userData = new HashMap<>();
-                        userData.put("mail", account.getEmail());
-                        userData.put("password", account.getId());
-
-                        dbRegistre.collection("users").document(account.getEmail()).set(userData);
-                        this.usuarioOnline = new Usuario(account.getEmail());
-                    }
-
+                    //Comprovem si hi ha un usuari amb aquest email al Auth
+                    FirebaseAuth.getInstance().fetchSignInMethodsForEmail(account.getEmail()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                            boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
+                            if(isNewUser){
+                                registreGoogle(account);
+                            }else{
+                                setUsuarioOnline(account.getEmail());
+                            }
+                        }
+                    });
                     //Cridem al metode de les preferencies
                     afegirAPreferencies();
                     //Comencem la activitat
@@ -221,7 +232,17 @@ public class AuthActivity extends AppCompatActivity {
 
         }
     }
+    private void setUsuarioOnline(String email){
+        this.usuarioOnline = new Usuario(email);
+    }
+    private void registreGoogle(GoogleSignInAccount account){
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("mail", account.getEmail());
+        userData.put("password", account.getId());
 
+        dbRegistre.collection("users").document(account.getEmail()).set(userData);
+        this.usuarioOnline = new Usuario(account.getEmail());
+    }
 
 
     private void afegirAPreferencies(){

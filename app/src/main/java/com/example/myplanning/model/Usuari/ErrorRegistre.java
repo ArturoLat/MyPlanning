@@ -4,6 +4,7 @@ public enum ErrorRegistre {
     FORMAT_EMAIL("Format de l'email incorrecte"),
     FORMAT_CONTRASENYA("Format de la contrasenya incorrecte"),
     REGISTRE_ANTERIOR("Ja tens un usuari creat amb aquest email"),
+    USUARI_ANTERIOR("Ja hi ha un usuari amb aquest email"),
     REGISTRE_CORRECTE("Registre correcte");
 
     private final String text;

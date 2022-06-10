@@ -27,7 +27,14 @@ public class RegistreViewModel extends AndroidViewModel {
         respuesta.setValue(ErrorRegistre.REGISTRE_CORRECTE.toString());
     }
 
-    public void emailIncorrecte() { respuesta.setValue(ErrorRegistre.FORMAT_EMAIL.toString());}
+    public void emailIncorrecte() {
+        respuesta.setValue(ErrorRegistre.FORMAT_EMAIL.toString());
+    }
+
+    public void registreAnterior(){
+        respuesta.setValue(ErrorRegistre.REGISTRE_ANTERIOR.toString());
+        System.out.println(ErrorRegistre.REGISTRE_ANTERIOR.toString());
+    }
 
     public void contrasenyaIncorrecte() { respuesta.setValue(ErrorRegistre.FORMAT_CONTRASENYA.toString());}
 

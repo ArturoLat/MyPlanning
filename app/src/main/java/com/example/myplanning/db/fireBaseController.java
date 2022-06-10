@@ -55,7 +55,6 @@ public class fireBaseController{
     }
 
     public Integer userExist(String user, String passUser){
-
         DocumentReference docRef = db.collection("users").document(user);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
