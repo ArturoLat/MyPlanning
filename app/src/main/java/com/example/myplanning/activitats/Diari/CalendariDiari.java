@@ -2,6 +2,7 @@ package com.example.myplanning.activitats.Diari;
 
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,10 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.time.LocalDateTime;
@@ -27,18 +32,23 @@ import com.example.myplanning.activitats.CalendariUtiles;
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Seleccio.Seleccio;
 import com.example.myplanning.model.Item.*;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class CalendariDiari extends AppCompatActivity{
 
     private Button diaSetmanaTV;
+    private TextView hapiness;
+    private ImageView imageHapiness;
     private static RecyclerView scheduleRecycleView;
     private static RecyclerView toDoRecycleView;
     private static RecyclerView tasksRecycleView;
     private RatingBar nota;
+    public Uri imageUrl;
     private Context parentContext;
     private DiariViewModel viewModel;
     private LocalDateTime diaActual = CalendariUtiles.selectedDate.atStartOfDay();
     int color;
+    private Storage storageClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +59,35 @@ public class CalendariDiari extends AppCompatActivity{
         initWidgets();
         setLiveDataObservers();
         this.initRating();
+        imageHapiness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getImage();
+            }
+        });
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        String email = prefs.getString("email", null);
+        if(requestCode == 1 && resultCode == RESULT_OK && data!=null && data.getData()!= null){
+            imageUrl = data.getData();
+            imageHapiness.setImageURI(imageUrl);
+            storageClass.uploadPictureHapiness(findViewById(android.R.id.content), email, this, imageUrl, "Hapiness", diaActual.toString());
+        }
+    }
+
+    private void getImage(){
+        storageClass.selectImage(this);
     }
 
     private void initWidgets() {
+        hapiness = findViewById(R.id.txtDayHapiness);
+        imageHapiness = findViewById(R.id.imageHapiness);
+        storageClass = Storage.getInstance();
+        storageClass = new Storage();
         this.diaSetmanaTV = findViewById(R.id.btnDia);
         this.nota = findViewById(R.id.notaDia);
         scheduleRecycleView = findViewById(R.id.scheduleRecycleView);

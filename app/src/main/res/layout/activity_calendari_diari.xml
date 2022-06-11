@@ -182,12 +182,23 @@
         <TextView
             android:id="@+id/txtDayHapiness"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/background"
             android:fontFamily="@font/kaushan_script"
             android:text="@string/txtHapiness"
             android:textColor="#795548" />
+
+        <ImageView
+            android:id="@+id/imageHapiness"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="40dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:contentDescription="@string/todoo"
+            tools:ignore="ImageContrastCheck"
+            tools:srcCompat="@tools:sample/avatars" />
 
 
     </LinearLayout>
