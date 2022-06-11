@@ -137,7 +137,7 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
         float val = 0;
         if (user != null){
             db.getCollectUserValoracio(user.getNom(), dia);
-            return null;
+            return new Valoracio(0, dia);
         }else{
             val = dbSqlite.readValoracio(dia);
 

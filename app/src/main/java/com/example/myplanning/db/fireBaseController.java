@@ -210,6 +210,7 @@ public class fireBaseController{
 
     public void getCollectUserValoracio(String user, LocalDateTime time) {
         String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
+
         db.collection(user).document("valoracio").collection(dataInfo).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -219,11 +220,14 @@ public class fireBaseController{
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 llista_val.add(new Valoracio((float) document.getLong("valoracio").intValue(),time));
                             }
-                            listener.notificarValoracio(llista_val);
-                        }else{
-                            insertValoracio(time, 0, user);
-                            ArrayList<Valoracio> llista_val = new ArrayList<>();
-                            llista_val.add(new Valoracio(0,time));
+                            if(!llista_val.isEmpty()){
+                                listener.notificarValoracio(llista_val);
+                            }else{
+                                insertValoracio(time, 0, user);
+                                ArrayList<Valoracio> llista = new ArrayList<>();
+                                llista.add(new Valoracio(0,time));
+
+                            }
                         }
                     }
                 });
