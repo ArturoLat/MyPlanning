@@ -119,32 +119,29 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
 
         if(respuesta.equals("Format de l'email incorrecte")){
             registreViewModel.emailIncorrecte();
+            System.out.println(registreViewModel.getRespuestaString());
         }else if(respuesta.equals("Format de la contrasenya incorrecte")){
             registreViewModel.contrasenyaIncorrecte();
+            System.out.println(registreViewModel.getRespuestaString());
         }else{
             db.userExist(mail,pass);
             System.out.println(resultat);
-            if(resultat == 3){
-                registreViewModel.usuariJaCreat();
-            }else{
-                FirebaseAuth.getInstance().fetchSignInMethodsForEmail(mail).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                        boolean isNewUser = task.getResult().getSignInMethods().isEmpty();{
-                            if(isNewUser){
-                                registre(mail, pass, user);
-                            }else{
-                                registreViewModel.registreAnterior();
-                            }
+            FirebaseAuth.getInstance().fetchSignInMethodsForEmail(mail).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                @Override
+                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                    boolean isNewUser = task.getResult().getSignInMethods().isEmpty();{
+                        if(isNewUser){
+                            registre(mail, pass, user);
+                        }else{
+                            registreViewModel.registreAnterior();
+                            System.out.println(registreViewModel.getRespuestaString());
                         }
                     }
-                });
+                }
+            });
 
-
-
-            }
         }
+
         registreViewModel.getRespuesta().observe(this, observer);
     }
 
@@ -156,6 +153,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         dbRegistre.collection("users").document(mail).set(userData);
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, pass);
         registreViewModel.registreCorrecte();
+        System.out.println(registreViewModel.getRespuestaString());
         registreViewModel.getRespuesta().observe(this, observer);
         this.usuarioOnline = new Usuario(mail);
         showHome(mail, ProviderType.EMAIL, user);
@@ -174,6 +172,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         }else {
             db.userExist(mail, pass);
         }
+
     }
 
     private void iniciSucces(){
@@ -181,6 +180,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         String user = txtUser.getText().toString();
 
         logInViewModel.logInCorrecte();
+        System.out.println(logInViewModel.getRespuestaString());
         this.usuarioOnline = new Usuario(mail);
         showHome(mail, ProviderType.EMAIL, user);
         //Afegim la conta a les preferencies
@@ -222,8 +222,9 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
                             boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
                             if(isNewUser){
                                 registreGoogle(account);
+
                             }else{
-                                setUsuarioOnline(account.getEmail());
+                                setUsuarioOnline(account);
                             }
                         }
                     });
@@ -240,8 +241,9 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
 
         }
     }
-    private void setUsuarioOnline(String email){
-        this.usuarioOnline = new Usuario(email);
+    private void setUsuarioOnline(GoogleSignInAccount account){
+        this.usuarioOnline = new Usuario(account.getEmail());
+        db.userExist(account.getEmail(), account.getId());
     }
     private void registreGoogle(GoogleSignInAccount account){
         Map<String, Object> userData = new HashMap<>();
@@ -250,6 +252,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
 
         dbRegistre.collection("users").document(account.getEmail()).set(userData);
         this.usuarioOnline = new Usuario(account.getEmail());
+
     }
 
 
@@ -269,6 +272,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
     private final Observer<String> observer = new Observer<String>() {
         @Override
         public void onChanged(String string) {
+            System.out.println("S'ha produit un observer");
             Toast toastRegistre =
                     Toast.makeText(getApplicationContext(), string, Toast.LENGTH_SHORT);
             toastRegistre.show();
@@ -301,12 +305,16 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         }else if(resultat == 1){
             //Contrasenya diferent
             logInViewModel.contrasenyaDiferent();
+            System.out.println(logInViewModel.getRespuestaString());
         }else if(resultat == 2) {
             //error no document asociat
             logInViewModel.usuariInexistent();
+            System.out.println(logInViewModel.getRespuestaString());
         }else {
             //fall de descarrega
             logInViewModel.usuariInexistent();
+            System.out.println(logInViewModel.getRespuestaString());
         }
+
     }
 }

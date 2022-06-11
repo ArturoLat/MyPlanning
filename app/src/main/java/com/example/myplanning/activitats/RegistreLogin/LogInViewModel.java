@@ -19,6 +19,9 @@ public class LogInViewModel extends AndroidViewModel {
         respuesta = new MutableLiveData<>();
     }
 
+    public String getRespuestaString(){
+        return respuesta.getValue().toString();
+    }
 
     public LiveData<String> getRespuesta(){
         return respuesta;

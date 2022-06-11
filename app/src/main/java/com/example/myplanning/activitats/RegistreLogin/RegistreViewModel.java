@@ -18,6 +18,10 @@ public class RegistreViewModel extends AndroidViewModel {
         respuesta = new MutableLiveData<>();
     }
 
+    public String getRespuestaString(){
+        return respuesta.getValue().toString();
+    }
+
 
     public LiveData<String> getRespuesta(){
         return respuesta;
@@ -33,7 +37,7 @@ public class RegistreViewModel extends AndroidViewModel {
 
     public void registreAnterior(){
         respuesta.setValue(ErrorRegistre.REGISTRE_ANTERIOR.toString());
-        System.out.println(ErrorRegistre.REGISTRE_ANTERIOR.toString());
+
     }
 
     public void contrasenyaIncorrecte() { respuesta.setValue(ErrorRegistre.FORMAT_CONTRASENYA.toString());}
