@@ -38,7 +38,7 @@ public class updateTarea extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hora_picker);
+        setContentView(R.layout.actualitzar_tasca);
         initWidgets();
         if(Usuario.getInstance() != null){
             db = fireBaseController.getInstance();
@@ -59,7 +59,7 @@ public class updateTarea extends AppCompatActivity {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             this.dia = LocalDateTime.parse(time, formatter);
 
-            int color = intent.getIntExtra("color",-16777216);
+            color = intent.getIntExtra("color",-16777216);
 
             this.acType = type;
             tareaText.setText(act);
@@ -74,8 +74,8 @@ public class updateTarea extends AppCompatActivity {
             int hora = time.getHour();
             int min = time.getMinute();
 
-            palette.setSelectedColor(getResources().getColor(R.color.yellow));
-            color = getResources().getColor(R.color.yellow);
+            palette.setSelectedColor(getResources().getColor(R.color.black));
+            color = getResources().getColor(R.color.black);
 
 
             time.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {

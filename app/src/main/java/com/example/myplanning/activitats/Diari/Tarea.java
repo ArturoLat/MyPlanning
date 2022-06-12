@@ -75,7 +75,7 @@ public class Tarea extends AppCompatActivity {
             String act = intent.getStringExtra("act");
             String type = intent.getStringExtra("type");
             String time = intent.getStringExtra("time");
-            int color = intent.getIntExtra("color",-16777216);
+            int color = intent.getIntExtra("color",getResources().getColor(R.color.black));
 
             tareaText.setText(act);
             tareaText.setTextColor(color);
@@ -93,8 +93,8 @@ public class Tarea extends AppCompatActivity {
             int hora = time.getHour();
             int min = time.getMinute();
 
-            palette.setSelectedColor(getResources().getColor(R.color.yellow));
-            color = getResources().getColor(R.color.yellow);
+            palette.setSelectedColor(getResources().getColor(R.color.black));
+            color = getResources().getColor(R.color.black);
 
 
             time.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
