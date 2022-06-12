@@ -7,18 +7,28 @@ import com.example.myplanning.R;
 import com.example.myplanning.activitats.Configuracio.ProviderType;
 
 public class ProviderSetUp {
-    String mail;
-    String user;
-    ProviderType providerType;
+    private String mail;
+    private String user;
+    private ProviderType providerType;
     public static ProviderSetUp instance;
+    private String pass;
 
-    public ProviderSetUp(String mail, ProviderType providerType, String user){
+    public ProviderSetUp(String mail, ProviderType providerType, String user, String pass){
         this.mail = mail;
         this.providerType = providerType;
         this.user = user;
         instance = this;
-
+        this.pass = pass;
     }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
     public void setMail(String mail) {
         this.mail = mail;
     }
@@ -48,3 +58,4 @@ public class ProviderSetUp {
     }
 
 }
+

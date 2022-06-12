@@ -34,6 +34,7 @@ import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -96,10 +97,11 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         String email = prefs.getString("email", null);
         String proveidor = prefs.getString("proveidor", null);
         String user = prefs.getString("user", null);
+        String pass = prefs.getString("pass", null);
         //Si el email i el proveidor no son nulls, la sessio ja esta logueada
         if(email != null && proveidor != null){
             this.usuarioOnline = new Usuario(email, user);
-            showHome(email, ProviderType.valueOf(proveidor), user);
+            showHome(email, ProviderType.valueOf(proveidor), user, pass);
             startActivity(new Intent(this, CalendariMensual.class));
         }
 
@@ -107,6 +109,8 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
 
     public void loginOffline(View view){
         dbSqlite = new db_Sqlite(view.getContext());
+        showHome("", ProviderType.OFFLINE, "", "");
+        afegirAPreferencies();
         startActivity(new Intent(this, CalendariMensual.class));
     }
 
@@ -156,7 +160,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         System.out.println(registreViewModel.getRespuestaString());
         registreViewModel.getRespuesta().observe(this, observer);
         this.usuarioOnline = new Usuario(mail, user);
-        showHome(mail, ProviderType.EMAIL, user);
+        showHome(mail, ProviderType.EMAIL, user, pass);
         //Afegim a les preferencies la conta registrada
         afegirAPreferencies();
         startActivity(new Intent(this, CalendariMensual.class));
@@ -176,13 +180,14 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
     }
 
     private void iniciSucces(){
-        String mail = txtEmail.getText().toString();
-        String user = txtUser.getText().toString();
-
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        String mail = prefs.getString("email", null);
+        String user = prefs.getString("user", null);
+        String pass = prefs.getString("pass", null);
         logInViewModel.logInCorrecte();
         System.out.println(logInViewModel.getRespuestaString());
         this.usuarioOnline = new Usuario(mail,user);
-        showHome(mail, ProviderType.EMAIL, user);
+        showHome(mail, ProviderType.EMAIL, user, pass);
         //Afegim la conta a les preferencies
         afegirAPreferencies();
         startActivity(new Intent(this, CalendariMensual.class));
@@ -195,7 +200,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         GoogleSignInOptions googleConf = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id_string))
                 .requestEmail()
-        .build();
+                .build();
 
         GoogleSignInClient googleClient = GoogleSignIn.getClient(this, googleConf);
         googleClient.signOut();
@@ -214,7 +219,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
                 if(account != null){
                     AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                     FirebaseAuth.getInstance().signInWithCredential(credential);
-                    showHome(account.getEmail(), ProviderType.GOOGLE, account.getGivenName());
+                    showHome(account.getEmail(), ProviderType.GOOGLE, account.getGivenName(), account.getId());
                     //Comprovem si hi ha un usuari amb aquest email al Auth
                     FirebaseAuth.getInstance().fetchSignInMethodsForEmail(account.getEmail()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                         @Override
@@ -264,6 +269,8 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         String email = providerSetUp.getMail();
         String user = providerSetUp.getUser();
         String proveidor = providerSetUp.getString();
+        String pass = providerSetUp.getPass();
+        editor.putString("pass", pass);
         editor.putString("email", email);
         editor.putString("user", user);
         editor.putString("proveidor", proveidor);
@@ -273,21 +280,22 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         @Override
         public void onChanged(String string) {
             System.out.println("S'ha produit un observer");
-            Toast toastRegistre =
-                    Toast.makeText(getApplicationContext(), string, Toast.LENGTH_SHORT);
-            toastRegistre.show();
+
+            Snackbar.make(findViewById(android.R.id.content), string, Snackbar.LENGTH_LONG).show();
+
         }
     };
 
-    private void showHome(String email, ProviderType provider, String user){
-        ProviderSetUp providerSetUp = new ProviderSetUp(email, provider, user);
+    private void showHome(String email, ProviderType provider, String user, String pass){
+        ProviderSetUp providerSetUp = new ProviderSetUp(email, provider, user, pass);
     }
 
     @Override
     public void notificarLogin(Integer resultat) {
-        String pass = txtPassword.getText().toString();
-        String mail = txtEmail.getText().toString();
-        String user = txtUser.getText().toString();
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        String mail = prefs.getString("email", null);
+        String user = prefs.getString("user", null);
+        String pass = prefs.getString("pass", null);
 
         this.resultat = resultat;
         if(resultat == 0){
@@ -315,6 +323,6 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
             logInViewModel.usuariInexistent();
             System.out.println(logInViewModel.getRespuestaString());
         }
-
+        logInViewModel.getRespuesta().observe(this, observer);
     }
 }

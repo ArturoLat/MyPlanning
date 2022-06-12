@@ -2,7 +2,8 @@ package com.example.myplanning.activitats.Configuracio;
 
 public enum ProviderType {
     EMAIL("EMAIL"),
-    GOOGLE("GOOGLE");
+    GOOGLE("GOOGLE"),
+    OFFLINE("OFFLINE");
 
 
     private final String text;

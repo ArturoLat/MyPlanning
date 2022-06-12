@@ -9,7 +9,6 @@ import com.example.myplanning.activitats.CalendariUtiles;
 
 import com.example.myplanning.activitats.RegistreLogin.AuthActivity;
 import com.example.myplanning.databinding.MainActivityLayoutBinding;
-import com.example.myplanning.notification.Notification;
 
 import java.time.LocalDate;
 
