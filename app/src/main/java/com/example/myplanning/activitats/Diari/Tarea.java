@@ -1,19 +1,24 @@
 package com.example.myplanning.activitats.Diari;
 
-import android.app.Dialog;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.CalendariUtiles;
@@ -21,15 +26,14 @@ import com.example.myplanning.db.db_Sqlite;
 import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Item.Dades;
 import com.example.myplanning.model.Usuari.Usuario;
-import com.thebluealliance.spectrum.SpectrumDialog;
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 import com.thebluealliance.spectrum.SpectrumPalette;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneOffset;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 public class Tarea extends AppCompatActivity {
 
@@ -44,10 +48,16 @@ public class Tarea extends AppCompatActivity {
     private Spinner spinnerActivitat;
     int color;
 
+    private final static String CHANNEL_ID = "NOTIFICACION";
+    private final static int NOTIFICACION_ID = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hora_picker);
+        createNotificationChannel();
+
+
         initWidgets();
         if(user != null){
             db = fireBaseController.getInstance();
@@ -158,7 +168,8 @@ public class Tarea extends AppCompatActivity {
                 dbLite.insertTask(dbLite.getDatabase(),tareaText.getText().toString(),eventTime.toString(),color);
 
             }
-        };
+        }
+        createNotificacion("Has creat el recordatori ",tareaText.getText().toString());
         startActivity(new Intent(this, CalendariDiari.class));
     }
 
@@ -166,5 +177,28 @@ public class Tarea extends AppCompatActivity {
         startActivity(new Intent(this, CalendariDiari.class));
     }
 
+    public void createNotificacion(String title, String content){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.ic_launcher_background);
+        builder.setContentTitle(title);
+        builder.setContentText(content);
+        builder.setColor(Color.BLUE);
+        builder.setLights(Color.RED, 1000,1000);
+        builder.setVibrate(new long[] {1000, 1000});
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+        notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
 
+    }
+
+    public void createNotificationChannel() {
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 }
