@@ -384,7 +384,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
     public Boolean deleteSchedule(SQLiteDatabase sqLiteDatabase, LocalDateTime dia) {
         Cursor cursorTodo;
         Integer id = getIdSchedule(dia);
-        cursorTodo = getWritableDatabase().rawQuery("Select * from "+ TABLE_HOMEWORK+ " where id_horari = ?",null);
+        cursorTodo = getWritableDatabase().rawQuery("Select * from "+ TABLE_HORARI + " where id_horari = ?",null);
         if(cursorTodo.getCount()>0) {
             long result = sqLiteDatabase.delete(TABLE_TODO,"id_horari=?",new String[]{String.valueOf(id)});
             return result != -1;
