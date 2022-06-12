@@ -285,9 +285,51 @@ public class fireBaseController{
         doc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                listenerImg.notificarImatgeHappiness(documentSnapshot.getString("url"));
+                String resultat = "";
+                resultat = documentSnapshot.getString("url");
+                if(resultat != null){
+                    listenerImg.notificarImatgeHappiness(documentSnapshot.getString("url"));
+                }
             }
         });
 
     }
+
+    public void deleteSchedule(LocalDateTime time, String nom, String act) {
+        String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
+
+        db.collection(nom).document("schedule").collection(dataInfo).document(act).delete()
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    getCollectUserSchedule(nom,time);
+                }
+            });
+
+    }
+    public void deleteTodo(LocalDateTime time, String nom, String act) {
+        String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
+
+        db.collection(nom).document("todo").collection(dataInfo).document(act).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        getCollectUserSchedule(nom,time);
+                    }
+                });
+
+    }
+    public void deleteTask(LocalDateTime time, String nom, String act) {
+        String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
+
+        db.collection(nom).document("homework").collection(dataInfo).document(act).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        getCollectUserSchedule(nom,time);
+                    }
+                });
+
+    }
+
 }

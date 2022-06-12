@@ -107,13 +107,13 @@ public class updateTarea extends AppCompatActivity {
     public void eliminarTasca(){
         if(Usuario.getInstance() != null){
             if(acType.equals("Schedule")){
-                //db.deleteSchedule(dia, Usuario.getInstance().getNom(), tareaText.getText().toString(),color);
+                db.deleteSchedule(dia, Usuario.getInstance().getNom(), tareaText.getText().toString());
 
             }else if(acType.equals("To-Do")){
-                //db.deleteTodo(dia, Usuario.getInstance().getNom(), tareaText.getText().toString(),color);
+                db.deleteTodo(dia, Usuario.getInstance().getNom(), tareaText.getText().toString());
 
             }else{
-                //db.deleteTask(dia, Usuario.getInstance().getNom(), tareaText.getText().toString(),color);
+                db.deleteTask(dia, Usuario.getInstance().getNom(), tareaText.getText().toString());
 
             }
 

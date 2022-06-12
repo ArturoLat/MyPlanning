@@ -246,6 +246,7 @@ public class CalendariDiari extends AppCompatActivity implements imgObserver {
     public void initImgHappiness(LocalDateTime time){
         if(viewModel.existUser()){
             viewModel.getImgHappinessFire(time);
+
         }else{
             viewModel.getImgHappinessSql(time);
         }
@@ -403,7 +404,7 @@ public class CalendariDiari extends AppCompatActivity implements imgObserver {
     @Override
     public void notificarImatgeHappiness(Object url) {
         if(url != null){
-            if(url.getClass().isInstance(String.class)){
+            if(url instanceof String){
                 Glide.with(CalendariDiari.this)
                         .load(url)
                         .centerCrop()
