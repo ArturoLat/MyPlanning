@@ -50,12 +50,14 @@ public class Configuracio extends AppCompatActivity implements imgLogin {
         setContentView(R.layout.config_layout);
         init();
         setup(email, proveidor, usuari);
-        imageProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getImage();
-            }
-        });
+        if(!proveidor.equals("OFFLINE")) {
+            imageProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getImage();
+                }
+            });
+        }
     }
 
     @Override
@@ -92,8 +94,10 @@ public class Configuracio extends AppCompatActivity implements imgLogin {
         email = providerSetUp.getMail();
         proveidor = providerSetUp.getString();
         usuari = providerSetUp.getUser();
-
-        db.getPerfilUrl(Usuario.getInstance().getNom());
+        System.out.println(proveidor);
+        if(!proveidor.equals("OFFLINE")){
+            db.getPerfilUrl(Usuario.getInstance().getNom());
+        }
 
     }
 
