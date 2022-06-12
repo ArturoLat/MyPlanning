@@ -9,6 +9,7 @@ import com.example.myplanning.activitats.CalendariUtiles;
 
 import com.example.myplanning.activitats.RegistreLogin.AuthActivity;
 import com.example.myplanning.databinding.MainActivityLayoutBinding;
+import com.example.myplanning.notification.Notification;
 
 import java.time.LocalDate;
 
@@ -22,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         CalendariUtiles.selectedDate = LocalDate.now();
         super.onCreate(savedInstanceState);
-
         startActivity(new Intent(this, AuthActivity.class));
 
     }

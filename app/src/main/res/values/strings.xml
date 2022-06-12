@@ -8,7 +8,8 @@
     <string name="boton_login">Sign In</string>
     <string name="boton_offline">Offline</string>
     <string name="user_image_content">Imagen avatar usuario</string>
-
+    <string name="channel_name">Notificacions</string>
+    <string name="channel_description">Canal de Notificacions</string>
     <string name="mail_user_register">Correu Electrònic</string>
     <string name="user_register">Registrar-se</string>
 
