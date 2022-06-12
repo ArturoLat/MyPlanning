@@ -377,22 +377,23 @@ public class db_Sqlite extends SQLiteOpenHelper {
             day = String.valueOf(dia.getDayOfMonth());
         }
         String search = dia.getYear()+"-"+month+"-"+day+"%";
-        this.database.execSQL("UPDATE "+ TABLE_VALORACIO +" SET nota" + " = " + nota + " WHERE date LIKE " + "'" + search + "'");
+        this.database.execSQL("UPDATE "+ TABLE_VALORACIO +" SET nota" + " = " + nota + " WHERE time LIKE " + "'" + search + "'");
 
     }
 
-    public Boolean deleteSchedule(SQLiteDatabase sqLiteDatabase, String ac) {
-        Cursor cursorSchedule;
-        cursorSchedule = getWritableDatabase().rawQuery("Select * from TABLE_HORARI where id_horari = ?",null);
-        if(cursorSchedule.getCount()>0) {
-            long result = sqLiteDatabase.delete(TABLE_HORARI,"id_horari=?",null);
+    public Boolean deleteSchedule(SQLiteDatabase sqLiteDatabase, LocalDateTime dia) {
+        Cursor cursorTodo;
+        Integer id = getIdSchedule(dia);
+        cursorTodo = getWritableDatabase().rawQuery("Select * from "+ TABLE_HOMEWORK+ " where id_horari = ?",null);
+        if(cursorTodo.getCount()>0) {
+            long result = sqLiteDatabase.delete(TABLE_TODO,"id_horari=?",new String[]{String.valueOf(id)});
             return result != -1;
         }else{
             return false;
         }
     }
 
-    public Boolean deleteToDo(SQLiteDatabase sqLiteDatabase, Integer id_todo, LocalDateTime dia, String act) {
+    public Boolean deleteToDo(SQLiteDatabase sqLiteDatabase, LocalDateTime dia) {
         Cursor cursorTodo;
         Integer id = getIdToDo(dia);
         cursorTodo = getWritableDatabase().rawQuery("Select * from "+ TABLE_TODO+ " where id_todo = ?",null);
@@ -409,7 +410,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
 
         Integer id = 0;
         Cursor cursorTodo;
-        cursorTodo = getWritableDatabase().rawQuery("SELECT id FROM "+ TABLE_VALORACIO +" WHERE date = " + "'" + dia.toString() + "'", null);
+        cursorTodo = getWritableDatabase().rawQuery("SELECT id FROM "+ TABLE_TODO +" WHERE time = " + "'" + dia.toString() + "'", null);
         if (cursorTodo.moveToFirst()) {
              id = Integer.parseInt(cursorTodo.getString(cursorTodo.getColumnIndex("id_todo")));
 
@@ -419,26 +420,46 @@ public class db_Sqlite extends SQLiteOpenHelper {
         return id;
     }
 
-    public Boolean deleteHomework(SQLiteDatabase sqLiteDatabase, Integer id_homework) {
-        Cursor cursorHomeWork;
-        cursorHomeWork = getWritableDatabase().rawQuery("Select * from TABLE_HOMEWORK where id_homework = ?",null);
-        if(cursorHomeWork.getCount()>0) {
-            long result = sqLiteDatabase.delete(TABLE_HOMEWORK,"id_homework=? and ",null);
+    public Boolean deleteHomework(SQLiteDatabase sqLiteDatabase, LocalDateTime dia) {
+        Cursor cursorTodo;
+        Integer id = getIdHomeWork(dia);
+        cursorTodo = getWritableDatabase().rawQuery("Select * from "+ TABLE_HOMEWORK+ " where id_homework = ?",null);
+        if(cursorTodo.getCount()>0) {
+            long result = sqLiteDatabase.delete(TABLE_TODO,"id_homework=?",new String[]{String.valueOf(id)});
             return result != -1;
         }else{
             return false;
         }
     }
 
-    public Boolean deleteHappiness(SQLiteDatabase sqLiteDatabase, Integer id_nota) {
-        Cursor cursorDayRating = null;
-        cursorDayRating = getWritableDatabase().rawQuery("Select * from TABLE_NOTA where id_nota = ?",null);
-        if(cursorDayRating.getCount()>0) {
-            long result = sqLiteDatabase.delete(TABLE_VALORACIO,"id_nota=?",null);
-            return result != -1;
-        }else{
-            return false;
+    @SuppressLint("Range")
+    public Integer getIdHomeWork(LocalDateTime dia){
+
+        Integer id = 0;
+        Cursor cursorTodo;
+        cursorTodo = getWritableDatabase().rawQuery("SELECT id FROM "+ TABLE_HOMEWORK +" WHERE time = " + "'" + dia.toString() + "'", null);
+        if (cursorTodo.moveToFirst()) {
+            id = Integer.parseInt(cursorTodo.getString(cursorTodo.getColumnIndex("id_homework")));
+
         }
+        cursorTodo.close();
+
+        return id;
+    }
+
+    @SuppressLint("Range")
+    public Integer getIdSchedule(LocalDateTime dia){
+
+        Integer id = 0;
+        Cursor cursorTodo;
+        cursorTodo = getWritableDatabase().rawQuery("SELECT id FROM "+ TABLE_HORARI +" WHERE date = " + "'" + dia.toString() + "'", null);
+        if (cursorTodo.moveToFirst()) {
+            id = Integer.parseInt(cursorTodo.getString(cursorTodo.getColumnIndex("id_horari")));
+
+        }
+        cursorTodo.close();
+
+        return id;
     }
 
     @SuppressLint("Range")

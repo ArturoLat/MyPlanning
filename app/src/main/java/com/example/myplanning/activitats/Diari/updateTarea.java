@@ -119,14 +119,14 @@ public class updateTarea extends AppCompatActivity {
 
         }else{
             if(acType.equals("Schedule")){
-                //dbLite.deleteSchedule(dbLite.getDatabase(),tareaText.getText().toString(),dia.toString(),color);
+                dbLite.deleteSchedule(dbLite.getDatabase(),dia);
 
 
             }else if(acType.equals("To-Do")){
-                //dbLite.deleteToDo(dbLite.getDatabase(),tareaText.getText().toString(),dia.toString(),color);
+                dbLite.deleteToDo(dbLite.getDatabase(),dia);
 
             }else{
-                //dbLite.deleteHomework(dbLite.getDatabase(),tareaText.getText().toString(),dia.toString(),color);
+                dbLite.deleteHomework(dbLite.getDatabase(),dia);
 
             }
         }
