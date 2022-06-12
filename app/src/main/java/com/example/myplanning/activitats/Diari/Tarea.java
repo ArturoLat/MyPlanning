@@ -143,7 +143,6 @@ public class Tarea extends AppCompatActivity {
                 LocalTime.of(time.getHour(),time.getMinute()));
         Dades dada = new Dades(tareaText.getText().toString(), false, eventTime.toString(),color);
         String activitatPenjar = spinnerActivitat.getSelectedItem().toString();
-        System.out.println(color);
         if(user != null){
             if(activitatPenjar.equals("Schedule")){
                 db.setCollectUserSchedule(eventTime, user.getNom(), tareaText.getText().toString(),color);

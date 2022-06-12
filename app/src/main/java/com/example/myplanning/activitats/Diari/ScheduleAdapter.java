@@ -47,12 +47,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         holder.check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Tarea.class);
+                Intent intent = new Intent(view.getContext(), updateTarea.class);
                 intent.putExtra("act", dada.getActivitat());
                 intent.putExtra("type", type);
                 intent.putExtra("time", dada.getDate().toString());
                 intent.putExtra("color", dada.getColor());
-                System.out.println(dada.getColor());
                 view.getContext().startActivity(intent);
             }
         });

@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
-            android:onClick="afegirEventAction"
+            android:onClick="activitatAccio"
             android:text="@string/actualitzar"
             android:textColor="@color/color_text" />
 
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
-            android:onClick="cancelarEventAction"
+            android:onClick="cancelarAccio"
             android:text="@string/cancelar"
             android:textColor="@color/color_text" />
 
@@ -90,6 +90,7 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="eliminarTasca"
             android:background="@color/red"
             android:text="@string/eliminarTarea" />
     </LinearLayout>

@@ -65,32 +65,29 @@ public class Storage {
         pd.setTitle("Uploading Image...");
         pd.show();
         final String profileKey = "ProfileKey";
-        StorageReference riversRef = storageReference.child("image/" + email + "/"+ tipo + "/" + profileKey);
+        StorageReference riversRef = storageReference.child("image/" + email + "/" + tipo + "/" + profileKey);
+        UploadTask uploadTask = riversRef.putFile(imageUrl);
 
-        riversRef.putFile(imageUrl)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        pd.dismiss();
-                        Snackbar.make(view, "Image Uploaded.", Snackbar.LENGTH_LONG).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        pd.dismiss();
-                        Toast.makeText(context, "Failed to Upload", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                        pd.setMessage("Percentatge: " + (int) progressPercent);
-                    }
-                });
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                return riversRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    urlDownload = task.getResult();
+                    insertDbStorageProfile();
+                    pd.dismiss();
+                    Snackbar.make(view, "Image Uploaded.", Snackbar.LENGTH_LONG).show();
+                }
+            }
+        });
     }
-
     public void uploadPictureHapiness(View view, String email, Context context, Uri imageUrl, String tipo, LocalDateTime day) {
 
         final ProgressDialog pd = new ProgressDialog(view.getContext());
@@ -114,12 +111,18 @@ public class Storage {
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     urlDownload = task.getResult();
-                    insertDbStorage(day);
+                    insertDbStorageProfile();
                     pd.dismiss();
                     Snackbar.make(view, "Image Uploaded.", Snackbar.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    private void insertDbStorageProfile(){
+        if(Usuario.getInstance() != null){
+            fireBaseController.setStoragePerfil(Usuario.getInstance().getNom(), urlDownload.toString());
+        }
     }
 
     private void insertDbStorage(LocalDateTime day) {

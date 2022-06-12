@@ -381,7 +381,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
 
     }
 
-    public Boolean deleteSchedule(SQLiteDatabase sqLiteDatabase, Integer id_horari) {
+    public Boolean deleteSchedule(SQLiteDatabase sqLiteDatabase, String ac) {
         Cursor cursorSchedule;
         cursorSchedule = getWritableDatabase().rawQuery("Select * from TABLE_HORARI where id_horari = ?",null);
         if(cursorSchedule.getCount()>0) {

@@ -15,14 +15,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.myplanning.R;
+import com.example.myplanning.activitats.Diari.CalendariDiari;
+import com.example.myplanning.activitats.observer.imgLogin;
 import com.example.myplanning.db.Storage;
 import com.example.myplanning.activitats.RegistreLogin.AuthActivity;
 import com.example.myplanning.activitats.RegistreLogin.ProviderSetUp;
 import com.example.myplanning.activitats.Seleccio.Seleccio;
+import com.example.myplanning.db.fireBaseController;
+import com.example.myplanning.model.Usuari.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Configuracio extends AppCompatActivity {
+public class Configuracio extends AppCompatActivity implements imgLogin {
 
     private Button btnConfig;
     private ImageView imageProfile;
@@ -36,6 +41,7 @@ public class Configuracio extends AppCompatActivity {
     private TextView usuaritxt;
     private TextView proveidortxt;
     private Button tancarSessioBtn;
+    private fireBaseController db = fireBaseController.getInstance();
     private Storage storageClass;
 
     @Override
@@ -43,8 +49,6 @@ public class Configuracio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.config_layout);
         init();
-        System.out.println(email);
-        System.out.println(proveidor);
         setup(email, proveidor, usuari);
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +65,11 @@ public class Configuracio extends AppCompatActivity {
             imageUrl = data.getData();
             imageProfile.setImageURI(imageUrl);
             storageClass.uploadPicture(findViewById(android.R.id.content), email, this, imageUrl, "ProfileImage");
+            if(Usuario.getInstance() != null){
+                db.setStoragePerfil(Usuario.getInstance().getNom(), imageUrl.toString());
+
+            }
+
         }
     }
 
@@ -69,6 +78,7 @@ public class Configuracio extends AppCompatActivity {
     }
 
     private void init(){
+        fireBaseController.setListenerImgPerfil(this);
         storageClass = new Storage();
         storageClass = Storage.getInstance();
         providerSetUp = ProviderSetUp.getInstance();
@@ -82,6 +92,9 @@ public class Configuracio extends AppCompatActivity {
         email = providerSetUp.getMail();
         proveidor = providerSetUp.getString();
         usuari = providerSetUp.getUser();
+
+        db.getPerfilUrl(Usuario.getInstance().getNom());
+
     }
 
     public void configuracioAccio(View view){
@@ -119,5 +132,13 @@ public class Configuracio extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void notificarImatgePerfil(String url) {
+        Glide.with(Configuracio.this)
+                .load(url)
+                .centerCrop()
+                .into(imageProfile);
     }
 }

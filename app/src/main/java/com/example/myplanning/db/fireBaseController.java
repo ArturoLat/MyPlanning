@@ -258,28 +258,24 @@ public class fireBaseController{
 
     }
 
-    public void setStoragePerfil(String user, String url){
+    public static void setStoragePerfil(String user, String url){
 
-        Map<String, Object> object = new HashMap<>();
-        object.put("url", url);
-
-        db.collection("users").document(user).set(object);
+        db.collection("users").document(user).update("url",url);
 
     }
 
     public void getPerfilUrl(String user) {
         DocumentReference docRef = db.collection("users").document(user);
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if(document.exists()){
-                            listenerImgPerfil.notificarImatgePerfil(document.getString("url"));
-                        }
-                    }
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String resultat = "";
+                resultat = documentSnapshot.getString("url");
+                if(resultat != null){
+                    listenerImgPerfil.notificarImatgePerfil(resultat);
                 }
-            });
+            }
+        });
     }
 
     public void getHappinesUrl(String user, LocalDateTime time) {
