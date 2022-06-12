@@ -50,6 +50,9 @@
         <activity
             android:name=".activitats.RegistreLogin.AuthActivity"
             android:exported="false" />
+        <activity
+            android:name=".activitats.Diari.updateTarea"
+            android:exported="false" />
 
     </application>
 
