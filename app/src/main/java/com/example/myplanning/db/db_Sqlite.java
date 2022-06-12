@@ -392,22 +392,38 @@ public class db_Sqlite extends SQLiteOpenHelper {
         }
     }
 
-    public Boolean deleteToDo(SQLiteDatabase sqLiteDatabase, Integer id_todo) {
+    public Boolean deleteToDo(SQLiteDatabase sqLiteDatabase, Integer id_todo, LocalDateTime dia, String act) {
         Cursor cursorTodo;
-        cursorTodo = getWritableDatabase().rawQuery("Select * from TABLE_TODO where id_todo = ?",null);
+        Integer id = getIdToDo(dia);
+        cursorTodo = getWritableDatabase().rawQuery("Select * from "+ TABLE_TODO+ " where id_todo = ?",null);
         if(cursorTodo.getCount()>0) {
-            long result = sqLiteDatabase.delete(TABLE_TODO,"id_todo=?",null);
+            long result = sqLiteDatabase.delete(TABLE_TODO,"id_todo=?",new String[]{String.valueOf(id)});
             return result != -1;
         }else{
             return false;
         }
     }
 
+    @SuppressLint("Range")
+    public Integer getIdToDo(LocalDateTime dia){
+
+        Integer id = 0;
+        Cursor cursorTodo;
+        cursorTodo = getWritableDatabase().rawQuery("SELECT id FROM "+ TABLE_VALORACIO +" WHERE date = " + "'" + dia.toString() + "'", null);
+        if (cursorTodo.moveToFirst()) {
+             id = Integer.parseInt(cursorTodo.getString(cursorTodo.getColumnIndex("id_todo")));
+
+        }
+        cursorTodo.close();
+
+        return id;
+    }
+
     public Boolean deleteHomework(SQLiteDatabase sqLiteDatabase, Integer id_homework) {
         Cursor cursorHomeWork;
         cursorHomeWork = getWritableDatabase().rawQuery("Select * from TABLE_HOMEWORK where id_homework = ?",null);
         if(cursorHomeWork.getCount()>0) {
-            long result = sqLiteDatabase.delete(TABLE_HOMEWORK,"id_homework=?",null);
+            long result = sqLiteDatabase.delete(TABLE_HOMEWORK,"id_homework=? and ",null);
             return result != -1;
         }else{
             return false;

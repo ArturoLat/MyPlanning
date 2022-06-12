@@ -352,6 +352,7 @@ public class CalendariDiari extends AppCompatActivity implements imgObserver {
         setDiaView();
         viewModel.initDades(diaActual);
         this.initRating();
+        imageHapiness.setImageResource(0);
         this.initImgHappiness(diaActual);
 
     }
@@ -361,6 +362,7 @@ public class CalendariDiari extends AppCompatActivity implements imgObserver {
         setDiaView();
         viewModel.initDades(diaActual);
         this.initRating();
+        imageHapiness.setImageResource(0);
         this.initImgHappiness(diaActual);
 
     }
