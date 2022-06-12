@@ -104,7 +104,7 @@ public class updateTarea extends AppCompatActivity {
 
     }
 
-    public void eliminarTasca(){
+    public void eliminarTasca(View view){
         if(Usuario.getInstance() != null){
             if(acType.equals("Schedule")){
                 db.deleteSchedule(dia, Usuario.getInstance().getNom(), tareaText.getText().toString());
@@ -130,6 +130,7 @@ public class updateTarea extends AppCompatActivity {
 
             }
         }
+        startActivity(new Intent(this, CalendariDiari.class));
 
     }
 
