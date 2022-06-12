@@ -6,10 +6,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import androidx.annotation.Nullable;
 
 import com.example.myplanning.R;
+import com.example.myplanning.activitats.observer.imgObserver;
 import com.example.myplanning.activitats.observer.llistArrayObserver;
 import com.example.myplanning.model.Item.Dades;
 import com.example.myplanning.model.Item.DayRating;
@@ -19,6 +22,9 @@ import com.example.myplanning.model.Item.ToDo;
 import com.example.myplanning.model.Item.Valoracio;
 import com.thebluealliance.spectrum.SpectrumPalette;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -32,7 +38,9 @@ public class db_Sqlite extends SQLiteOpenHelper {
     private static final String TABLE_TODO = "t_todo";
     private static final String TABLE_HOMEWORK = "t_homework";
     private static final String TABLE_VALORACIO = "t_valoracio";
+    private static final String TABLE_HAPPINESS = "t_happiness";
 
+    public static imgObserver listenerImg;
     public static llistArrayObserver listener;
     public static db_Sqlite instance;
     public static SQLiteDatabase database;
@@ -42,6 +50,14 @@ public class db_Sqlite extends SQLiteOpenHelper {
         super(context, DATABASE_MYPLANNING, null, DATABASE_VERSION);
         this.database = this.getWritableDatabase();
         this.instance = this;
+    }
+
+    public static imgObserver getListenerImg() {
+        return listenerImg;
+    }
+
+    public static void setListenerImg(imgObserver listenerImg) {
+        db_Sqlite.listenerImg = listenerImg;
     }
 
     public static SQLiteDatabase getDatabase() {
@@ -80,6 +96,10 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 "id_nota INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "date TEXT NOT NULL," +
                 "nota REAL NOT NULL)");
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_HAPPINESS + "(" +
+                "id_nota INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "date TEXT NOT NULL," +
+                "url BLOB NOT NULL)");
 
     }
 
@@ -93,6 +113,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE " + TABLE_TODO);
         sqLiteDatabase.execSQL("DROP TABLE " + TABLE_HOMEWORK);
         sqLiteDatabase.execSQL("DROP TABLE " + TABLE_VALORACIO);
+        sqLiteDatabase.execSQL("DROP TABLE " + TABLE_HAPPINESS);
         onCreate(sqLiteDatabase);
 
     }
@@ -134,6 +155,28 @@ public class db_Sqlite extends SQLiteOpenHelper {
         values.put("date", date);
         values.put("nota", nota);
         sqLiteDatabase.insert(TABLE_VALORACIO, null, values);
+    }
+
+    public void insertImgHappiness(SQLiteDatabase sqLiteDatabase, LocalDateTime date, String url) {
+        if(!this.existImg(date)) {
+            ContentValues values = new ContentValues();
+            try {
+                FileInputStream fs = new FileInputStream(url);
+                byte[] imgbyte = new byte[fs.available()];
+                fs.read(imgbyte);
+                values.put("date", date.toString());
+                values.put("url", imgbyte);
+                sqLiteDatabase.insert(TABLE_HAPPINESS, null, values);
+                fs.close();
+                this.readImageHappiness(date);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            this.updateHappiness(date,url);
+        }
+
+
     }
 
     @SuppressLint("Range")
@@ -319,8 +362,6 @@ public class db_Sqlite extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public void updateValoracio(LocalDateTime dia, float nota) {
-        float resultat = 0;
-        Cursor cursorDayRating;
         String month = "";
         String day = "";
         if(dia.getMonthValue() < 10){
@@ -382,6 +423,107 @@ public class db_Sqlite extends SQLiteOpenHelper {
         }else{
             return false;
         }
+    }
+
+    @SuppressLint("Range")
+    public Bitmap readImageHappiness(LocalDateTime dia) {
+        Cursor cursorImg;
+        String month = "";
+        String day = "";
+        if(existImg(dia)){
+            if(dia.getMonthValue() < 10){
+                month = "0"+dia.getMonthValue();
+
+            }else{
+                month = String.valueOf(dia.getMonthValue());
+            }
+            if(dia.getDayOfMonth() < 10){
+                day = "0"+dia.getDayOfMonth();
+
+            }else{
+                day = String.valueOf(dia.getDayOfMonth());
+            }
+            String search = dia.getYear()+"-"+month+"-"+day+"%";
+            cursorImg = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_HAPPINESS + " WHERE date LIKE " + "'" + search + "'", null);
+            byte[] blob = new byte[0];
+            if (cursorImg.moveToFirst()) {
+                Integer id = Integer.parseInt(cursorImg.getString(cursorImg.getColumnIndex("id_nota")));
+                String date = cursorImg.getString(cursorImg.getColumnIndex("date"));
+                blob = cursorImg.getBlob(2);
+            }
+            cursorImg.close();
+
+            Bitmap bmp= BitmapFactory.decodeByteArray(blob,0,blob.length);
+            listenerImg.notificarImatgeHappiness(bmp);
+            return bmp;
+        }else{
+            listenerImg.notificarImatgeHappiness(null);
+        }
+        return null;
+    }
+
+    @SuppressLint("Range")
+    public void updateHappiness(LocalDateTime dia, String url) {
+        if(!url.isEmpty()){
+            String month = "";
+            String day = "";
+            if(dia.getMonthValue() < 10){
+                month = "0"+dia.getMonthValue();
+
+            }else{
+                month = String.valueOf(dia.getMonthValue());
+            }
+            if(dia.getDayOfMonth() < 10){
+                day = "0"+dia.getDayOfMonth();
+
+            }else{
+                day = String.valueOf(dia.getDayOfMonth());
+            }
+            ContentValues values = new ContentValues();
+            try {
+                FileInputStream fs = new FileInputStream(url);
+                byte[] imgbyte = new byte[fs.available()];
+                fs.read(imgbyte);
+                values.put("date", dia.toString());
+                values.put("url", imgbyte);
+                String search = dia.getYear()+"-"+month+"-"+day+"T00:00";
+                database.update(TABLE_HAPPINESS,values,"date=?" ,new String[]{search});
+                this.readImageHappiness(dia);
+                fs.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @SuppressLint("Range")
+    public boolean existImg(LocalDateTime dia) {
+        Cursor cursorImg;
+        String month = "";
+        String day = "";
+        if(dia.getMonthValue() < 10){
+            month = "0"+dia.getMonthValue();
+
+        }else{
+            month = String.valueOf(dia.getMonthValue());
+        }
+        if(dia.getDayOfMonth() < 10){
+            day = "0"+dia.getDayOfMonth();
+
+        }else{
+            day = String.valueOf(dia.getDayOfMonth());
+        }
+        String search = dia.getYear()+"-"+month+"-"+day+"%";
+        cursorImg = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_HAPPINESS + " WHERE date LIKE " + "'" + search + "'", null);
+
+        if (cursorImg.moveToFirst()) {
+            return true;
+        }
+        cursorImg.close();
+
+        return false;
     }
 
 }

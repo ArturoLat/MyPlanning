@@ -246,7 +246,7 @@ public class fireBaseController{
                 });
     }
 
-    public void setStorageHappiness(String user, LocalDateTime time, String url){
+    public static void setStorageHappiness(String user, LocalDateTime time, String url){
 
         String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
 

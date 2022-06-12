@@ -195,7 +195,7 @@
             android:layout_height="150dp"
             android:layout_marginStart="40dp"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@color/background"
             android:contentDescription="@string/todoo"
             tools:ignore="ImageContrastCheck"
             tools:srcCompat="@tools:sample/avatars" />

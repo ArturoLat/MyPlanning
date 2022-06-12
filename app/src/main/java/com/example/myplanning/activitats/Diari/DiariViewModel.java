@@ -1,6 +1,7 @@
 package com.example.myplanning.activitats.Diari;
 
 import android.app.Application;
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 import androidx.lifecycle.AndroidViewModel;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class DiariViewModel extends AndroidViewModel implements llistArrayObserver {
+public class DiariViewModel extends AndroidViewModel implements llistArrayObserver{
 
     private final MutableLiveData<ArrayList<Dades>> listDatosShedule;
     private final MutableLiveData<ArrayList<Dades>> listDatostoDo;
@@ -167,19 +168,23 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
             db.setStorageHappiness(user.getNom(),diaActual,imageUrl.toString());
 
         }else{
+            dbSqlite.insertImgHappiness(dbSqlite.getWritableDatabase(),diaActual,imageUrl.toString());
 
         }
 
+    }
+
+    public void getImgHappinessFire(LocalDateTime diaActual) {
+        db.getHappinesUrl(user.getNom(),diaActual);
 
     }
 
-    public void getImgHappiness(LocalDateTime diaActual) {
-        if(user != null){
-            db.getHappinesUrl(user.getNom(),diaActual);
-
-        }else{
-
-        }
+    public Bitmap getImgHappinessSql(LocalDateTime diaActual) {
+        return dbSqlite.readImageHappiness(diaActual);
     }
 
+    public String getFullUrl(String url, LocalDateTime diaActual) {
+        url = url.substring(0, url.length()-5);
+        return url.concat("/"+user.getNom()+"/"+"Hapiness"+"/"+diaActual.toString()+".jpeg");
+    }
 }
