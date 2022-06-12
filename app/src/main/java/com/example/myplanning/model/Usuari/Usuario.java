@@ -4,11 +4,13 @@ import com.example.myplanning.db.fireBaseController;
 
 public class Usuario {
 
-    private String nom;
+    private String correu;
+    private String username;
     public static Usuario instance;
 
-    public Usuario(String nom){
-        this.nom = nom;
+    public Usuario(String nom, String user){
+        this.correu = nom;
+        this.username = user;
         instance = this;
     }
     public static Usuario getInstance(){
@@ -16,12 +18,20 @@ public class Usuario {
 
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getNom() {
-        return nom;
+        return correu;
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.correu = nom;
     }
 
 

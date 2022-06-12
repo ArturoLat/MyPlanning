@@ -98,7 +98,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         String user = prefs.getString("user", null);
         //Si el email i el proveidor no son nulls, la sessio ja esta logueada
         if(email != null && proveidor != null){
-            this.usuarioOnline = new Usuario(email);
+            this.usuarioOnline = new Usuario(email, user);
             showHome(email, ProviderType.valueOf(proveidor), user);
             startActivity(new Intent(this, CalendariMensual.class));
         }
@@ -155,7 +155,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         registreViewModel.registreCorrecte();
         System.out.println(registreViewModel.getRespuestaString());
         registreViewModel.getRespuesta().observe(this, observer);
-        this.usuarioOnline = new Usuario(mail);
+        this.usuarioOnline = new Usuario(mail, user);
         showHome(mail, ProviderType.EMAIL, user);
         //Afegim a les preferencies la conta registrada
         afegirAPreferencies();
@@ -181,7 +181,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
 
         logInViewModel.logInCorrecte();
         System.out.println(logInViewModel.getRespuestaString());
-        this.usuarioOnline = new Usuario(mail);
+        this.usuarioOnline = new Usuario(mail,user);
         showHome(mail, ProviderType.EMAIL, user);
         //Afegim la conta a les preferencies
         afegirAPreferencies();
@@ -242,7 +242,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         }
     }
     private void setUsuarioOnline(GoogleSignInAccount account){
-        this.usuarioOnline = new Usuario(account.getEmail());
+        this.usuarioOnline = new Usuario(account.getEmail(), account.getGivenName());
         db.userExist(account.getEmail(), account.getId());
     }
     private void registreGoogle(GoogleSignInAccount account){
@@ -251,7 +251,7 @@ public class AuthActivity extends AppCompatActivity implements LoginObserver {
         userData.put("password", account.getId());
 
         dbRegistre.collection("users").document(account.getEmail()).set(userData);
-        this.usuarioOnline = new Usuario(account.getEmail());
+        this.usuarioOnline = new Usuario(account.getEmail(), account.getGivenName());
 
     }
 

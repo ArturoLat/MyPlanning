@@ -6,10 +6,13 @@ import androidx.annotation.NonNull;
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Diari.CalendariDiari;
 import com.example.myplanning.activitats.observer.LoginObserver;
+import com.example.myplanning.activitats.observer.imgLogin;
+import com.example.myplanning.activitats.observer.imgObserver;
 import com.example.myplanning.activitats.observer.llistArrayObserver;
 import com.example.myplanning.model.Item.*;
 import com.example.myplanning.model.Usuari.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +39,8 @@ public class fireBaseController{
     private static fireBaseController instance;
     public static llistArrayObserver listener;
     public static LoginObserver listenerLogin;
+    public static imgLogin listenerImgPerfil;
+    public static imgObserver listenerImg;
     private int resultat = -1;
 
     public fireBaseController(llistArrayObserver listener){
@@ -46,6 +51,14 @@ public class fireBaseController{
     public fireBaseController(){
         this.instance = this;
 
+    }
+
+    public static void setListenerImg(imgObserver listenerImg) {
+        fireBaseController.listenerImg = listenerImg;
+    }
+
+    public static void setListenerImgPerfil(imgLogin listenerImgPerfil) {
+        fireBaseController.listenerImgPerfil = listenerImgPerfil;
     }
 
     public static void setListener(llistArrayObserver listener) {
@@ -204,7 +217,7 @@ public class fireBaseController{
         Map<String, Object> object = new HashMap<>();
         object.put("valoracio", nota);
         db.collection(user).document("valoracio")
-                .collection(String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth())).document("valoracio").set(object);
+                .collection(dataInfo).document("valoracio").set(object);
 
     }
 
@@ -231,5 +244,54 @@ public class fireBaseController{
                         }
                     }
                 });
+    }
+
+    public void setStorageHappiness(String user, LocalDateTime time, String url){
+
+        String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
+
+        Map<String, Object> object = new HashMap<>();
+        object.put("url", url);
+
+        db.collection(user).document("happiness")
+                .collection(dataInfo).document("url").set(object);
+
+    }
+
+    public void setStoragePerfil(String user, String url){
+
+        Map<String, Object> object = new HashMap<>();
+        object.put("url", url);
+
+        db.collection("users").document(user).set(object);
+
+    }
+
+    public void getPerfilUrl(String user) {
+        DocumentReference docRef = db.collection("users").document(user);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if(document.exists()){
+                            listenerImgPerfil.notificarImatgePerfil(document.getString("url"));
+                        }
+                    }
+                }
+            });
+    }
+
+    public void getHappinesUrl(String user, LocalDateTime time) {
+        String dataInfo = String.valueOf(time.getYear()+"-"+time.getMonthValue()+"-"+time.getDayOfMonth());
+
+        DocumentReference doc = db.collection(user).document("happiness").collection(dataInfo).document("url");
+        doc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                listenerImg.notificarImatgeHappiness(documentSnapshot.getString("url"));
+            }
+        });
+
     }
 }

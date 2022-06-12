@@ -4,14 +4,18 @@ package com.example.myplanning.activitats.Diari;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -31,10 +35,13 @@ import java.util.Comparator;
 import com.example.myplanning.activitats.CalendariUtiles;
 import com.example.myplanning.R;
 import com.example.myplanning.activitats.Seleccio.Seleccio;
+import com.example.myplanning.activitats.observer.imgLogin;
+import com.example.myplanning.activitats.observer.imgObserver;
+import com.example.myplanning.db.Storage;
+import com.example.myplanning.db.fireBaseController;
 import com.example.myplanning.model.Item.*;
-import com.google.firebase.storage.FirebaseStorage;
 
-public class CalendariDiari extends AppCompatActivity{
+public class CalendariDiari extends AppCompatActivity implements imgObserver {
 
     private Button diaSetmanaTV;
     private TextView hapiness;
@@ -56,15 +63,26 @@ public class CalendariDiari extends AppCompatActivity{
         viewModel = new ViewModelProvider(this).get(DiariViewModel.class);
         parentContext = this.getBaseContext();
         setContentView(R.layout.activity_calendari_diari);
+        int resposta = 50;
+        requestPermissions(new String[]{Manifest.permission.MANAGE_DOCUMENTS},resposta);
         initWidgets();
+        fireBaseController.setListenerImg(this);
         setLiveDataObservers();
         this.initRating();
+        this.initHappines();
+
+
         imageHapiness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getImage();
             }
         });
+    }
+
+    private void initHappines() {
+        viewModel.getImgHappiness(diaActual);
+
     }
 
     @Override
@@ -76,6 +94,7 @@ public class CalendariDiari extends AppCompatActivity{
             imageUrl = data.getData();
             imageHapiness.setImageURI(imageUrl);
             storageClass.uploadPictureHapiness(findViewById(android.R.id.content), email, this, imageUrl, "Hapiness", diaActual.toString());
+            this.viewModel.setImgHappiness(imageUrl,diaActual);
         }
     }
 
@@ -240,12 +259,15 @@ public class CalendariDiari extends AppCompatActivity{
         return llistaEvents;
     }
 
-
-
     private void showDatePickerDialog() {
         DatePickerFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
 
     }
 
+    @Override
+    public void notificarImatgeHappiness(String url) {
+        imageHapiness.setImageURI(Uri.parse(url));
+
+    }
 }

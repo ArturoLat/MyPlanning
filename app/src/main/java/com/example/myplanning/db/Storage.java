@@ -1,4 +1,4 @@
-package com.example.myplanning.activitats.Diari;
+package com.example.myplanning.db;
 
 
 import android.app.ProgressDialog;
@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
 
-import com.example.myplanning.db.db_Sqlite;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;

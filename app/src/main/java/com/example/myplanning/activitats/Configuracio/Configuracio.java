@@ -1,6 +1,5 @@
 package com.example.myplanning.activitats.Configuracio;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,30 +9,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.example.myplanning.R;
-import com.example.myplanning.activitats.Diari.Storage;
+import com.example.myplanning.db.Storage;
 import com.example.myplanning.activitats.RegistreLogin.AuthActivity;
 import com.example.myplanning.activitats.RegistreLogin.ProviderSetUp;
 import com.example.myplanning.activitats.Seleccio.Seleccio;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.File;
-import java.util.UUID;
 
 public class Configuracio extends AppCompatActivity {
 
@@ -82,8 +69,8 @@ public class Configuracio extends AppCompatActivity {
     }
 
     private void init(){
-        storageClass = Storage.getInstance();
         storageClass = new Storage();
+        storageClass = Storage.getInstance();
         providerSetUp = ProviderSetUp.getInstance();
         imageProfile = findViewById(R.id.imgProfile);
         emailtxt = findViewById(R.id.txtCorreuAuth);

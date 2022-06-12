@@ -1,6 +1,7 @@
 package com.example.myplanning.activitats.Diari;
 
 import android.app.Application;
+import android.net.Uri;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -160,4 +161,25 @@ public class DiariViewModel extends AndroidViewModel implements llistArrayObserv
 
 
     }
+
+    public void setImgHappiness(Uri imageUrl, LocalDateTime diaActual) {
+        if(user != null){
+            db.setStorageHappiness(user.getNom(),diaActual,imageUrl.toString());
+
+        }else{
+
+        }
+
+
+    }
+
+    public void getImgHappiness(LocalDateTime diaActual) {
+        if(user != null){
+            db.getHappinesUrl(user.getNom(),diaActual);
+
+        }else{
+
+        }
+    }
+
 }
