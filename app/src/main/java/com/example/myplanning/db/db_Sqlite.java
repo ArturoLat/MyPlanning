@@ -410,7 +410,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
 
         Integer id = 0;
         Cursor cursorTodo;
-        cursorTodo = getWritableDatabase().rawQuery("SELECT id FROM "+ TABLE_TODO +" WHERE time = " + "'" + dia.toString() + "'", null);
+        cursorTodo = getWritableDatabase().rawQuery("SELECT id_todo FROM "+ TABLE_TODO +" WHERE time = " + "'" + dia.toString() + "'", null);
         if (cursorTodo.moveToFirst()) {
              id = Integer.parseInt(cursorTodo.getString(cursorTodo.getColumnIndex("id_todo")));
 
@@ -437,7 +437,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
 
         Integer id = 0;
         Cursor cursorTodo;
-        cursorTodo = getWritableDatabase().rawQuery("SELECT id FROM "+ TABLE_HOMEWORK +" WHERE time = " + "'" + dia.toString() + "'", null);
+        cursorTodo = getWritableDatabase().rawQuery("SELECT id_homework FROM "+ TABLE_HOMEWORK +" WHERE time = " + "'" + dia.toString() + "'", null);
         if (cursorTodo.moveToFirst()) {
             id = Integer.parseInt(cursorTodo.getString(cursorTodo.getColumnIndex("id_homework")));
 
@@ -452,7 +452,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
 
         Integer id = 0;
         Cursor cursorTodo;
-        cursorTodo = getWritableDatabase().rawQuery("SELECT id FROM "+ TABLE_HORARI +" WHERE date = " + "'" + dia.toString() + "'", null);
+        cursorTodo = getWritableDatabase().rawQuery("SELECT id_horari FROM "+ TABLE_HORARI +" WHERE time = " + "'" + dia.toString() + "'", null);
         if (cursorTodo.moveToFirst()) {
             id = Integer.parseInt(cursorTodo.getString(cursorTodo.getColumnIndex("id_horari")));
 
@@ -481,7 +481,7 @@ public class db_Sqlite extends SQLiteOpenHelper {
                 day = String.valueOf(dia.getDayOfMonth());
             }
             String search = dia.getYear()+"-"+month+"-"+day+"%";
-            cursorImg = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_HAPPINESS + " WHERE date LIKE " + "'" + search + "'", null);
+            cursorImg = getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_HAPPINESS + " WHERE time LIKE " + "'" + search + "'", null);
             byte[] blob = new byte[0];
             if (cursorImg.moveToFirst()) {
                 Integer id = Integer.parseInt(cursorImg.getString(cursorImg.getColumnIndex("id_nota")));
